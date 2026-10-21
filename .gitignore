@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Local-only documentation (not pushed to remote)
+docs/
+
+# Local-only opencode config, agents and skills
+.opencode/

@@ -13,7 +13,8 @@ from typing import Any
 
 
 class ErrorCode(str, Enum):
-    INVALID_SPEC = "INVALID_SPEC"
+    INVALID_SPEC = "INVALID_SPEC"  # the submitted job spec is malformed
+    INVALID_ARGUMENT = "INVALID_ARGUMENT"  # an operation argument other than a spec is invalid
     JOB_NOT_FOUND = "JOB_NOT_FOUND"
     JOB_ALREADY_EXISTS = "JOB_ALREADY_EXISTS"
 
@@ -36,10 +37,25 @@ class InstanceState(str, Enum):
     UNKNOWN = "UNKNOWN"
 
 
-# States counted in "observed" and before requesting more attempts.
+# Attempts that may still have a live process: counted in "observed" and polled by the controller.
 ACTIVE_STATES = frozenset(
     {InstanceState.PENDING, InstanceState.RUNNING, InstanceState.UNKNOWN, InstanceState.STOPPING}
 )
+
+# Attempts that count toward the desired replicas. Pending and uncertain attempts count too,
+# so that reconciliation does not create duplicates; STOPPING ones are already leaving.
+REPLICA_STATES = frozenset({InstanceState.PENDING, InstanceState.RUNNING, InstanceState.UNKNOWN})
+
+ALLOWED_TRANSITIONS = {
+    InstanceState.PENDING: frozenset({InstanceState.RUNNING, InstanceState.FAILED, InstanceState.STOPPING}),
+    InstanceState.RUNNING: frozenset({InstanceState.UNKNOWN, InstanceState.FAILED, InstanceState.STOPPING}),
+    InstanceState.UNKNOWN: frozenset({InstanceState.RUNNING, InstanceState.FAILED, InstanceState.STOPPING}),
+    InstanceState.STOPPING: frozenset({InstanceState.STOPPED}),
+    InstanceState.STOPPED: frozenset(),
+    InstanceState.FAILED: frozenset(),
+}
+
+FINAL_STATES = frozenset({InstanceState.STOPPED, InstanceState.FAILED})
 
 # No "/": an attempt ID is "<job_id>/<n>" and must split without ambiguity.
 JOB_ID_PATTERN = re.compile(r"[A-Za-z0-9._-]{1,64}")
@@ -160,6 +176,13 @@ class Instance:
     pid: int | None = None
     node_id: str | None = None
     progress: int | None = None
+    missed_probes: int = 0  # consecutive health probes without an answer while UNKNOWN
+
+    def move_to(self, state: InstanceState) -> None:
+        """Changes state; an illegal transition is a controller bug, not a client error."""
+        if state not in ALLOWED_TRANSITIONS[self.state]:
+            raise ValueError(f"illegal transition for {self.instance_id}: {self.state.value} -> {state.value}")
+        self.state = state
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -177,3 +200,15 @@ class Job:
     desired_replicas: int
     instances: list[Instance] = field(default_factory=list)
     next_attempt: int = 1
+
+
+@dataclass(frozen=True)
+class ReconcileActions:
+    """What the runtime layer must do after a reconcile pass.
+
+    The decisions are already recorded: new attempts exist as PENDING and the
+    ones to kill are already STOPPING (scale-down) or FAILED (given up).
+    """
+
+    start: tuple[str, ...] = ()  # new attempts: create one process for each
+    kill: tuple[str, ...] = ()  # attempts whose process must be terminated

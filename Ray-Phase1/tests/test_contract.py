@@ -11,7 +11,7 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 
-from orchestrator import ErrorCode, InstanceState, Orchestrator, OrchestratorError
+from orchestrator import ErrorCode, InstanceState, Orchestrator, OrchestratorError, ReconcileActions
 
 FIXED_NOW = datetime(2026, 10, 18, 12, 0, 0, tzinfo=timezone.utc)
 
@@ -28,6 +28,14 @@ def spec_with(**changes):
     spec = copy.deepcopy(SPEC)
     spec.update(changes)
     return spec
+
+
+def run_actions(orch, actions, node_id="node-A"):
+    """Fake runtime: every new attempt starts and answers, every kill succeeds."""
+    for instance_id in actions.start:
+        orch.report_healthy(instance_id, pid=1000 + int(instance_id.split("/")[1]), node_id=node_id, progress=0)
+    for instance_id in actions.kill:
+        orch.report_death(instance_id)
 
 
 class SubmitAndQuery(unittest.TestCase):
@@ -127,20 +135,19 @@ class InstanceCorrelation(unittest.TestCase):
         self.orch.submit_job(SPEC)
 
     def test_attempts_get_distinct_ids_and_start_pending(self):
-        first = self.orch.add_instance("demo-001")
-        second = self.orch.add_instance("demo-001")
-        self.assertEqual((first, second), ("demo-001/1", "demo-001/2"))
+        actions = self.orch.reconcile("demo-001")
+        self.assertEqual(actions.start, ("demo-001/1", "demo-001/2"))
         view = self.orch.get_job("demo-001")
         self.assertEqual(view["observed"]["pending"], 2)
         self.assertEqual([i["state"] for i in view["instances"]], ["PENDING", "PENDING"])
 
-    def test_observation_links_attempt_to_process_and_node(self):
-        instance_id = self.orch.add_instance("demo-001")
-        self.orch.update_instance(instance_id, state=InstanceState.RUNNING, pid=1234, node_id="node-A", progress=7)
+    def test_health_report_links_attempt_to_process_and_node(self):
+        instance_id = self.orch.reconcile("demo-001").start[0]
+        self.orch.report_healthy(instance_id, pid=1234, node_id="node-A", progress=7)
 
         self.assertEqual(
-            self.orch.get_job("demo-001")["instances"],
-            [{"instance_id": "demo-001/1", "state": "RUNNING", "pid": 1234, "node_id": "node-A", "progress": 7}],
+            self.orch.get_job("demo-001")["instances"][0],
+            {"instance_id": "demo-001/1", "state": "RUNNING", "pid": 1234, "node_id": "node-A", "progress": 7},
         )
         observed = [e for e in self.orch.events() if e["event"] == "instance_observed"]
         self.assertEqual(
@@ -160,39 +167,193 @@ class InstanceCorrelation(unittest.TestCase):
             ],
         )
 
-    def test_repeating_the_same_observation_adds_no_event(self):
-        instance_id = self.orch.add_instance("demo-001")
-        self.orch.update_instance(instance_id, progress=3)
+    def test_repeating_the_same_report_adds_no_event(self):
+        instance_id = self.orch.reconcile("demo-001").start[0]
+        self.orch.report_healthy(instance_id, pid=1, node_id="node-A", progress=3)
         before = len(self.orch.events())
-        self.orch.update_instance(instance_id, progress=3)
+        self.orch.report_healthy(instance_id, pid=1, node_id="node-A", progress=3)
         self.assertEqual(len(self.orch.events()), before)
 
     def test_finished_attempts_stay_listed_but_are_not_counted(self):
-        failed = self.orch.add_instance("demo-001")
-        replacement = self.orch.add_instance("demo-001")
-        self.orch.update_instance(failed, state=InstanceState.FAILED)
+        failed, replacement = self.orch.reconcile("demo-001").start
+        self.orch.report_death(failed)
         view = self.orch.get_job("demo-001")
         self.assertEqual([i["instance_id"] for i in view["instances"]], [failed, replacement])
         self.assertEqual(view["observed"], {"running": 0, "pending": 1, "unknown": 0, "stopping": 0})
         self.assertEqual(self.orch.active_instances("demo-001"), [replacement])
 
     def test_attempt_numbers_are_per_job(self):
-        self.orch.submit_job(spec_with(job_id="demo-002"))
-        self.orch.add_instance("demo-001")
-        self.assertEqual(self.orch.add_instance("demo-002"), "demo-002/1")
+        self.orch.submit_job(spec_with(job_id="demo-002", replicas=1))
+        self.orch.reconcile("demo-001")
+        self.assertEqual(self.orch.reconcile("demo-002").start, ("demo-002/1",))
 
-    def test_adding_to_unknown_job_is_job_not_found(self):
+    def test_reconciling_unknown_job_is_job_not_found(self):
         with self.assertRaises(OrchestratorError) as ctx:
-            self.orch.add_instance("missing")
+            self.orch.reconcile("missing")
         self.assertEqual(ctx.exception.code, ErrorCode.JOB_NOT_FOUND)
 
     def test_events_can_be_saved_as_jsonl(self):
-        self.orch.add_instance("demo-001")
+        self.orch.set_replicas("demo-001", 1)
+        self.orch.reconcile("demo-001")
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "events.jsonl"
             self.orch.dump_events(path)
             lines = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
-        self.assertEqual([e["event"] for e in lines], ["job_submitted", "instance_requested"])
+        self.assertEqual([e["event"] for e in lines], ["job_submitted", "replicas_set", "instance_requested"])
+
+
+class SetReplicas(unittest.TestCase):
+    def setUp(self):
+        self.orch = Orchestrator()
+        self.orch.submit_job(SPEC)
+
+    def test_sets_the_absolute_goal_and_returns_it(self):
+        self.assertEqual(self.orch.set_replicas("demo-001", 3), 3)
+        self.assertEqual(self.orch.get_job("demo-001")["desired_replicas"], 3)
+
+    def test_repeating_the_same_value_changes_nothing(self):
+        self.orch.set_replicas("demo-001", 3)
+        self.orch.set_replicas("demo-001", 3)
+        changes = [e for e in self.orch.events() if e["event"] == "replicas_set"]
+        self.assertEqual(len(changes), 1)
+        self.assertEqual((changes[0]["from_replicas"], changes[0]["replicas"]), (2, 3))
+
+    def test_only_the_goal_changes_until_the_next_reconcile(self):
+        self.orch.set_replicas("demo-001", 3)
+        self.assertEqual(self.orch.get_job("demo-001")["instances"], [])
+
+    def test_resubmitting_the_original_spec_keeps_the_new_goal(self):
+        self.orch.set_replicas("demo-001", 5)
+        self.assertEqual(self.orch.submit_job(copy.deepcopy(SPEC)), "demo-001")
+        self.assertEqual(self.orch.get_job("demo-001")["desired_replicas"], 5)
+
+    def test_stop_job_sets_zero_and_the_job_can_be_scaled_again(self):
+        self.assertEqual(self.orch.stop_job("demo-001"), 0)
+        self.assertEqual(self.orch.stop_job("demo-001"), 0)
+        self.assertEqual(self.orch.set_replicas("demo-001", 1), 1)
+
+    def test_invalid_values_are_rejected(self):
+        for value in (-1, 1.5, True, "3"):
+            with self.subTest(value=value):
+                with self.assertRaises(OrchestratorError) as ctx:
+                    self.orch.set_replicas("demo-001", value)
+                self.assertEqual(ctx.exception.code, ErrorCode.INVALID_ARGUMENT)
+        self.assertEqual(self.orch.get_job("demo-001")["desired_replicas"], 2)
+
+    def test_unknown_job_is_job_not_found(self):
+        for operation in (lambda: self.orch.set_replicas("missing", 1), lambda: self.orch.stop_job("missing")):
+            with self.subTest(operation=operation):
+                with self.assertRaises(OrchestratorError) as ctx:
+                    operation()
+                self.assertEqual(ctx.exception.code, ErrorCode.JOB_NOT_FOUND)
+
+
+class Reconcile(unittest.TestCase):
+    def setUp(self):
+        self.orch = Orchestrator(max_missed_probes=3)
+        self.orch.submit_job(spec_with(replicas=1))
+
+    def states(self):
+        return [i["state"] for i in self.orch.get_job("demo-001")["instances"]]
+
+    def running(self):
+        return self.orch.get_job("demo-001")["observed"]["running"]
+
+    def test_sequence_1_3_1_0_converges_without_leftovers(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.assertEqual(self.running(), 1)
+
+        self.orch.set_replicas("demo-001", 3)
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.assertEqual(self.running(), 3)
+
+        self.orch.set_replicas("demo-001", 1)
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.assertEqual(self.running(), 1)
+
+        self.orch.stop_job("demo-001")
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.assertEqual(self.orch.active_instances("demo-001"), [])
+        self.assertEqual(self.states(), ["STOPPED", "STOPPED", "STOPPED"])
+        self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+
+    def test_pending_attempts_are_not_duplicated(self):
+        # Not enough capacity: the attempt stays PENDING across many passes.
+        (instance_id,) = self.orch.reconcile("demo-001").start
+        for _ in range(5):
+            self.orch.report_unresponsive(instance_id)
+            self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+        self.assertEqual(self.states(), ["PENDING"])
+
+    def test_scale_down_stops_pending_before_running_and_newest_first(self):
+        self.orch.set_replicas("demo-001", 3)
+        old, middle, new = self.orch.reconcile("demo-001").start
+        self.orch.report_healthy(old, pid=1, node_id="n", progress=0)
+        self.orch.report_healthy(middle, pid=2, node_id="n", progress=0)
+        # "new" is still PENDING.
+        self.orch.set_replicas("demo-001", 1)
+        self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions(kill=(new, middle)))
+        self.assertEqual(self.states(), ["RUNNING", "STOPPING", "STOPPING"])
+
+    def test_death_after_requested_stop_is_stopped_not_failed(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.orch.stop_job("demo-001")
+        (instance_id,) = self.orch.reconcile("demo-001").kill
+        self.orch.report_death(instance_id)
+        self.assertEqual(self.states(), ["STOPPED"])
+        self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+
+    def test_unexpected_death_is_replaced_with_a_new_attempt(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.orch.report_death("demo-001/1")
+        self.assertEqual(self.orch.reconcile("demo-001").start, ("demo-001/2",))
+        self.assertEqual(self.states(), ["FAILED", "PENDING"])
+
+    def test_with_zero_goal_a_lost_attempt_is_not_replaced(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.orch.set_replicas("demo-001", 0)
+        self.orch.report_death("demo-001/1")
+        self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+
+    def test_unknown_counts_until_k_missed_probes_then_is_killed_and_replaced(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        for _ in range(2):
+            self.orch.report_unresponsive("demo-001/1")
+            self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+        self.assertEqual(self.states(), ["UNKNOWN"])
+
+        self.orch.report_unresponsive("demo-001/1")  # third missed probe
+        self.assertEqual(
+            self.orch.reconcile("demo-001"),
+            ReconcileActions(start=("demo-001/2",), kill=("demo-001/1",)),
+        )
+        self.assertEqual(self.states(), ["FAILED", "PENDING"])
+
+    def test_answering_again_clears_uncertainty(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.orch.report_unresponsive("demo-001/1")
+        self.orch.report_unresponsive("demo-001/1")
+        self.orch.report_healthy("demo-001/1", pid=1001, node_id="node-A", progress=9)
+        self.orch.report_unresponsive("demo-001/1")
+        self.orch.report_unresponsive("demo-001/1")
+        self.assertEqual(self.orch.reconcile("demo-001"), ReconcileActions())
+        self.assertEqual(self.states(), ["UNKNOWN"])
+
+    def test_late_answer_does_not_revive_a_given_up_attempt(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        for _ in range(3):
+            self.orch.report_unresponsive("demo-001/1")
+        self.orch.reconcile("demo-001")
+        self.orch.report_healthy("demo-001/1", pid=1001, node_id="node-A", progress=10)
+        self.assertEqual(self.states(), ["FAILED", "PENDING"])
+        self.assertIn("stale_report_ignored", [e["event"] for e in self.orch.events()])
+
+    def test_illegal_transition_is_a_controller_bug(self):
+        run_actions(self.orch, self.orch.reconcile("demo-001"))
+        self.orch.report_death("demo-001/1")
+        instance = self.orch._instances["demo-001/1"]
+        with self.assertRaises(ValueError):
+            instance.move_to(InstanceState.RUNNING)
 
 
 if __name__ == "__main__":

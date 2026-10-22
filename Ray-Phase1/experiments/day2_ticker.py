@@ -205,16 +205,25 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         runtime.start(instance_id, spec)
     meta["request_seconds"] = round(time.perf_counter() - request_started, 6)
     meta["requested_before_waiting"] = True
+    meta["requested_at"] = requested_at
     print(f"{PREFIX} {len(instance_ids)} instances requested, none of them waited for yet")
 
     first = {}
+    healthy_at: dict[str, float] = {}
     for instance_id in instance_ids:
         first[instance_id] = _first_observation(runtime, instance_id, args.startup_timeout)
+        # When the controller first saw it healthy: an upper bound of the start up,
+        # because the probe that answered was not necessarily the first one after ready.
+        healthy_at[instance_id] = time.time()
         observation = first[instance_id]
         print(
             f"{PREFIX} {instance_id}: pid {observation.pid} | node {observation.node_id} "
-            f"| actor {observation.actor_id} | progress {observation.progress}"
+            f"| actor {observation.actor_id} | progress {observation.progress} "
+            f"| healthy at t+{healthy_at[instance_id] - requested_at:.3f}s"
         )
+    meta["startup_seconds"] = {
+        instance_id: round(healthy_at[instance_id] - requested_at, 3) for instance_id in instance_ids
+    }
 
     samples: list[dict[str, Any]] = []
     for index in range(args.samples):
@@ -243,6 +252,8 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
             "actor_id": last[instance_id].actor_id,
             "progress_first": first[instance_id].progress,
             "progress_last": last[instance_id].progress,
+            "first_healthy_at": round(healthy_at[instance_id], 6),
+            "startup_seconds": round(healthy_at[instance_id] - requested_at, 3),
             "started_at": last[instance_id].started_at,
             "last_tick_at": last[instance_id].last_tick_at,
         }

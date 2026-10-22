@@ -1,2 +1,2 @@
-# Dependencias de la fase Ray (P14).
+# Ray phase dependencies.
 ray[default]==2.58.0

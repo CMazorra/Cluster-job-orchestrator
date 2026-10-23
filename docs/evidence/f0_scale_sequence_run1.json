@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "mode": "local cluster (4 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 2997,
+    "driver_node_id": "1dd099c5affeaaad833b75654b55dcc240dcd2c06bd9a893cfc03f75",
+    "cluster_resources": {
+      "memory": 4727812096.0,
+      "CPU": 4.0,
+      "object_store_memory": 2026205184.0,
+      "node:172.25.118.49": 1.0,
+      "GPU": 1.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "node:__internal_head__": 1.0
+    },
+    "sequence": [
+      1,
+      3,
+      1,
+      0
+    ],
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_missed_probes": 3,
+    "placement": null
+  },
+  "job_id": "scale-demo",
+  "phases": [
+    {
+      "name": "initial",
+      "desired": 1,
+      "settled": true,
+      "cycles": 2,
+      "elapsed_seconds": 0.57,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "scale-demo/1": "RUNNING"
+      },
+      "active_before": [],
+      "trace": [
+        {
+          "phase": "initial",
+          "cycle": 1,
+          "desired": 1,
+          "counts": {
+            "PENDING": 1,
+            "RUNNING": 0,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 0,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "PENDING"
+          }
+        },
+        {
+          "phase": "initial",
+          "cycle": 2,
+          "desired": 1,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 1,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 0,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "RUNNING"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scale-up",
+      "desired": 3,
+      "settled": true,
+      "cycles": 2,
+      "elapsed_seconds": 0.507,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 3,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "scale-demo/1": "RUNNING",
+        "scale-demo/2": "RUNNING",
+        "scale-demo/3": "RUNNING"
+      },
+      "active_before": [
+        "scale-demo/1"
+      ],
+      "trace": [
+        {
+          "phase": "scale-up",
+          "cycle": 1,
+          "desired": 3,
+          "counts": {
+            "PENDING": 2,
+            "RUNNING": 1,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 0,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "RUNNING",
+            "scale-demo/2": "PENDING",
+            "scale-demo/3": "PENDING"
+          }
+        },
+        {
+          "phase": "scale-up",
+          "cycle": 2,
+          "desired": 3,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 3,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 0,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "RUNNING",
+            "scale-demo/2": "RUNNING",
+            "scale-demo/3": "RUNNING"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scale-down",
+      "desired": 1,
+      "settled": true,
+      "cycles": 2,
+      "elapsed_seconds": 0.505,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 2,
+        "FAILED": 0
+      },
+      "instances": {
+        "scale-demo/1": "RUNNING",
+        "scale-demo/2": "STOPPED",
+        "scale-demo/3": "STOPPED"
+      },
+      "active_before": [
+        "scale-demo/1",
+        "scale-demo/2",
+        "scale-demo/3"
+      ],
+      "trace": [
+        {
+          "phase": "scale-down",
+          "cycle": 1,
+          "desired": 1,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 1,
+            "UNKNOWN": 0,
+            "STOPPING": 2,
+            "STOPPED": 0,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "RUNNING",
+            "scale-demo/2": "STOPPING",
+            "scale-demo/3": "STOPPING"
+          }
+        },
+        {
+          "phase": "scale-down",
+          "cycle": 2,
+          "desired": 1,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 1,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 2,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "RUNNING",
+            "scale-demo/2": "STOPPED",
+            "scale-demo/3": "STOPPED"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stop",
+      "desired": 0,
+      "settled": true,
+      "cycles": 2,
+      "elapsed_seconds": 0.503,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 3,
+        "FAILED": 0
+      },
+      "instances": {
+        "scale-demo/1": "STOPPED",
+        "scale-demo/2": "STOPPED",
+        "scale-demo/3": "STOPPED"
+      },
+      "active_before": [
+        "scale-demo/1"
+      ],
+      "trace": [
+        {
+          "phase": "stop",
+          "cycle": 1,
+          "desired": 0,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 0,
+            "UNKNOWN": 0,
+            "STOPPING": 1,
+            "STOPPED": 2,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "STOPPING",
+            "scale-demo/2": "STOPPED",
+            "scale-demo/3": "STOPPED"
+          }
+        },
+        {
+          "phase": "stop",
+          "cycle": 2,
+          "desired": 0,
+          "counts": {
+            "PENDING": 0,
+            "RUNNING": 0,
+            "UNKNOWN": 0,
+            "STOPPING": 0,
+            "STOPPED": 3,
+            "FAILED": 0
+          },
+          "instances": {
+            "scale-demo/1": "STOPPED",
+            "scale-demo/2": "STOPPED",
+            "scale-demo/3": "STOPPED"
+          }
+        }
+      ]
+    }
+  ],
+  "starts": [
+    "scale-demo/1",
+    "scale-demo/2",
+    "scale-demo/3"
+  ],
+  "kills": [
+    "scale-demo/3",
+    "scale-demo/2",
+    "scale-demo/1"
+  ],
+  "cpus_back_seconds": 0.001,
+  "checks": [
+    {
+      "name": "every phase settles on its goal",
+      "ok": true,
+      "detail": "initial=1: RUNNING 1, scale-up=3: RUNNING 3, scale-down=1: RUNNING 1, stop=0: RUNNING 0"
+    },
+    {
+      "name": "no attempt is requested beyond the goal changes",
+      "ok": true,
+      "detail": "requested 3, expected 3"
+    },
+    {
+      "name": "a scale-down waits in STOPPING until Ray confirms the death",
+      "ok": true,
+      "detail": "observed"
+    },
+    {
+      "name": "a scale-down keeps an older attempt",
+      "ok": true,
+      "detail": "survivors were already active before the change"
+    },
+    {
+      "name": "with goal 0 nothing is recreated",
+      "ok": true,
+      "detail": "new attempts while holding: 0"
+    },
+    {
+      "name": "attempt ids are never reused",
+      "ok": true,
+      "detail": "requested ['scale-demo/1', 'scale-demo/2', 'scale-demo/3']"
+    },
+    {
+      "name": "the logical CPUs come back",
+      "ok": true,
+      "detail": "back after 0.001 s"
+    },
+    {
+      "name": "Ray's state API reports no ticker alive",
+      "ok": true,
+      "detail": "alive []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-10-23T02:29:34.423Z",
+      "m": 72.750516,
+      "event": "job_submitted",
+      "job_id": "scale-demo",
+      "spec": {
+        "job_id": "scale-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 1,
+        "resources": {
+          "cpu": 1.0
+        }
+      }
+    },
+    {
+      "t": "2026-10-23T02:29:34.423Z",
+      "m": 72.750555,
+      "event": "instance_requested",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-10-23T02:29:34.993Z",
+      "m": 73.320232,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3637,
+      "node_id": "1dd099c5affeaaad833b75654b55dcc240dcd2c06bd9a893cfc03f75",
+      "progress": 4
+    },
+    {
+      "t": "2026-10-23T02:29:34.993Z",
+      "m": 73.320315,
+      "event": "replicas_set",
+      "job_id": "scale-demo",
+      "from_replicas": 1,
+      "replicas": 3
+    },
+    {
+      "t": "2026-10-23T02:29:34.994Z",
+      "m": 73.321393,
+      "event": "instance_requested",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/2",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-10-23T02:29:34.994Z",
+      "m": 73.321401,
+      "event": "instance_requested",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/3",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-10-23T02:29:35.500Z",
+      "m": 73.827534,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "progress": 9
+    },
+    {
+      "t": "2026-10-23T02:29:35.500Z",
+      "m": 73.827552,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3635,
+      "node_id": "1dd099c5affeaaad833b75654b55dcc240dcd2c06bd9a893cfc03f75",
+      "progress": 3
+    },
+    {
+      "t": "2026-10-23T02:29:35.500Z",
+      "m": 73.827559,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3636,
+      "node_id": "1dd099c5affeaaad833b75654b55dcc240dcd2c06bd9a893cfc03f75",
+      "progress": 3
+    },
+    {
+      "t": "2026-10-23T02:29:35.500Z",
+      "m": 73.827625,
+      "event": "replicas_set",
+      "job_id": "scale-demo",
+      "from_replicas": 3,
+      "replicas": 1
+    },
+    {
+      "t": "2026-10-23T02:29:35.501Z",
+      "m": 73.829186,
+      "event": "instance_decision",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-10-23T02:29:35.501Z",
+      "m": 73.829193,
+      "event": "instance_decision",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-10-23T02:29:36.005Z",
+      "m": 74.332753,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "progress": 14
+    },
+    {
+      "t": "2026-10-23T02:29:36.005Z",
+      "m": 74.332768,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-10-23T02:29:36.005Z",
+      "m": 74.332774,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-10-23T02:29:36.005Z",
+      "m": 74.332831,
+      "event": "replicas_set",
+      "job_id": "scale-demo",
+      "from_replicas": 1,
+      "replicas": 0
+    },
+    {
+      "t": "2026-10-23T02:29:36.007Z",
+      "m": 74.334736,
+      "event": "instance_decision",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-10-23T02:29:36.508Z",
+      "m": 74.835621,
+      "event": "instance_observed",
+      "job_id": "scale-demo",
+      "instance_id": "scale-demo/1",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{"t": "2026-10-23T02:05:50.874Z", "m": 78.114065, "event": "job_submitted", "job_id": "crash-demo", "spec": {"job_id": "crash-demo", "workload": {"entrypoint": "ticker", "args": {"interval_ms": 100}}, "replicas": 2, "resources": {"cpu": 1}}}
+{"t": "2026-10-23T02:05:50.874Z", "m": 78.114099, "event": "instance_requested", "job_id": "crash-demo", "instance_id": "crash-demo/1", "reason": "initial"}
+{"t": "2026-10-23T02:05:50.874Z", "m": 78.114106, "event": "instance_requested", "job_id": "crash-demo", "instance_id": "crash-demo/2", "reason": "initial"}
+{"t": "2026-10-23T02:05:51.445Z", "m": 78.685018, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/1", "from_state": "PENDING", "state": "RUNNING", "pid": 2995, "node_id": "117bcdb1b6320232e34e6f759f4737cac626412e957614758c7b6322", "progress": 3}
+{"t": "2026-10-23T02:05:51.445Z", "m": 78.685034, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "from_state": "PENDING", "state": "RUNNING", "pid": 2994, "node_id": "117bcdb1b6320232e34e6f759f4737cac626412e957614758c7b6322", "progress": 3}
+{"t": "2026-10-23T02:05:51.947Z", "m": 79.187191, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/1", "progress": 8}
+{"t": "2026-10-23T02:05:51.947Z", "m": 79.187201, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "progress": 8}
+{"t": "2026-10-23T02:05:52.449Z", "m": 79.689523, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/1", "progress": 13}
+{"t": "2026-10-23T02:05:52.449Z", "m": 79.689532, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "progress": 13}
+{"t": "2026-10-23T02:05:52.951Z", "m": 80.191267, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/1", "progress": 18}
+{"t": "2026-10-23T02:05:52.951Z", "m": 80.191275, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "progress": 18}
+{"t": "2026-10-23T02:05:52.951Z", "m": 80.191359, "event": "annotation", "kind": "fault_injected", "instance_id": "crash-demo/1", "pid": 2995, "method": "crash"}
+{"t": "2026-10-23T02:05:52.957Z", "m": 80.19761, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/1", "from_state": "RUNNING", "state": "FAILED"}
+{"t": "2026-10-23T02:05:52.957Z", "m": 80.197624, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "progress": 19}
+{"t": "2026-10-23T02:05:52.957Z", "m": 80.197639, "event": "instance_requested", "job_id": "crash-demo", "instance_id": "crash-demo/3", "reason": "replacement", "replaces": "crash-demo/1"}
+{"t": "2026-10-23T02:05:53.463Z", "m": 80.702976, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/2", "progress": 24}
+{"t": "2026-10-23T02:05:53.463Z", "m": 80.702991, "event": "instance_observed", "job_id": "crash-demo", "instance_id": "crash-demo/3", "from_state": "PENDING", "state": "RUNNING", "pid": 3101, "node_id": "117bcdb1b6320232e34e6f759f4737cac626412e957614758c7b6322", "progress": 1}

@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "mode": "local cluster (2 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 651,
+    "driver_node_id": "39314cf03166d350cc6e0b1451c31117abccfa4fb165abf572875ad6",
+    "cluster_resources": {
+      "node:172.25.118.49": 1.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "object_store_memory": 2025931161.0,
+      "memory": 4727172711.0,
+      "CPU": 2.0,
+      "node:__internal_head__": 1.0,
+      "GPU": 1.0
+    }
+  },
+  "samples": [
+    {
+      "t": 1.190776304,
+      "progress": {
+        "two/1": 4,
+        "two/2": 4
+      }
+    },
+    {
+      "t": 2.193432769000001,
+      "progress": {
+        "two/1": 8,
+        "two/2": 8
+      }
+    },
+    {
+      "t": 3.195263806,
+      "progress": {
+        "two/1": 12,
+        "two/2": 12
+      }
+    }
+  ],
+  "instances": {
+    "two/1": {
+      "instance_id": "two/1",
+      "outcome": "healthy",
+      "pid": 1283,
+      "node_id": "39314cf03166d350cc6e0b1451c31117abccfa4fb165abf572875ad6",
+      "progress": 12,
+      "actor_id": "a1e8e2ef7e7476c1ed7ada0a01000000",
+      "started_at": 1792722517.5082192,
+      "last_tick_at": 1792722520.5101147,
+      "detail": ""
+    },
+    "two/2": {
+      "instance_id": "two/2",
+      "outcome": "healthy",
+      "pid": 1284,
+      "node_id": "39314cf03166d350cc6e0b1451c31117abccfa4fb165abf572875ad6",
+      "progress": 12,
+      "actor_id": "b2064657e37022543830596d01000000",
+      "started_at": 1792722517.508293,
+      "last_tick_at": 1792722520.5101554,
+      "detail": ""
+    }
+  },
+  "activity_windows": {
+    "two/1": {
+      "started_at": 1792722517.5082192,
+      "last_tick_at": 1792722520.5101147
+    },
+    "two/2": {
+      "started_at": 1792722517.508293,
+      "last_tick_at": 1792722520.5101554
+    }
+  },
+  "overlap_seconds": 3.002,
+  "first_answer_seconds": 0.188,
+  "deaths_confirmed_seconds": 0.114,
+  "cpus_back_seconds": 0.001,
+  "terminations": [
+    {
+      "instance_id": "two/1",
+      "outcome": "kill_requested",
+      "detail": ""
+    },
+    {
+      "instance_id": "two/2",
+      "outcome": "kill_requested",
+      "detail": ""
+    }
+  ],
+  "confirmations": {
+    "two/1": {
+      "instance_id": "two/1",
+      "outcome": "dead",
+      "pid": null,
+      "node_id": null,
+      "progress": null,
+      "actor_id": null,
+      "started_at": null,
+      "last_tick_at": null,
+      "detail": "death already confirmed"
+    },
+    "two/2": {
+      "instance_id": "two/2",
+      "outcome": "dead",
+      "pid": null,
+      "node_id": null,
+      "progress": null,
+      "actor_id": null,
+      "started_at": null,
+      "last_tick_at": null,
+      "detail": "ActorDiedError"
+    }
+  },
+  "checks": [
+    {
+      "name": "each instance runs in its own process",
+      "ok": true,
+      "detail": "pids [1283, 1284]"
+    },
+    {
+      "name": "no instance runs in the driver process",
+      "ok": true,
+      "detail": "driver 651"
+    },
+    {
+      "name": "Ray's state API sees the same processes",
+      "ok": true,
+      "detail": "state API pids [1283, 1284]"
+    },
+    {
+      "name": "progress advances in every instance",
+      "ok": true,
+      "detail": "two/1: 0 -> 12, two/2: 0 -> 12"
+    },
+    {
+      "name": "the activity windows overlap",
+      "ok": true,
+      "detail": "3.002 s of overlap"
+    },
+    {
+      "name": "Ray confirms every death after the kill request",
+      "ok": true,
+      "detail": "two/1: dead (death already confirmed), two/2: dead (ActorDiedError)"
+    },
+    {
+      "name": "the logical CPUs come back",
+      "ok": true,
+      "detail": "back after 0.001 s"
+    },
+    {
+      "name": "Ray's state API reports no ticker alive",
+      "ok": true,
+      "detail": "alive []"
+    }
+  ]
+}

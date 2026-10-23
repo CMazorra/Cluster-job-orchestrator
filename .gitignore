@@ -2,11 +2,8 @@ __pycache__/
 *.pyc
 .venv/
 
-# Local-only documentation (not pushed to remote), except experiment records and their evidence
-docs/*
-!docs/F0.md
-!docs/F1.md
-!docs/evidence/
+# Local-only documentation at the repository root (not pushed to remote)
+/docs/
 
 # Local-only opencode config, agents and skills
 .opencode/

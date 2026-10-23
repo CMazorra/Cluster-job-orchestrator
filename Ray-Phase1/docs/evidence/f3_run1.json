@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "mode": "local cluster (2 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 2324,
+    "driver_node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+    "cluster_resources": {
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "node:__internal_head__": 1.0,
+      "GPU": 1.0,
+      "node:172.25.118.49": 1.0,
+      "memory": 4727642932.0,
+      "object_store_memory": 2026132684.0,
+      "CPU": 2.0
+    },
+    "fault": "hang",
+    "replicas": 2,
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_missed_probes": 3
+  },
+  "job_id": "hang-demo",
+  "victim": {
+    "instance_id": "hang-demo/1",
+    "state": "RUNNING",
+    "pid": 2957,
+    "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+    "progress": 19
+  },
+  "survivor_before": {
+    "instance_id": "hang-demo/2",
+    "state": "RUNNING",
+    "pid": 2958,
+    "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+    "progress": 19
+  },
+  "survivor_after": {
+    "instance_id": "hang-demo/2",
+    "state": "RUNNING",
+    "pid": 2958,
+    "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+    "progress": 93
+  },
+  "timeline": {
+    "instance_id": "hang-demo/1",
+    "replacement_id": "hang-demo/3",
+    "failed_by": "instance_decision",
+    "suspicion_s": 2.001,
+    "detection_s": 7.005,
+    "replacement_request_s": 0.0,
+    "recovery_s": 0.505,
+    "total_s": 7.51
+  },
+  "trace": [
+    {
+      "label": "start",
+      "cycle": 1,
+      "seconds": 0.081,
+      "desired": 2,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "PENDING",
+        "hang-demo/2": "PENDING"
+      }
+    },
+    {
+      "label": "start",
+      "cycle": 2,
+      "seconds": 0.007,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "RUNNING",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "healthy",
+      "cycle": 3,
+      "seconds": 0.002,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "RUNNING",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "healthy",
+      "cycle": 4,
+      "seconds": 0.003,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "RUNNING",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "healthy",
+      "cycle": 5,
+      "seconds": 0.001,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "RUNNING",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "after-fault",
+      "cycle": 1,
+      "seconds": 2.001,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 1,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "UNKNOWN",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "after-fault",
+      "cycle": 2,
+      "seconds": 2.001,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 1,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "hang-demo/1": "UNKNOWN",
+        "hang-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "after-fault",
+      "cycle": 3,
+      "seconds": 2.002,
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      "instances": {
+        "hang-demo/1": "FAILED",
+        "hang-demo/2": "RUNNING",
+        "hang-demo/3": "PENDING"
+      }
+    },
+    {
+      "label": "after-fault",
+      "cycle": 4,
+      "seconds": 0.004,
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      "instances": {
+        "hang-demo/1": "FAILED",
+        "hang-demo/2": "RUNNING",
+        "hang-demo/3": "RUNNING"
+      }
+    },
+    {
+      "label": "stop",
+      "cycle": 1,
+      "seconds": 0.002,
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 2,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      "instances": {
+        "hang-demo/1": "FAILED",
+        "hang-demo/2": "STOPPING",
+        "hang-demo/3": "STOPPING"
+      }
+    },
+    {
+      "label": "stop",
+      "cycle": 2,
+      "seconds": 0.002,
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 2,
+        "FAILED": 1
+      },
+      "instances": {
+        "hang-demo/1": "FAILED",
+        "hang-demo/2": "STOPPED",
+        "hang-demo/3": "STOPPED"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "the faulty attempt ends FAILED, not STOPPED",
+      "ok": true,
+      "detail": "hang-demo/1: FAILED"
+    },
+    {
+      "name": "exactly one replacement, naming the faulty attempt",
+      "ok": true,
+      "detail": "replacements [('hang-demo/3', 'hang-demo/1')]"
+    },
+    {
+      "name": "the goal is restored",
+      "ok": true,
+      "detail": "RUNNING 2 of 2 after the fault"
+    },
+    {
+      "name": "the goal never changed",
+      "ok": true,
+      "detail": "desired [2]"
+    },
+    {
+      "name": "the replacement is a new process",
+      "ok": true,
+      "detail": "pid 3082, faulty 2957, survivor 2958"
+    },
+    {
+      "name": "the replacement starts its counter again: local state was lost",
+      "ok": true,
+      "detail": "replacement first progress 1, faulty attempt was at 19"
+    },
+    {
+      "name": "the other attempt kept running and counting",
+      "ok": true,
+      "detail": "state changes 0, progress 19 -> 93"
+    },
+    {
+      "name": "the hung attempt was suspected before being given up",
+      "ok": true,
+      "detail": "UNKNOWN after 2.001 s, failed by instance_decision"
+    },
+    {
+      "name": "it was given up only after K missed probes",
+      "ok": true,
+      "detail": "missed probes reported [1, 2, 3], K = 3"
+    },
+    {
+      "name": "the hung process was terminated: one process per replica",
+      "ok": true,
+      "detail": "alive ticker pids [2958, 3082], hung pid 2957"
+    },
+    {
+      "name": "detection and recovery were measured",
+      "ok": true,
+      "detail": "detection 7.005 s, recovery 0.505 s"
+    },
+    {
+      "name": "the job stops without leftovers",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-10-23T02:47:02.893Z",
+      "m": 69.234591,
+      "event": "job_submitted",
+      "job_id": "hang-demo",
+      "spec": {
+        "job_id": "hang-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-10-23T02:47:02.893Z",
+      "m": 69.234633,
+      "event": "instance_requested",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-10-23T02:47:02.893Z",
+      "m": 69.234641,
+      "event": "instance_requested",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-10-23T02:47:03.481Z",
+      "m": 69.823122,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2957,
+      "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+      "progress": 3
+    },
+    {
+      "t": "2026-10-23T02:47:03.481Z",
+      "m": 69.823138,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2958,
+      "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+      "progress": 3
+    },
+    {
+      "t": "2026-10-23T02:47:03.983Z",
+      "m": 70.325078,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "progress": 9
+    },
+    {
+      "t": "2026-10-23T02:47:03.983Z",
+      "m": 70.325088,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 9
+    },
+    {
+      "t": "2026-10-23T02:47:04.486Z",
+      "m": 70.828165,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "progress": 14
+    },
+    {
+      "t": "2026-10-23T02:47:04.486Z",
+      "m": 70.828173,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 14
+    },
+    {
+      "t": "2026-10-23T02:47:04.988Z",
+      "m": 71.329809,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "progress": 19
+    },
+    {
+      "t": "2026-10-23T02:47:04.988Z",
+      "m": 71.329818,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 19
+    },
+    {
+      "t": "2026-10-23T02:47:04.988Z",
+      "m": 71.329915,
+      "event": "annotation",
+      "kind": "fault_injected",
+      "instance_id": "hang-demo/1",
+      "pid": 2957,
+      "method": "hang"
+    },
+    {
+      "t": "2026-10-23T02:47:06.990Z",
+      "m": 73.331336,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-10-23T02:47:09.491Z",
+      "m": 75.832954,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-10-23T02:47:09.491Z",
+      "m": 75.832966,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 44
+    },
+    {
+      "t": "2026-10-23T02:47:11.993Z",
+      "m": 78.33481,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "missed_probes": 3
+    },
+    {
+      "t": "2026-10-23T02:47:11.993Z",
+      "m": 78.334821,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 69
+    },
+    {
+      "t": "2026-10-23T02:47:11.993Z",
+      "m": 78.334834,
+      "event": "instance_decision",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/1",
+      "reason": "given_up_after_missed_probes",
+      "from_state": "UNKNOWN",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-10-23T02:47:11.993Z",
+      "m": 78.334846,
+      "event": "instance_requested",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/3",
+      "reason": "replacement",
+      "replaces": "hang-demo/1"
+    },
+    {
+      "t": "2026-10-23T02:47:12.498Z",
+      "m": 78.840173,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/2",
+      "progress": 93
+    },
+    {
+      "t": "2026-10-23T02:47:12.498Z",
+      "m": 78.84019,
+      "event": "instance_observed",
+      "job_id": "hang-demo",
+      "instance_id": "hang-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3082,
+      "node_id": "a3706cdabb711ef86200d1601074c8833675130a2c3c883d667bfa0e",
+      "progress": 1
+    }
+  ]
+}

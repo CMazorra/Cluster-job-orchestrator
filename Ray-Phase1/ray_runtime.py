@@ -33,6 +33,9 @@ DEFAULT_PROBE_TIMEOUT_S = 2.0
 # with a large capacity, so the label restricts placement without limiting count.
 LABEL_UNITS = 1
 
+# Faults an experiment can inject into an actor.
+FAULTS = ("crash", "hang")
+
 
 @ray.remote(num_cpus=1, max_restarts=0, max_task_retries=0)
 class Ticker:
@@ -71,6 +74,15 @@ class Ticker:
     def crash(self) -> None:
         """Ends this process on purpose. The controller sees it as an unexpected death."""
         os._exit(1)
+
+    def hang(self) -> None:
+        """Blocks this method forever, like a stuck request handler.
+
+        The process stays alive and the counter keeps advancing, but the actor
+        runs one method at a time, so every later ``status`` call waits behind
+        this one and is never answered.
+        """
+        threading.Event().wait()
 
 
 class RayRuntime:
@@ -138,13 +150,18 @@ class RayRuntime:
         ray.kill(actor)
         return Termination(instance_id, KILL_REQUESTED)
 
-    def crash(self, instance_id: str) -> None:
-        """Fault injection for experiments: makes the actor's process exit at once.
+    def inject_fault(self, instance_id: str, fault: str) -> None:
+        """Fault injection for experiments, on the actor of one instance.
+
+        * ``crash``: the process exits at once;
+        * ``hang``: the process stays alive but stops answering.
 
         Nothing is awaited and nothing is reported: the controller has to
-        discover the death through its own probes, as with a real crash.
+        discover the fault through its own probes, as with a real one.
         """
-        self._actors[instance_id].crash.remote()
+        if fault not in FAULTS:
+            raise ValueError(f"unknown fault {fault!r}; expected one of {FAULTS}")
+        getattr(self._actors[instance_id], fault).remote()
 
     def shutdown(self) -> list[Termination]:
         """Requests the end of every actor whose death was not confirmed yet."""

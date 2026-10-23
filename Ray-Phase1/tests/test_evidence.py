@@ -4,7 +4,7 @@ import itertools
 import unittest
 
 from orchestrator import Orchestrator
-from orchestrator.evidence import crash_timeline
+from orchestrator.evidence import fault_timeline
 
 
 def spec(replicas: int) -> dict:
@@ -93,7 +93,7 @@ class Annotations(unittest.TestCase):
         self.assertEqual([e["m"] for e in orch.events()], [10.0, 11.0])
 
 
-class CrashTimeline(unittest.TestCase):
+class FaultTimeline(unittest.TestCase):
     def test_durations_come_from_the_monotonic_stamps(self):
         now = [0.0]
         orch = Orchestrator(monotonic=lambda: now[0])
@@ -108,19 +108,52 @@ class CrashTimeline(unittest.TestCase):
         now[0] = 12.0
         healthy(orch, replacement)
 
-        timeline = crash_timeline(orch.events(), "job/1")
+        timeline = fault_timeline(orch.events(), "job/1")
         self.assertEqual(timeline["replacement_id"], replacement)
         self.assertEqual(
             (timeline["detection_s"], timeline["replacement_request_s"], timeline["recovery_s"], timeline["total_s"]),
             (0.5, 0.0, 1.5, 2.0),
         )
 
+    def test_a_hung_attempt_is_suspected_first_and_failed_by_a_decision(self):
+        now = [0.0]
+        orch = Orchestrator(max_missed_probes=3, monotonic=lambda: now[0])
+        orch.submit_job(spec(1))
+        healthy(orch, *orch.reconcile("job").start)
+
+        now[0] = 10.0
+        orch.annotate("fault_injected", instance_id="job/1", method="hang")
+        for second in (12.0, 14.5, 17.0):
+            now[0] = second
+            orch.report_unresponsive("job/1")
+        now[0] = 17.5
+        (replacement,) = orch.reconcile("job").start
+        now[0] = 18.0
+        healthy(orch, replacement)
+
+        timeline = fault_timeline(orch.events(), "job/1")
+        self.assertEqual(timeline["failed_by"], "instance_decision")
+        self.assertEqual(
+            (timeline["suspicion_s"], timeline["detection_s"], timeline["recovery_s"], timeline["total_s"]),
+            (2.0, 7.5, 0.5, 8.0),
+        )
+
+    def test_a_crash_is_failed_by_an_observation_without_suspicion(self):
+        orch = Orchestrator()
+        orch.submit_job(spec(1))
+        healthy(orch, *orch.reconcile("job").start)
+        orch.annotate("fault_injected", instance_id="job/1", method="crash")
+        orch.report_death("job/1")
+        timeline = fault_timeline(orch.events(), "job/1")
+        self.assertEqual(timeline["failed_by"], "instance_observed")
+        self.assertIsNone(timeline["suspicion_s"])
+
     def test_steps_that_did_not_happen_are_none(self):
         orch = Orchestrator()
         orch.submit_job(spec(1))
         healthy(orch, *orch.reconcile("job").start)
         orch.annotate("fault_injected", instance_id="job/1", method="crash")
-        timeline = crash_timeline(orch.events(), "job/1")
+        timeline = fault_timeline(orch.events(), "job/1")
         self.assertIsNone(timeline["replacement_id"])
         self.assertIsNone(timeline["detection_s"])
         self.assertIsNone(timeline["total_s"])

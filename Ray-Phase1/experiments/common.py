@@ -23,6 +23,21 @@ import ray
 # restricts placement without limiting how many instances fit.
 LABEL_CAPACITY = 1000
 
+STATES = ("PENDING", "RUNNING", "UNKNOWN", "STOPPING", "STOPPED", "FAILED")
+LETTER = {"PENDING": "P", "RUNNING": "R", "UNKNOWN": "U", "STOPPING": "S", "STOPPED": "T", "FAILED": "F"}
+
+
+def snapshot(orchestrator: Any, job_id: str) -> tuple[dict[str, int], dict[str, str]]:
+    """How many attempts are in each state, and the state of every attempt."""
+    instances = {i["instance_id"]: i["state"] for i in orchestrator.get_job(job_id)["instances"]}
+    counts = {state: sum(1 for s in instances.values() if s == state) for state in STATES}
+    return counts, instances
+
+
+def settled(counts: dict[str, int], desired: int) -> bool:
+    """The goal is met and nothing is still moving: no pending, no doubt, no stop in flight."""
+    return counts["RUNNING"] == desired and counts["PENDING"] == counts["UNKNOWN"] == counts["STOPPING"] == 0
+
 
 def start_cluster(*, cpus: int, address: str | None = None, labels: tuple[str, ...] = ()) -> dict[str, Any]:
     """Starts a local cluster, or connects to a running one, and describes it."""

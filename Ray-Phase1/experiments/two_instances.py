@@ -118,8 +118,10 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     windows = {i: {"started_at": o.started_at, "last_tick_at": o.last_tick_at} for i, o in last.items()}
     overlap, overlap_note = _overlap_seconds(windows)
 
+    kill_requested_at = time.monotonic()
     terminations = [runtime.terminate(instance_id) for instance_id in instance_ids]
     confirmed = _wait_for(runtime, instance_ids, DEAD, args.startup_timeout)
+    deaths_confirmed_after = round(time.monotonic() - kill_requested_at, 3)
     cpus_back = wait_for_free_cpus(meta["cluster_resources"].get("CPU", 0), RESOURCE_TIMEOUT_S)
     alive_after = alive_tickers()
 
@@ -175,6 +177,9 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         "instances": {i: last[i]._asdict() for i in instance_ids},
         "activity_windows": windows,
         "overlap_seconds": overlap,
+        "first_answer_seconds": healthy_after,
+        "deaths_confirmed_seconds": deaths_confirmed_after,
+        "cpus_back_seconds": cpus_back,
         "terminations": [t._asdict() for t in terminations],
         "confirmations": {i: o._asdict() for i, o in confirmed.items()},
         "checks": checks,

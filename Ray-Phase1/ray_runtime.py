@@ -138,6 +138,14 @@ class RayRuntime:
         ray.kill(actor)
         return Termination(instance_id, KILL_REQUESTED)
 
+    def crash(self, instance_id: str) -> None:
+        """Fault injection for experiments: makes the actor's process exit at once.
+
+        Nothing is awaited and nothing is reported: the controller has to
+        discover the death through its own probes, as with a real crash.
+        """
+        self._actors[instance_id].crash.remote()
+
     def shutdown(self) -> list[Termination]:
         """Requests the end of every actor whose death was not confirmed yet."""
         return [self.terminate(instance_id) for instance_id in list(self._actors)]

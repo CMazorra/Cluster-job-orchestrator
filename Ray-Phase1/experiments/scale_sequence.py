@@ -20,7 +20,17 @@ import time
 from pathlib import Path
 from typing import Any
 
-from common import alive_tickers, print_checks, print_meta, start_cluster, wait_for_free_cpus
+from common import (
+    LETTER,
+    STATES,
+    alive_tickers,
+    print_checks,
+    print_meta,
+    settled,
+    snapshot,
+    start_cluster,
+    wait_for_free_cpus,
+)
 
 import ray
 
@@ -28,8 +38,6 @@ from orchestrator import Orchestrator, RuntimeController
 from ray_runtime import DEFAULT_PROBE_TIMEOUT_S, RayRuntime
 
 PREFIX = "[scale]"
-STATES = ("PENDING", "RUNNING", "UNKNOWN", "STOPPING", "STOPPED", "FAILED")
-LETTER = {"PENDING": "P", "RUNNING": "R", "UNKNOWN": "U", "STOPPING": "S", "STOPPED": "T", "FAILED": "F"}
 PHASE_NAMES = ("initial", "scale-up", "scale-down", "stop")
 RESOURCE_TIMEOUT_S = 30.0
 
@@ -65,20 +73,9 @@ def _phase_name(index: int) -> str:
     return PHASE_NAMES[index] if index < len(PHASE_NAMES) else f"phase-{index + 1}"
 
 
-def _snapshot(orchestrator: Orchestrator, job_id: str) -> tuple[dict[str, int], dict[str, str]]:
-    instances = {i["instance_id"]: i["state"] for i in orchestrator.get_job(job_id)["instances"]}
-    counts = {state: sum(1 for s in instances.values() if s == state) for state in STATES}
-    return counts, instances
-
-
-def _settled(counts: dict[str, int], desired: int) -> bool:
-    """The goal is met and nothing is still moving: no pending, no doubt, no stop in flight."""
-    return counts["RUNNING"] == desired and counts["PENDING"] == counts["UNKNOWN"] == counts["STOPPING"] == 0
-
-
 def _cycle(controller: RuntimeController, orchestrator: Orchestrator, job_id: str, phase: str, index: int, desired: int) -> dict[str, Any]:
     actions = controller.step(job_id)
-    counts, instances = _snapshot(orchestrator, job_id)
+    counts, instances = snapshot(orchestrator, job_id)
     rendered = ", ".join(f"{i}({LETTER[s]})" for i, s in instances.items())
     print(
         f"{PREFIX} {phase} cycle {index}: goal {desired} | "
@@ -95,17 +92,17 @@ def _run_phase(controller: RuntimeController, orchestrator: Orchestrator, job_id
     rows: list[dict[str, Any]] = []
     while time.monotonic() - started_at < args.deadline:
         rows.append(_cycle(controller, orchestrator, job_id, name, len(rows) + 1, desired))
-        if _settled(rows[-1]["counts"], desired):
+        if settled(rows[-1]["counts"], desired):
             break
         time.sleep(args.cycle)
-    counts, instances = _snapshot(orchestrator, job_id)
-    settled = _settled(counts, desired)
-    if not settled:
+    counts, instances = snapshot(orchestrator, job_id)
+    phase_settled = settled(counts, desired)
+    if not phase_settled:
         print(f"{PREFIX} {name}: NOT settled within {args.deadline} s")
     return {
         "name": name,
         "desired": desired,
-        "settled": settled,
+        "settled": phase_settled,
         "cycles": len(rows),
         "elapsed_seconds": round(time.monotonic() - started_at, 3),
         "counts": counts,
@@ -221,6 +218,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "phases": phases,
         "starts": controller.starts,
         "kills": controller.kills,
+        "cpus_back_seconds": cpus_back,
         "checks": _checks(phases, controller, sequence, hold_new, cpus_back, alive_after),
         "events": orchestrator.events(),
     }

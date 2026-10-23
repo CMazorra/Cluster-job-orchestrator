@@ -131,7 +131,7 @@ class InvalidSpec(unittest.TestCase):
 
 class InstanceCorrelation(unittest.TestCase):
     def setUp(self):
-        self.orch = Orchestrator(clock=lambda: FIXED_NOW)
+        self.orch = Orchestrator(clock=lambda: FIXED_NOW, monotonic=lambda: 5.0)
         self.orch.submit_job(SPEC)
 
     def test_attempts_get_distinct_ids_and_start_pending(self):
@@ -155,6 +155,7 @@ class InstanceCorrelation(unittest.TestCase):
             [
                 {
                     "t": "2026-10-18T12:00:00.000Z",
+                    "m": 5.0,
                     "event": "instance_observed",
                     "job_id": "demo-001",
                     "instance_id": "demo-001/1",

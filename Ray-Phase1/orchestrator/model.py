@@ -177,6 +177,8 @@ class Instance:
     node_id: str | None = None
     progress: int | None = None
     missed_probes: int = 0  # consecutive health probes without an answer while UNKNOWN
+    reason: str = "initial"  # why it was created: initial, scale_up or replacement
+    replaces: str | None = None  # failed attempt this one replaces, if any
 
     def move_to(self, state: InstanceState) -> None:
         """Changes state; an illegal transition is a controller bug, not a client error."""
@@ -200,6 +202,8 @@ class Job:
     desired_replicas: int
     instances: list[Instance] = field(default_factory=list)
     next_attempt: int = 1
+    # Failed attempts that counted toward the goal and have not been replaced yet.
+    unreplaced_failures: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)

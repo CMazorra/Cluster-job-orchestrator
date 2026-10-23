@@ -7,6 +7,7 @@ Operations are called sequentially; there is no protection against concurrent wr
 from __future__ import annotations
 
 import json
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
@@ -26,6 +27,7 @@ from .model import (
 )
 
 Clock = Callable[[], datetime]
+MonotonicClock = Callable[[], float]
 
 DEFAULT_MAX_MISSED_PROBES = 3
 
@@ -42,10 +44,20 @@ def _iso(moment: datetime) -> str:
 
 
 class Orchestrator:
-    def __init__(self, clock: Clock = _utc_now, max_missed_probes: int = DEFAULT_MAX_MISSED_PROBES):
+    def __init__(
+        self,
+        clock: Clock = _utc_now,
+        max_missed_probes: int = DEFAULT_MAX_MISSED_PROBES,
+        monotonic: MonotonicClock = time.monotonic,
+    ):
+        """``clock`` stamps events with a wall-clock time; ``monotonic`` stamps them for durations.
+
+        The wall clock can jump, so durations between events must use the "m" stamp.
+        """
         if not (_is_int(max_missed_probes) and max_missed_probes >= 1):
             raise ValueError("max_missed_probes must be a positive integer")
         self._clock = clock
+        self._monotonic = monotonic
         self._max_missed_probes = max_missed_probes
         self._jobs: dict[str, Job] = {}
         self._instances: dict[str, Instance] = {}
@@ -122,14 +134,23 @@ class Orchestrator:
         for instance in job.instances:
             if instance.state is InstanceState.UNKNOWN and instance.missed_probes >= self._max_missed_probes:
                 self._decide(instance, InstanceState.FAILED, "given_up_after_missed_probes")
+                job.unreplaced_failures.append(instance.instance_id)
                 kill.append(instance.instance_id)
 
         replicas = [(index, i) for index, i in enumerate(job.instances) if i.state in REPLICA_STATES]
         missing = job.desired_replicas - len(replicas)
 
         start: list[str] = []
+        if missing <= 0:
+            # The goal is covered, so earlier failures no longer need a replacement.
+            job.unreplaced_failures.clear()
         if missing > 0:
-            start = [self._add_instance(job) for _ in range(missing)]
+            first_pass = job.next_attempt == 1
+            for _ in range(missing):
+                if job.unreplaced_failures:
+                    start.append(self._add_instance(job, "replacement", job.unreplaced_failures.pop(0)))
+                else:
+                    start.append(self._add_instance(job, "initial" if first_pass else "scale_up"))
         elif missing < 0:
             # Among attempts in the same state, the newest goes first.
             ordered = sorted(replicas, key=lambda pair: (_STOP_PRIORITY[pair[1].state], -pair[0]))
@@ -176,11 +197,20 @@ class Orchestrator:
         # A death after a requested stop is the stop completing, never a failure.
         target = InstanceState.STOPPED if instance.state is InstanceState.STOPPING else InstanceState.FAILED
         self._observed(instance, self._move(instance, target))
+        if target is InstanceState.FAILED:
+            self._jobs[instance.job_id].unreplaced_failures.append(instance_id)
 
     def active_instances(self, job_id: str) -> list[str]:
         return [i.instance_id for i in self._job(job_id).instances if i.state in ACTIVE_STATES]
 
     # --- Evidence -----------------------------------------------------------------
+
+    def annotate(self, kind: str, **fields: Any) -> None:
+        """Records something that happened outside the domain, such as an injected fault.
+
+        It changes no state; it only places the external event on the same timeline.
+        """
+        self._record("annotation", kind=kind, **fields)
 
     def events(self) -> list[dict[str, Any]]:
         """Session history linking job, attempt and process."""
@@ -199,14 +229,19 @@ class Orchestrator:
             raise OrchestratorError(ErrorCode.JOB_NOT_FOUND, f"job {job_id!r} does not exist")
         return job
 
-    def _add_instance(self, job: Job) -> str:
+    def _add_instance(self, job: Job, reason: str, replaces: str | None = None) -> str:
         """Creates a PENDING attempt with ID "<job_id>/<n>"; n is never reused within a job."""
         job_id = job.spec.job_id
-        instance = Instance(instance_id=f"{job_id}/{job.next_attempt}", job_id=job_id)
+        instance = Instance(
+            instance_id=f"{job_id}/{job.next_attempt}", job_id=job_id, reason=reason, replaces=replaces
+        )
         job.next_attempt += 1
         job.instances.append(instance)
         self._instances[instance.instance_id] = instance
-        self._record("instance_requested", job_id=job_id, instance_id=instance.instance_id)
+        fields: dict[str, Any] = {"reason": reason}
+        if replaces is not None:
+            fields["replaces"] = replaces
+        self._record("instance_requested", job_id=job_id, instance_id=instance.instance_id, **fields)
         return instance.instance_id
 
     def _move(self, instance: Instance, state: InstanceState) -> dict[str, Any]:
@@ -223,4 +258,4 @@ class Orchestrator:
         self._record("instance_decision", job_id=instance.job_id, instance_id=instance.instance_id, reason=reason, **changes)
 
     def _record(self, event: str, **fields: Any) -> None:
-        self._events.append({"t": _iso(self._clock()), "event": event, **fields})
+        self._events.append({"t": _iso(self._clock()), "m": round(self._monotonic(), 6), "event": event, **fields})

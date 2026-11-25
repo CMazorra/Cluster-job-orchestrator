@@ -1,6 +1,5 @@
 """Attempt identity, annotations and fault timelines in the session history."""
 
-import itertools
 import unittest
 
 from orchestrator import Orchestrator
@@ -86,9 +85,10 @@ class Annotations(unittest.TestCase):
         self.assertEqual(orch.events()[-1]["kind"], "fault_injected")
 
     def test_every_event_carries_a_monotonic_stamp(self):
-        ticks = itertools.count(10)
-        orch = Orchestrator(monotonic=lambda: float(next(ticks)))
+        now = [10.0]
+        orch = Orchestrator(monotonic=lambda: now[0])
         orch.submit_job(spec(1))
+        now[0] = 11.0
         orch.reconcile("job")
         self.assertEqual([e["m"] for e in orch.events()], [10.0, 11.0])
 

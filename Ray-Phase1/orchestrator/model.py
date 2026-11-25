@@ -179,6 +179,11 @@ class Instance:
     missed_probes: int = 0  # consecutive health probes without an answer while UNKNOWN
     reason: str = "initial"  # why it was created: initial, scale_up or replacement
     replaces: str | None = None  # failed attempt this one replaces, if any
+    # Consecutive failures, without a stable run in between, in the chain of attempts this
+    # one belongs to. A replacement inherits the count of the attempt it replaces.
+    failures_in_row: int = 0
+    running_since: float | None = None  # monotonic time it became RUNNING
+    retry_at: float | None = None  # monotonic time its replacement may be created, once FAILED
 
     def move_to(self, state: InstanceState) -> None:
         """Changes state; an illegal transition is a controller bug, not a client error."""

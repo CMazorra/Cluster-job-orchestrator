@@ -31,6 +31,12 @@ MonotonicClock = Callable[[], float]
 
 DEFAULT_MAX_MISSED_PROBES = 3
 
+# Replacement backoff: the first failure in a chain is replaced at once; each further
+# failure without a stable run in between doubles the wait, up to the maximum.
+DEFAULT_BACKOFF_BASE_S = 1.0
+DEFAULT_BACKOFF_MAX_S = 30.0
+DEFAULT_STABLE_AFTER_S = 10.0  # RUNNING this long resets the chain
+
 # Scale-down order: attempts that are not serving yet go first; RUNNING ones go last.
 _STOP_PRIORITY = {InstanceState.PENDING: 0, InstanceState.UNKNOWN: 1, InstanceState.RUNNING: 2}
 
@@ -49,16 +55,25 @@ class Orchestrator:
         clock: Clock = _utc_now,
         max_missed_probes: int = DEFAULT_MAX_MISSED_PROBES,
         monotonic: MonotonicClock = time.monotonic,
+        backoff_base_s: float = DEFAULT_BACKOFF_BASE_S,
+        backoff_max_s: float = DEFAULT_BACKOFF_MAX_S,
+        stable_after_s: float = DEFAULT_STABLE_AFTER_S,
     ):
         """``clock`` stamps events with a wall-clock time; ``monotonic`` stamps them for durations.
 
         The wall clock can jump, so durations between events must use the "m" stamp.
+        ``backoff_base_s = 0`` disables the replacement backoff.
         """
         if not (_is_int(max_missed_probes) and max_missed_probes >= 1):
             raise ValueError("max_missed_probes must be a positive integer")
+        if backoff_base_s < 0 or backoff_max_s < backoff_base_s or stable_after_s < 0:
+            raise ValueError("backoff and stability times must be non-negative, with max >= base")
         self._clock = clock
         self._monotonic = monotonic
         self._max_missed_probes = max_missed_probes
+        self._backoff_base_s = backoff_base_s
+        self._backoff_max_s = backoff_max_s
+        self._stable_after_s = stable_after_s
         self._jobs: dict[str, Job] = {}
         self._instances: dict[str, Instance] = {}
         self._events: list[dict[str, Any]] = []
@@ -134,7 +149,7 @@ class Orchestrator:
         for instance in job.instances:
             if instance.state is InstanceState.UNKNOWN and instance.missed_probes >= self._max_missed_probes:
                 self._decide(instance, InstanceState.FAILED, "given_up_after_missed_probes")
-                job.unreplaced_failures.append(instance.instance_id)
+                self._record_failure(job, instance)
                 kill.append(instance.instance_id)
 
         replicas = [(index, i) for index, i in enumerate(job.instances) if i.state in REPLICA_STATES]
@@ -146,11 +161,14 @@ class Orchestrator:
             job.unreplaced_failures.clear()
         if missing > 0:
             first_pass = job.next_attempt == 1
-            for _ in range(missing):
-                if job.unreplaced_failures:
-                    start.append(self._add_instance(job, "replacement", job.unreplaced_failures.pop(0)))
-                else:
-                    start.append(self._add_instance(job, "initial" if first_pass else "scale_up"))
+            now = self._monotonic()
+            # Failures still inside their backoff keep their slot empty until it expires.
+            due = [f for f in job.unreplaced_failures if (self._instances[f].retry_at or 0.0) <= now]
+            for failed_id in due[:missing]:
+                job.unreplaced_failures.remove(failed_id)
+                start.append(self._add_instance(job, "replacement", failed_id))
+            for _ in range(max(0, missing - len(due[:missing]) - len(job.unreplaced_failures))):
+                start.append(self._add_instance(job, "initial" if first_pass else "scale_up"))
         elif missing < 0:
             # Among attempts in the same state, the newest goes first.
             ordered = sorted(replicas, key=lambda pair: (_STOP_PRIORITY[pair[1].state], -pair[0]))
@@ -170,6 +188,8 @@ class Orchestrator:
         changes: dict[str, Any] = {}
         if instance.state in (InstanceState.PENDING, InstanceState.UNKNOWN):
             changes.update(self._move(instance, InstanceState.RUNNING))
+        if instance.running_since is None:
+            instance.running_since = self._monotonic()
         instance.missed_probes = 0
         for name, value in (("pid", pid), ("node_id", node_id), ("progress", progress)):
             if value != getattr(instance, name):
@@ -198,7 +218,7 @@ class Orchestrator:
         target = InstanceState.STOPPED if instance.state is InstanceState.STOPPING else InstanceState.FAILED
         self._observed(instance, self._move(instance, target))
         if target is InstanceState.FAILED:
-            self._jobs[instance.job_id].unreplaced_failures.append(instance_id)
+            self._record_failure(self._jobs[instance.job_id], instance)
 
     def active_instances(self, job_id: str) -> list[str]:
         return [i.instance_id for i in self._job(job_id).instances if i.state in ACTIVE_STATES]
@@ -233,7 +253,11 @@ class Orchestrator:
         """Creates a PENDING attempt with ID "<job_id>/<n>"; n is never reused within a job."""
         job_id = job.spec.job_id
         instance = Instance(
-            instance_id=f"{job_id}/{job.next_attempt}", job_id=job_id, reason=reason, replaces=replaces
+            instance_id=f"{job_id}/{job.next_attempt}",
+            job_id=job_id,
+            reason=reason,
+            replaces=replaces,
+            failures_in_row=self._instances[replaces].failures_in_row if replaces else 0,
         )
         job.next_attempt += 1
         job.instances.append(instance)
@@ -243,6 +267,28 @@ class Orchestrator:
             fields["replaces"] = replaces
         self._record("instance_requested", job_id=job_id, instance_id=instance.instance_id, **fields)
         return instance.instance_id
+
+    def _record_failure(self, job: Job, instance: Instance) -> None:
+        """Queues a FAILED attempt for replacement, after a backoff if its chain keeps failing."""
+        now = self._monotonic()
+        stable = instance.running_since is not None and now - instance.running_since >= self._stable_after_s
+        instance.failures_in_row = 1 if stable else instance.failures_in_row + 1
+        delay = self._backoff(instance.failures_in_row)
+        instance.retry_at = now + delay
+        job.unreplaced_failures.append(instance.instance_id)
+        if delay > 0:
+            self._record(
+                "replacement_backoff",
+                job_id=job.spec.job_id,
+                instance_id=instance.instance_id,
+                failures_in_row=instance.failures_in_row,
+                delay_s=delay,
+            )
+
+    def _backoff(self, failures_in_row: int) -> float:
+        if failures_in_row <= 1 or self._backoff_base_s <= 0:
+            return 0.0
+        return min(self._backoff_base_s * 2 ** (failures_in_row - 2), self._backoff_max_s)
 
     def _move(self, instance: Instance, state: InstanceState) -> dict[str, Any]:
         from_state = instance.state

@@ -26,7 +26,7 @@ AI_USE.md             declaración de uso de asistentes de IA
 | [Mapa de dependencias](Ray-Phase1/docs/DEPENDENCY_MAP.md) | Qué hace Ray por nosotros y qué tendrá que decidir la versión nativa |
 | [Cierre de la fase Ray](Ray-Phase1/docs/PHASE1_SUMMARY.md) | Entregables, semántica de fallos observada y preguntas abiertas |
 | [Escenarios](Ray-Phase1/docs/SCENARIOS.md) | Catálogo completo de escenarios de fallo: ejecutados, pendientes y no aplicables, con su justificación |
-| [F0](Ray-Phase1/docs/F0.md), [F1](Ray-Phase1/docs/F1.md), [caída de un nodo](Ray-Phase1/docs/F1_NODE.md), [F3](Ray-Phase1/docs/F3.md), [F17](Ray-Phase1/docs/F17.md) | Referencia normal, caída de un proceso, caída de un nodo, proceso que deja de responder y amplificación de reintentos, con su [evidencia](Ray-Phase1/docs/evidence/) |
+| [F0](Ray-Phase1/docs/F0.md), [F1](Ray-Phase1/docs/F1.md), [caída de un nodo](Ray-Phase1/docs/F1_NODE.md), [F2](Ray-Phase1/docs/F2.md), [F3](Ray-Phase1/docs/F3.md), [F4](Ray-Phase1/docs/F4.md), [F17](Ray-Phase1/docs/F17.md) | Referencia normal, caída de un proceso, caída de un nodo, caída y reinicio del controlador, proceso que deja de responder, pérdida de respuestas de salud y amplificación de reintentos, con su [evidencia](Ray-Phase1/docs/evidence/) |
 
 ## Requisitos
 
@@ -61,6 +61,8 @@ python experiments/fault_recovery.py --fault crash   # un proceso muere
 python experiments/fault_recovery.py --fault hang    # un proceso deja de responder
 python experiments/node_failure.py                # cae un nodo entero y entra otro
 python experiments/retry_amplification.py         # una carga que se cae al arrancar
+python experiments/controller_restart.py          # el controlador cae y se reinicia
+python experiments/message_loss.py --loss 0.3     # se pierden respuestas de salud
 ```
 
 Cada script imprime sus comprobaciones (`[OK]` o `[FAIL]`) y termina con código 1 si alguna falla. Con `--output` guarda los resultados en JSON y, donde existe, `--events` guarda el historial de eventos en JSONL. Entre ejecuciones conviene hacer `ray stop --force`.

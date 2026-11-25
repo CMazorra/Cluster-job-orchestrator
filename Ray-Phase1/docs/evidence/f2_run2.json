@@ -1,0 +1,367 @@
+{
+  "meta": {
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "mode": "observer process owning a simulated cluster; controller in a separate process",
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0
+  },
+  "pids_before": [
+    44358,
+    44359
+  ],
+  "instances_gone_after_s": 0.016,
+  "processes_gone_after_s": 0.023,
+  "recovery_after_restart_s": 1.881,
+  "pids_after": [
+    44506,
+    44507
+  ],
+  "reused_attempt_ids": [
+    "restart-demo/1",
+    "restart-demo/2"
+  ],
+  "session1_last_status": {
+    "session": 1,
+    "pid": 44302,
+    "phase": "running",
+    "monotonic": 19239.484408539,
+    "job": {
+      "job_id": "restart-demo",
+      "desired_replicas": 2,
+      "observed": {
+        "running": 2,
+        "pending": 0,
+        "unknown": 0,
+        "stopping": 0
+      },
+      "instances": [
+        {
+          "instance_id": "restart-demo/1",
+          "state": "RUNNING",
+          "pid": 44359,
+          "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+          "progress": 0
+        },
+        {
+          "instance_id": "restart-demo/2",
+          "state": "RUNNING",
+          "pid": 44358,
+          "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+          "progress": 0
+        }
+      ],
+      "observed_at": "2026-11-25T20:36:30.231Z"
+    },
+    "counts": {
+      "PENDING": 0,
+      "RUNNING": 2,
+      "UNKNOWN": 0,
+      "STOPPING": 0,
+      "STOPPED": 0,
+      "FAILED": 0
+    },
+    "events": [
+      {
+        "t": "2026-11-25T20:36:29.521Z",
+        "m": 19238.774496,
+        "event": "job_submitted",
+        "job_id": "restart-demo",
+        "spec": {
+          "job_id": "restart-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      },
+      {
+        "t": "2026-11-25T20:36:29.521Z",
+        "m": 19238.774557,
+        "event": "instance_requested",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "reason": "initial"
+      },
+      {
+        "t": "2026-11-25T20:36:29.521Z",
+        "m": 19238.77457,
+        "event": "instance_requested",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "reason": "initial"
+      },
+      {
+        "t": "2026-11-25T20:36:30.231Z",
+        "m": 19239.484343,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "from_state": "PENDING",
+        "state": "RUNNING",
+        "pid": 44359,
+        "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+        "progress": 0
+      },
+      {
+        "t": "2026-11-25T20:36:30.231Z",
+        "m": 19239.484359,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "from_state": "PENDING",
+        "state": "RUNNING",
+        "pid": 44358,
+        "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+        "progress": 0
+      }
+    ]
+  },
+  "session2_final_status": {
+    "session": 2,
+    "pid": 44462,
+    "phase": "stopped",
+    "job_known_after_restart": false,
+    "get_job_error": "JOB_NOT_FOUND",
+    "monotonic": 19249.546314603,
+    "job": {
+      "job_id": "restart-demo",
+      "desired_replicas": 0,
+      "observed": {
+        "running": 0,
+        "pending": 0,
+        "unknown": 0,
+        "stopping": 0
+      },
+      "instances": [
+        {
+          "instance_id": "restart-demo/1",
+          "state": "STOPPED",
+          "pid": 44507,
+          "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+          "progress": 20
+        },
+        {
+          "instance_id": "restart-demo/2",
+          "state": "STOPPED",
+          "pid": 44506,
+          "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+          "progress": 20
+        }
+      ],
+      "observed_at": "2026-11-25T20:36:40.584Z"
+    },
+    "counts": {
+      "PENDING": 0,
+      "RUNNING": 0,
+      "UNKNOWN": 0,
+      "STOPPING": 0,
+      "STOPPED": 2,
+      "FAILED": 0
+    },
+    "events": [
+      {
+        "t": "2026-11-25T20:36:37.299Z",
+        "m": 19246.279978,
+        "event": "job_submitted",
+        "job_id": "restart-demo",
+        "spec": {
+          "job_id": "restart-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      },
+      {
+        "t": "2026-11-25T20:36:37.299Z",
+        "m": 19246.280082,
+        "event": "instance_requested",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "reason": "initial"
+      },
+      {
+        "t": "2026-11-25T20:36:37.299Z",
+        "m": 19246.280102,
+        "event": "instance_requested",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "reason": "initial"
+      },
+      {
+        "t": "2026-11-25T20:36:37.979Z",
+        "m": 19246.960107,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "from_state": "PENDING",
+        "state": "RUNNING",
+        "pid": 44507,
+        "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+        "progress": 0
+      },
+      {
+        "t": "2026-11-25T20:36:37.979Z",
+        "m": 19246.960123,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "from_state": "PENDING",
+        "state": "RUNNING",
+        "pid": 44506,
+        "node_id": "60a08cde3db5894d8bf7fa48739118d3f317cd09ea040126bfce3c63",
+        "progress": 0
+      },
+      {
+        "t": "2026-11-25T20:36:38.489Z",
+        "m": 19247.470191,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "progress": 5
+      },
+      {
+        "t": "2026-11-25T20:36:38.489Z",
+        "m": 19247.470202,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "progress": 5
+      },
+      {
+        "t": "2026-11-25T20:37:13.936Z",
+        "m": 19247.978998,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "progress": 10
+      },
+      {
+        "t": "2026-11-25T20:37:13.936Z",
+        "m": 19247.979008,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "progress": 10
+      },
+      {
+        "t": "2026-11-25T20:36:39.525Z",
+        "m": 19248.487439,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "progress": 15
+      },
+      {
+        "t": "2026-11-25T20:36:39.525Z",
+        "m": 19248.487449,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "progress": 15
+      },
+      {
+        "t": "2026-11-25T20:36:40.036Z",
+        "m": 19248.998245,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "progress": 20
+      },
+      {
+        "t": "2026-11-25T20:36:40.036Z",
+        "m": 19248.998258,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "progress": 20
+      },
+      {
+        "t": "2026-11-25T20:36:40.045Z",
+        "m": 19249.007811,
+        "event": "replicas_set",
+        "job_id": "restart-demo",
+        "from_replicas": 2,
+        "replicas": 0
+      },
+      {
+        "t": "2026-11-25T20:36:40.051Z",
+        "m": 19249.013563,
+        "event": "instance_decision",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "reason": "scale_down",
+        "from_state": "RUNNING",
+        "state": "STOPPING"
+      },
+      {
+        "t": "2026-11-25T20:36:40.051Z",
+        "m": 19249.013576,
+        "event": "instance_decision",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "reason": "scale_down",
+        "from_state": "RUNNING",
+        "state": "STOPPING"
+      },
+      {
+        "t": "2026-11-25T20:36:40.576Z",
+        "m": 19249.53887,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/1",
+        "from_state": "STOPPING",
+        "state": "STOPPED"
+      },
+      {
+        "t": "2026-11-25T20:36:40.576Z",
+        "m": 19249.538894,
+        "event": "instance_observed",
+        "job_id": "restart-demo",
+        "instance_id": "restart-demo/2",
+        "from_state": "STOPPING",
+        "state": "STOPPED"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "before the crash the job runs with its goal",
+      "ok": true,
+      "detail": "pids [44358, 44359], state API [44359, 44358]"
+    },
+    {
+      "name": "the instances do not survive their controller",
+      "ok": true,
+      "detail": "state API: 0.016 s; processes: 0.023 s after the crash"
+    },
+    {
+      "name": "the restarted controller does not know the job",
+      "ok": true,
+      "detail": "get_job after restart: JOB_NOT_FOUND"
+    },
+    {
+      "name": "resubmitting the job restores the goal with new processes",
+      "ok": true,
+      "detail": "pids before [44358, 44359], after [44506, 44507]"
+    },
+    {
+      "name": "the second session stops cleanly",
+      "ok": true,
+      "detail": "exit code 0, alive tickers [], CPUs back after 0.001 s"
+    }
+  ]
+}

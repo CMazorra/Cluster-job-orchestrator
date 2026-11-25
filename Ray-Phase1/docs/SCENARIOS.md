@@ -6,8 +6,8 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 
 | Estado | Escenarios |
 |---|---|
-| ✅ Ejecutados | F0, F1, caída de un nodo, F3, F17 |
-| 🔜 Aplican y están pendientes | F2, F4, F7, F8, F9, F16 |
+| ✅ Ejecutados | F0, F1, caída de un nodo, F2, F3, F4, F17 |
+| 🔜 Aplican y están pendientes | F7, F8, F9, F16 |
 | ➖ No aplican en esta fase | F5, F6, F10–F15, F18–F21 |
 
 ## Ejecutados
@@ -17,15 +17,15 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 | **F0** Ejecución normal de referencia | [F0.md](F0.md) | 8/8 y 8/8 en tres ejecuciones | Toda fase converge en dos ciclos de control (~0,5 s) |
 | **F1** Caída de un proceso | [F1.md](F1.md) | 10/10 en tres ejecuciones | Se pierde el estado local; sobreviven el objetivo y las demás instancias; un reemplazo en ~0,5 s |
 | **Caída de un nodo** y entrada de otro (campaña mínima del curso; F1 a nivel de nodo) | [F1_NODE.md](F1_NODE.md) | 10/10 en tres ejecuciones | Detección ~15 s; rondas de consulta de ~10 s pese al plazo de 2 s; con la membresía de Ray desactualizada, los reemplazos se asignan al nodo muerto y la recuperación tarda ~85 s |
+| **F2** Caída y reinicio del controlador | [F2.md](F2.md) | 5/5 en tres ejecuciones | Ray destruye las instancias ~17 ms después de caer el controlador; el controlador reiniciado responde `JOB_NOT_FOUND`; solo reenviar el trabajo lo restaura (~1,9 s) y los IDs de intento se reutilizan. Es la limitación de durabilidad del [contrato](CONTRACT.md) (5.2), ahora con evidencia |
 | **F3** Proceso lento o colgado | [F3.md](F3.md) | 12/12 en tres ejecuciones | Sospecha a los 2 s y abandono a los 7 s, tras exactamente K = 3 consultas; nunca dos procesos para una réplica |
+| **F4** Pérdida de respuestas de salud | [F4.md](F4.md) | 6/6 en seis ejecuciones (p = 0,1 y p = 0,3) | El 94 % de las sospechas se aclara sin reemplazo; nunca más intentos que réplicas. Aun así, con K = 3 y un 30 % de pérdida hay un abandono falso cada ~25 s por réplica (11 observados frente a ~14 esperados), que mata un proceso sano |
 | **F17** Amplificación de reintentos | [F17.md](F17.md) | 7/7 en tres ejecuciones (y 6/6 sin la corrección, como comparación) | Sin control, una carga que se cae al arrancar provocaba 53 reemplazos en 30 s; con la espera creciente añadida al dominio, 5. A cambio, la recuperación tras arreglar el fallo tarda lo que quede de la espera en curso |
 
 ## Aplican y están pendientes
 
 | Escenario | Qué probaría en el prototipo | Qué se espera |
 |---|---|---|
-| **F2** Caída y reinicio | El controlador cae y se reinicia | Se pierde el objetivo, y Ray termina los actores del driver caído. Es la limitación de durabilidad documentada en el [contrato](CONTRACT.md) (5.2); el experimento la demuestra con evidencia |
-| **F4** Pérdida de paquetes | Respuestas de salud que fallan al azar | Las sospechas sueltas no deben provocar reemplazos innecesarios: solo K fallos consecutivos lo hacen |
 | **F7** Reparación y reconciliación | Un proceso deja de responder durante un tiempo y vuelve | Si vuelve antes de K consultas, sigue sin reemplazo; si vuelve después, ya fue reemplazado y su respuesta tardía se ignora |
 | **F8** Respuesta perdida tras un efecto | El cliente pierde la respuesta de `submit_job`, `set_replicas` o `stop_job` y reintenta | Un solo trabajo y ningún actor duplicado |
 | **F9** Petición duplicada | La misma operación llega dos veces | Sin efectos dobles: las operaciones son idempotentes por contrato |

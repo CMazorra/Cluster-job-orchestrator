@@ -1,0 +1,2232 @@
+{
+  "meta": {
+    "mode": "local cluster (4 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 52237,
+    "driver_node_id": "7c378fb2e86f08166f7788fa824da002dc0f589df2f44ec12e7d712d",
+    "cluster_resources": {
+      "CPU": 4.0,
+      "memory": 3948292096.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "object_store_memory": 1692125184.0,
+      "node:172.25.118.49": 1.0,
+      "GPU": 1.0,
+      "node:__internal_head__": 1.0
+    },
+    "loss": 0.1,
+    "seed": 2,
+    "lossy_seconds": 60.0,
+    "replicas": 2,
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_missed_probes": 3
+  },
+  "answers": 240,
+  "dropped": 29,
+  "suspicions": 26,
+  "cleared": 25,
+  "false_give_ups": 1,
+  "expected_false_give_ups": 0.22,
+  "replacements": 1,
+  "real_misses": [],
+  "checks": [
+    {
+      "name": "the loss rate matches the configured probability",
+      "ok": true,
+      "detail": "29/240 dropped"
+    },
+    {
+      "name": "an isolated lost answer only raises a suspicion",
+      "ok": true,
+      "detail": "26 suspicions, 25 cleared without replacement"
+    },
+    {
+      "name": "no attempt is given up before K answers in a row are lost",
+      "ok": true,
+      "detail": "premature give-ups []"
+    },
+    {
+      "name": "every give-up is replaced once",
+      "ok": true,
+      "detail": "give-ups ['loss-demo/1'], replacements ['loss-demo/1']"
+    },
+    {
+      "name": "never more active attempts than the goal",
+      "ok": true,
+      "detail": "max active 2"
+    },
+    {
+      "name": "the goal is restored once the loss stops, and the job stops cleanly",
+      "ok": true,
+      "detail": "CPUs back after 11.403 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-25T20:49:12.666Z",
+      "m": 20001.65951,
+      "event": "job_submitted",
+      "job_id": "loss-demo",
+      "spec": {
+        "job_id": "loss-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-25T20:49:12.666Z",
+      "m": 20001.659561,
+      "event": "instance_requested",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T20:49:12.666Z",
+      "m": 20001.65957,
+      "event": "instance_requested",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T20:49:13.261Z",
+      "m": 20002.255262,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 52876,
+      "node_id": "7c378fb2e86f08166f7788fa824da002dc0f589df2f44ec12e7d712d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-25T20:49:13.261Z",
+      "m": 20002.255316,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 52878,
+      "node_id": "7c378fb2e86f08166f7788fa824da002dc0f589df2f44ec12e7d712d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-25T20:49:13.262Z",
+      "m": 20002.255379,
+      "event": "annotation",
+      "kind": "loss_started",
+      "loss": 0.1,
+      "seed": 2
+    },
+    {
+      "t": "2026-11-25T20:49:13.766Z",
+      "m": 20002.759789,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:13.766Z",
+      "m": 20002.759802,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:14.268Z",
+      "m": 20003.26212,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 13
+    },
+    {
+      "t": "2026-11-25T20:49:14.268Z",
+      "m": 20003.262132,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 13
+    },
+    {
+      "t": "2026-11-25T20:49:14.771Z",
+      "m": 20003.764783,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 18
+    },
+    {
+      "t": "2026-11-25T20:49:14.771Z",
+      "m": 20003.764793,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 18
+    },
+    {
+      "t": "2026-11-25T20:49:50.185Z",
+      "m": 20004.266981,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 23
+    },
+    {
+      "t": "2026-11-25T20:49:50.185Z",
+      "m": 20004.266991,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 23
+    },
+    {
+      "t": "2026-11-25T20:49:15.756Z",
+      "m": 20004.771368,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-25T20:49:15.756Z",
+      "m": 20004.771382,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-25T20:49:16.258Z",
+      "m": 20005.273444,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 33
+    },
+    {
+      "t": "2026-11-25T20:49:16.258Z",
+      "m": 20005.273453,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 33
+    },
+    {
+      "t": "2026-11-25T20:49:16.761Z",
+      "m": 20005.776327,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 38
+    },
+    {
+      "t": "2026-11-25T20:49:16.761Z",
+      "m": 20005.776341,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 38
+    },
+    {
+      "t": "2026-11-25T20:49:17.264Z",
+      "m": 20006.278525,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 43
+    },
+    {
+      "t": "2026-11-25T20:49:17.264Z",
+      "m": 20006.278534,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 43
+    },
+    {
+      "t": "2026-11-25T20:49:17.766Z",
+      "m": 20006.780875,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 48
+    },
+    {
+      "t": "2026-11-25T20:49:17.766Z",
+      "m": 20006.780886,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 48
+    },
+    {
+      "t": "2026-11-25T20:49:18.268Z",
+      "m": 20007.283025,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:18.268Z",
+      "m": 20007.283036,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:18.770Z",
+      "m": 20007.785297,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 58
+    },
+    {
+      "t": "2026-11-25T20:49:18.770Z",
+      "m": 20007.78531,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 58
+    },
+    {
+      "t": "2026-11-25T20:49:19.273Z",
+      "m": 20008.287807,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 63
+    },
+    {
+      "t": "2026-11-25T20:49:19.273Z",
+      "m": 20008.287817,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 63
+    },
+    {
+      "t": "2026-11-25T20:49:19.775Z",
+      "m": 20008.790207,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 68
+    },
+    {
+      "t": "2026-11-25T20:49:19.775Z",
+      "m": 20008.790217,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 68
+    },
+    {
+      "t": "2026-11-25T20:49:55.210Z",
+      "m": 20009.292821,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 73
+    },
+    {
+      "t": "2026-11-25T20:49:55.210Z",
+      "m": 20009.292842,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:20.763Z",
+      "m": 20009.794767,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 78
+    },
+    {
+      "t": "2026-11-25T20:49:20.763Z",
+      "m": 20009.794784,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 78
+    },
+    {
+      "t": "2026-11-25T20:49:21.266Z",
+      "m": 20010.297288,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 83
+    },
+    {
+      "t": "2026-11-25T20:49:21.266Z",
+      "m": 20010.297301,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 83
+    },
+    {
+      "t": "2026-11-25T20:49:21.768Z",
+      "m": 20010.79952,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 88
+    },
+    {
+      "t": "2026-11-25T20:49:21.768Z",
+      "m": 20010.79953,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 88
+    },
+    {
+      "t": "2026-11-25T20:49:22.271Z",
+      "m": 20011.302282,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 93
+    },
+    {
+      "t": "2026-11-25T20:49:22.271Z",
+      "m": 20011.302298,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 93
+    },
+    {
+      "t": "2026-11-25T20:49:22.775Z",
+      "m": 20011.805975,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 98
+    },
+    {
+      "t": "2026-11-25T20:49:22.775Z",
+      "m": 20011.805985,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 98
+    },
+    {
+      "t": "2026-11-25T20:49:23.277Z",
+      "m": 20012.308549,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 103
+    },
+    {
+      "t": "2026-11-25T20:49:23.277Z",
+      "m": 20012.30856,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 103
+    },
+    {
+      "t": "2026-11-25T20:49:23.780Z",
+      "m": 20012.811593,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 108
+    },
+    {
+      "t": "2026-11-25T20:49:23.780Z",
+      "m": 20012.811604,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 108
+    },
+    {
+      "t": "2026-11-25T20:49:24.282Z",
+      "m": 20013.313865,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 113
+    },
+    {
+      "t": "2026-11-25T20:49:24.282Z",
+      "m": 20013.313874,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 113
+    },
+    {
+      "t": "2026-11-25T20:49:24.785Z",
+      "m": 20013.816241,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 118
+    },
+    {
+      "t": "2026-11-25T20:49:24.785Z",
+      "m": 20013.816259,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 118
+    },
+    {
+      "t": "2026-11-25T20:50:00.236Z",
+      "m": 20014.318355,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 123
+    },
+    {
+      "t": "2026-11-25T20:50:00.236Z",
+      "m": 20014.318365,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 123
+    },
+    {
+      "t": "2026-11-25T20:49:25.802Z",
+      "m": 20014.820869,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-25T20:49:25.802Z",
+      "m": 20014.820879,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-25T20:49:26.304Z",
+      "m": 20015.323006,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-25T20:49:26.304Z",
+      "m": 20015.323016,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-25T20:49:26.806Z",
+      "m": 20015.825505,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 139
+    },
+    {
+      "t": "2026-11-25T20:49:26.806Z",
+      "m": 20015.825515,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 139
+    },
+    {
+      "t": "2026-11-25T20:49:27.308Z",
+      "m": 20016.32754,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 144
+    },
+    {
+      "t": "2026-11-25T20:49:27.308Z",
+      "m": 20016.327613,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 144
+    },
+    {
+      "t": "2026-11-25T20:49:27.812Z",
+      "m": 20016.830826,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 149
+    },
+    {
+      "t": "2026-11-25T20:49:27.812Z",
+      "m": 20016.830844,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 149
+    },
+    {
+      "t": "2026-11-25T20:49:28.314Z",
+      "m": 20017.333091,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 154
+    },
+    {
+      "t": "2026-11-25T20:49:28.314Z",
+      "m": 20017.333103,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 154
+    },
+    {
+      "t": "2026-11-25T20:49:28.816Z",
+      "m": 20017.83531,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-25T20:49:28.816Z",
+      "m": 20017.83532,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-25T20:49:29.318Z",
+      "m": 20018.33726,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-25T20:49:29.318Z",
+      "m": 20018.337271,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-25T20:49:29.820Z",
+      "m": 20018.839243,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-25T20:49:29.820Z",
+      "m": 20018.839253,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-25T20:50:05.258Z",
+      "m": 20019.34146,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-25T20:50:05.258Z",
+      "m": 20019.34147,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-25T20:49:30.828Z",
+      "m": 20019.843591,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-25T20:49:30.828Z",
+      "m": 20019.843602,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-25T20:49:31.330Z",
+      "m": 20020.345633,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-25T20:49:31.330Z",
+      "m": 20020.345644,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-25T20:49:31.832Z",
+      "m": 20020.847913,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 189
+    },
+    {
+      "t": "2026-11-25T20:49:31.832Z",
+      "m": 20020.847923,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 189
+    },
+    {
+      "t": "2026-11-25T20:49:32.334Z",
+      "m": 20021.349766,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 194
+    },
+    {
+      "t": "2026-11-25T20:49:32.334Z",
+      "m": 20021.349775,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 194
+    },
+    {
+      "t": "2026-11-25T20:49:32.837Z",
+      "m": 20021.852581,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 199
+    },
+    {
+      "t": "2026-11-25T20:49:32.837Z",
+      "m": 20021.852594,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 199
+    },
+    {
+      "t": "2026-11-25T20:49:33.339Z",
+      "m": 20022.355017,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 204
+    },
+    {
+      "t": "2026-11-25T20:49:33.339Z",
+      "m": 20022.355035,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:33.842Z",
+      "m": 20022.857718,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 209
+    },
+    {
+      "t": "2026-11-25T20:49:33.842Z",
+      "m": 20022.857735,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 209
+    },
+    {
+      "t": "2026-11-25T20:49:34.344Z",
+      "m": 20023.359976,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 214
+    },
+    {
+      "t": "2026-11-25T20:49:34.344Z",
+      "m": 20023.359987,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 214
+    },
+    {
+      "t": "2026-11-25T20:49:34.847Z",
+      "m": 20023.862437,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 219
+    },
+    {
+      "t": "2026-11-25T20:49:34.847Z",
+      "m": 20023.862456,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:10.281Z",
+      "m": 20024.364573,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 224
+    },
+    {
+      "t": "2026-11-25T20:50:10.281Z",
+      "m": 20024.364591,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 224
+    },
+    {
+      "t": "2026-11-25T20:49:35.858Z",
+      "m": 20024.868125,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 229
+    },
+    {
+      "t": "2026-11-25T20:49:35.858Z",
+      "m": 20024.868147,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 229
+    },
+    {
+      "t": "2026-11-25T20:49:36.362Z",
+      "m": 20025.371775,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 234
+    },
+    {
+      "t": "2026-11-25T20:49:36.362Z",
+      "m": 20025.371787,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 234
+    },
+    {
+      "t": "2026-11-25T20:49:36.864Z",
+      "m": 20025.873952,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 239
+    },
+    {
+      "t": "2026-11-25T20:49:36.864Z",
+      "m": 20025.873962,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 239
+    },
+    {
+      "t": "2026-11-25T20:49:37.368Z",
+      "m": 20026.377299,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 244
+    },
+    {
+      "t": "2026-11-25T20:49:37.368Z",
+      "m": 20026.377312,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 244
+    },
+    {
+      "t": "2026-11-25T20:49:37.870Z",
+      "m": 20026.88027,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "progress": 249
+    },
+    {
+      "t": "2026-11-25T20:49:37.871Z",
+      "m": 20026.880342,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 249
+    },
+    {
+      "t": "2026-11-25T20:49:38.373Z",
+      "m": 20027.382814,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:38.373Z",
+      "m": 20027.382826,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 254
+    },
+    {
+      "t": "2026-11-25T20:49:38.875Z",
+      "m": 20027.884764,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 259
+    },
+    {
+      "t": "2026-11-25T20:49:38.875Z",
+      "m": 20027.884774,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 259
+    },
+    {
+      "t": "2026-11-25T20:49:39.378Z",
+      "m": 20028.388242,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:39.379Z",
+      "m": 20028.388259,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 264
+    },
+    {
+      "t": "2026-11-25T20:49:39.881Z",
+      "m": 20028.891002,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-25T20:49:39.881Z",
+      "m": 20028.891015,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 269
+    },
+    {
+      "t": "2026-11-25T20:50:15.310Z",
+      "m": 20029.39307,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "missed_probes": 3
+    },
+    {
+      "t": "2026-11-25T20:50:15.310Z",
+      "m": 20029.393085,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 274
+    },
+    {
+      "t": "2026-11-25T20:50:15.310Z",
+      "m": 20029.393104,
+      "event": "instance_decision",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/1",
+      "reason": "given_up_after_missed_probes",
+      "from_state": "UNKNOWN",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T20:50:15.310Z",
+      "m": 20029.393133,
+      "event": "instance_requested",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "reason": "replacement",
+      "replaces": "loss-demo/1"
+    },
+    {
+      "t": "2026-11-25T20:49:40.890Z",
+      "m": 20029.898974,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 279
+    },
+    {
+      "t": "2026-11-25T20:49:40.890Z",
+      "m": 20029.898993,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 52877,
+      "node_id": "7c378fb2e86f08166f7788fa824da002dc0f589df2f44ec12e7d712d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-25T20:50:16.317Z",
+      "m": 20030.401132,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 284
+    },
+    {
+      "t": "2026-11-25T20:50:16.317Z",
+      "m": 20030.401143,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 8
+    },
+    {
+      "t": "2026-11-25T20:49:41.882Z",
+      "m": 20030.903501,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 289
+    },
+    {
+      "t": "2026-11-25T20:49:41.882Z",
+      "m": 20030.903517,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:42.384Z",
+      "m": 20031.405635,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 294
+    },
+    {
+      "t": "2026-11-25T20:49:42.384Z",
+      "m": 20031.405652,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 18
+    },
+    {
+      "t": "2026-11-25T20:49:42.886Z",
+      "m": 20031.907698,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:42.886Z",
+      "m": 20031.907711,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 23
+    },
+    {
+      "t": "2026-11-25T20:49:43.389Z",
+      "m": 20032.410226,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 304
+    },
+    {
+      "t": "2026-11-25T20:49:43.389Z",
+      "m": 20032.410237,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-25T20:49:43.891Z",
+      "m": 20032.912849,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 309
+    },
+    {
+      "t": "2026-11-25T20:49:43.891Z",
+      "m": 20032.912861,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 33
+    },
+    {
+      "t": "2026-11-25T20:49:44.394Z",
+      "m": 20033.415202,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:44.394Z",
+      "m": 20033.415219,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 38
+    },
+    {
+      "t": "2026-11-25T20:49:44.896Z",
+      "m": 20033.9176,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 319
+    },
+    {
+      "t": "2026-11-25T20:49:44.896Z",
+      "m": 20033.917612,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 43
+    },
+    {
+      "t": "2026-11-25T20:50:20.336Z",
+      "m": 20034.419454,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 324
+    },
+    {
+      "t": "2026-11-25T20:50:20.336Z",
+      "m": 20034.419464,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 48
+    },
+    {
+      "t": "2026-11-25T20:49:45.918Z",
+      "m": 20034.921465,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 329
+    },
+    {
+      "t": "2026-11-25T20:49:45.918Z",
+      "m": 20034.921476,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 53
+    },
+    {
+      "t": "2026-11-25T20:49:46.420Z",
+      "m": 20035.423984,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 334
+    },
+    {
+      "t": "2026-11-25T20:49:46.420Z",
+      "m": 20035.423995,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 58
+    },
+    {
+      "t": "2026-11-25T20:49:46.923Z",
+      "m": 20035.926398,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 339
+    },
+    {
+      "t": "2026-11-25T20:49:46.923Z",
+      "m": 20035.926408,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 63
+    },
+    {
+      "t": "2026-11-25T20:49:47.425Z",
+      "m": 20036.428612,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 344
+    },
+    {
+      "t": "2026-11-25T20:49:47.425Z",
+      "m": 20036.428623,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 68
+    },
+    {
+      "t": "2026-11-25T20:49:47.927Z",
+      "m": 20036.931139,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 349
+    },
+    {
+      "t": "2026-11-25T20:49:47.927Z",
+      "m": 20036.931149,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 73
+    },
+    {
+      "t": "2026-11-25T20:49:48.430Z",
+      "m": 20037.433216,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 354
+    },
+    {
+      "t": "2026-11-25T20:49:48.430Z",
+      "m": 20037.433244,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 78
+    },
+    {
+      "t": "2026-11-25T20:49:48.933Z",
+      "m": 20037.936301,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 359
+    },
+    {
+      "t": "2026-11-25T20:49:48.933Z",
+      "m": 20037.936326,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 83
+    },
+    {
+      "t": "2026-11-25T20:49:49.439Z",
+      "m": 20038.442728,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 364
+    },
+    {
+      "t": "2026-11-25T20:49:49.439Z",
+      "m": 20038.442801,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 88
+    },
+    {
+      "t": "2026-11-25T20:49:49.942Z",
+      "m": 20038.945583,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 369
+    },
+    {
+      "t": "2026-11-25T20:49:49.942Z",
+      "m": 20038.945594,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 93
+    },
+    {
+      "t": "2026-11-25T20:50:25.364Z",
+      "m": 20039.448565,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:25.365Z",
+      "m": 20039.448602,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 98
+    },
+    {
+      "t": "2026-11-25T20:49:50.934Z",
+      "m": 20039.951736,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 379
+    },
+    {
+      "t": "2026-11-25T20:49:50.934Z",
+      "m": 20039.951748,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:51.436Z",
+      "m": 20040.453824,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:51.436Z",
+      "m": 20040.453841,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 108
+    },
+    {
+      "t": "2026-11-25T20:49:51.938Z",
+      "m": 20040.955728,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-25T20:49:51.938Z",
+      "m": 20040.95574,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 113
+    },
+    {
+      "t": "2026-11-25T20:49:52.442Z",
+      "m": 20041.458907,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 394
+    },
+    {
+      "t": "2026-11-25T20:49:52.442Z",
+      "m": 20041.458924,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 118
+    },
+    {
+      "t": "2026-11-25T20:49:52.944Z",
+      "m": 20041.960996,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 399
+    },
+    {
+      "t": "2026-11-25T20:49:52.944Z",
+      "m": 20041.961006,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 123
+    },
+    {
+      "t": "2026-11-25T20:49:53.446Z",
+      "m": 20042.463673,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 404
+    },
+    {
+      "t": "2026-11-25T20:49:53.446Z",
+      "m": 20042.463698,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-25T20:49:53.949Z",
+      "m": 20042.96619,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 410
+    },
+    {
+      "t": "2026-11-25T20:49:53.949Z",
+      "m": 20042.9662,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-25T20:49:54.451Z",
+      "m": 20043.468188,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 415
+    },
+    {
+      "t": "2026-11-25T20:49:54.451Z",
+      "m": 20043.468199,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 139
+    },
+    {
+      "t": "2026-11-25T20:49:54.954Z",
+      "m": 20043.971344,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 420
+    },
+    {
+      "t": "2026-11-25T20:49:54.954Z",
+      "m": 20043.97136,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 144
+    },
+    {
+      "t": "2026-11-25T20:49:55.465Z",
+      "m": 20044.473501,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 425
+    },
+    {
+      "t": "2026-11-25T20:49:55.465Z",
+      "m": 20044.473512,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 149
+    },
+    {
+      "t": "2026-11-25T20:49:55.968Z",
+      "m": 20044.97586,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:55.968Z",
+      "m": 20044.97587,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:56.470Z",
+      "m": 20045.478113,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 435
+    },
+    {
+      "t": "2026-11-25T20:49:56.470Z",
+      "m": 20045.478127,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-25T20:49:56.973Z",
+      "m": 20045.981649,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 440
+    },
+    {
+      "t": "2026-11-25T20:49:56.973Z",
+      "m": 20045.98166,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-25T20:49:57.476Z",
+      "m": 20046.484497,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:49:57.476Z",
+      "m": 20046.484514,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-25T20:49:57.979Z",
+      "m": 20046.987065,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 450
+    },
+    {
+      "t": "2026-11-25T20:49:57.979Z",
+      "m": 20046.987077,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-25T20:49:58.481Z",
+      "m": 20047.489138,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 455
+    },
+    {
+      "t": "2026-11-25T20:49:58.481Z",
+      "m": 20047.489148,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-25T20:49:58.983Z",
+      "m": 20047.991353,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 460
+    },
+    {
+      "t": "2026-11-25T20:49:58.983Z",
+      "m": 20047.991364,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-25T20:49:59.486Z",
+      "m": 20048.49472,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 465
+    },
+    {
+      "t": "2026-11-25T20:49:59.486Z",
+      "m": 20048.49473,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 189
+    },
+    {
+      "t": "2026-11-25T20:49:59.989Z",
+      "m": 20048.997047,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 470
+    },
+    {
+      "t": "2026-11-25T20:49:59.989Z",
+      "m": 20048.997057,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 194
+    },
+    {
+      "t": "2026-11-25T20:50:35.415Z",
+      "m": 20049.499755,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 475
+    },
+    {
+      "t": "2026-11-25T20:50:35.415Z",
+      "m": 20049.499768,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 199
+    },
+    {
+      "t": "2026-11-25T20:50:00.981Z",
+      "m": 20050.002591,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 480
+    },
+    {
+      "t": "2026-11-25T20:50:00.981Z",
+      "m": 20050.002609,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:01.485Z",
+      "m": 20050.506596,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 485
+    },
+    {
+      "t": "2026-11-25T20:50:01.485Z",
+      "m": 20050.506617,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 209
+    },
+    {
+      "t": "2026-11-25T20:50:01.993Z",
+      "m": 20051.014426,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 490
+    },
+    {
+      "t": "2026-11-25T20:50:01.993Z",
+      "m": 20051.014489,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:02.495Z",
+      "m": 20051.516716,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 495
+    },
+    {
+      "t": "2026-11-25T20:50:02.495Z",
+      "m": 20051.516735,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 219
+    },
+    {
+      "t": "2026-11-25T20:50:02.997Z",
+      "m": 20052.018652,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 500
+    },
+    {
+      "t": "2026-11-25T20:50:02.997Z",
+      "m": 20052.018663,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 224
+    },
+    {
+      "t": "2026-11-25T20:50:03.501Z",
+      "m": 20052.522821,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 505
+    },
+    {
+      "t": "2026-11-25T20:50:03.501Z",
+      "m": 20052.522833,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 229
+    },
+    {
+      "t": "2026-11-25T20:50:04.004Z",
+      "m": 20053.025444,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 510
+    },
+    {
+      "t": "2026-11-25T20:50:04.004Z",
+      "m": 20053.025456,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 234
+    },
+    {
+      "t": "2026-11-25T20:50:04.508Z",
+      "m": 20053.529174,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:04.508Z",
+      "m": 20053.529188,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 239
+    },
+    {
+      "t": "2026-11-25T20:50:05.010Z",
+      "m": 20054.031678,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 520
+    },
+    {
+      "t": "2026-11-25T20:50:05.010Z",
+      "m": 20054.031691,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 244
+    },
+    {
+      "t": "2026-11-25T20:50:05.529Z",
+      "m": 20054.53587,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 525
+    },
+    {
+      "t": "2026-11-25T20:50:05.529Z",
+      "m": 20054.535882,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 249
+    },
+    {
+      "t": "2026-11-25T20:50:06.031Z",
+      "m": 20055.037809,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:06.031Z",
+      "m": 20055.037821,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 254
+    },
+    {
+      "t": "2026-11-25T20:50:06.533Z",
+      "m": 20055.540191,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 535
+    },
+    {
+      "t": "2026-11-25T20:50:06.533Z",
+      "m": 20055.540204,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 259
+    },
+    {
+      "t": "2026-11-25T20:50:07.036Z",
+      "m": 20056.043086,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 540
+    },
+    {
+      "t": "2026-11-25T20:50:07.036Z",
+      "m": 20056.043097,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 264
+    },
+    {
+      "t": "2026-11-25T20:50:07.538Z",
+      "m": 20056.545262,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:07.538Z",
+      "m": 20056.545275,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 269
+    },
+    {
+      "t": "2026-11-25T20:50:08.041Z",
+      "m": 20057.047758,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 550
+    },
+    {
+      "t": "2026-11-25T20:50:08.041Z",
+      "m": 20057.04777,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 274
+    },
+    {
+      "t": "2026-11-25T20:50:08.544Z",
+      "m": 20057.551536,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:08.545Z",
+      "m": 20057.55155,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 279
+    },
+    {
+      "t": "2026-11-25T20:50:09.047Z",
+      "m": 20058.054169,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 560
+    },
+    {
+      "t": "2026-11-25T20:50:09.047Z",
+      "m": 20058.054356,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 284
+    },
+    {
+      "t": "2026-11-25T20:50:09.550Z",
+      "m": 20058.556583,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 565
+    },
+    {
+      "t": "2026-11-25T20:50:09.550Z",
+      "m": 20058.556593,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 289
+    },
+    {
+      "t": "2026-11-25T20:50:10.052Z",
+      "m": 20059.0588,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 570
+    },
+    {
+      "t": "2026-11-25T20:50:10.052Z",
+      "m": 20059.058812,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 294
+    },
+    {
+      "t": "2026-11-25T20:50:10.544Z",
+      "m": 20059.56286,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 575
+    },
+    {
+      "t": "2026-11-25T20:50:10.544Z",
+      "m": 20059.562877,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 299
+    },
+    {
+      "t": "2026-11-25T20:50:11.048Z",
+      "m": 20060.067094,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:11.048Z",
+      "m": 20060.067107,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 304
+    },
+    {
+      "t": "2026-11-25T20:50:11.550Z",
+      "m": 20060.569666,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 585
+    },
+    {
+      "t": "2026-11-25T20:50:11.550Z",
+      "m": 20060.569677,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 309
+    },
+    {
+      "t": "2026-11-25T20:50:12.052Z",
+      "m": 20061.071522,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 590
+    },
+    {
+      "t": "2026-11-25T20:50:12.052Z",
+      "m": 20061.071539,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T20:50:12.554Z",
+      "m": 20061.573855,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 595
+    },
+    {
+      "t": "2026-11-25T20:50:12.554Z",
+      "m": 20061.573893,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 319
+    },
+    {
+      "t": "2026-11-25T20:50:13.056Z",
+      "m": 20062.075886,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 600
+    },
+    {
+      "t": "2026-11-25T20:50:13.056Z",
+      "m": 20062.075897,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 324
+    },
+    {
+      "t": "2026-11-25T20:50:13.556Z",
+      "m": 20062.576097,
+      "event": "annotation",
+      "kind": "loss_stopped"
+    },
+    {
+      "t": "2026-11-25T20:50:13.558Z",
+      "m": 20062.577838,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "progress": 605
+    },
+    {
+      "t": "2026-11-25T20:50:13.558Z",
+      "m": 20062.577847,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "progress": 329
+    },
+    {
+      "t": "2026-11-25T20:50:13.558Z",
+      "m": 20062.577944,
+      "event": "replicas_set",
+      "job_id": "loss-demo",
+      "from_replicas": 2,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-25T20:50:13.559Z",
+      "m": 20062.579176,
+      "event": "instance_decision",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T20:50:13.559Z",
+      "m": 20062.579184,
+      "event": "instance_decision",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T20:50:14.062Z",
+      "m": 20063.081509,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-25T20:50:14.062Z",
+      "m": 20063.081519,
+      "event": "instance_observed",
+      "job_id": "loss-demo",
+      "instance_id": "loss-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

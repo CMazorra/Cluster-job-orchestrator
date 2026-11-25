@@ -1,0 +1,51 @@
+# Escenarios de fallo y carga: fase Ray
+
+Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo que tiene el prototipo con Ray: qué se ejecutó, qué falta y qué no aplica, y por qué. Un escenario solo se marca como hecho si se ejecutó con Ray real, con la predicción escrita antes, tres ejecuciones y evidencia guardada.
+
+## Resumen
+
+| Estado | Escenarios |
+|---|---|
+| ✅ Ejecutados | F0, F1, caída de un nodo, F3 |
+| 🔜 Aplican y están pendientes | F2, F4, F7, F8, F9, F16, F17 |
+| ➖ No aplican en esta fase | F5, F6, F10–F15, F18–F21 |
+
+## Ejecutados
+
+| Escenario | Registro | Resultado | Hallazgos principales |
+|---|---|---|---|
+| **F0** Ejecución normal de referencia | [F0.md](F0.md) | 8/8 y 8/8 en tres ejecuciones | Toda fase converge en dos ciclos de control (~0,5 s) |
+| **F1** Caída de un proceso | [F1.md](F1.md) | 10/10 en tres ejecuciones | Se pierde el estado local; sobreviven el objetivo y las demás instancias; un reemplazo en ~0,5 s |
+| **Caída de un nodo** y entrada de otro (campaña mínima del curso; F1 a nivel de nodo) | [F1_NODE.md](F1_NODE.md) | 10/10 en tres ejecuciones | Detección ~15 s; rondas de consulta de ~10 s pese al plazo de 2 s; con la membresía de Ray desactualizada, los reemplazos se asignan al nodo muerto y la recuperación tarda ~85 s |
+| **F3** Proceso lento o colgado | [F3.md](F3.md) | 12/12 en tres ejecuciones | Sospecha a los 2 s y abandono a los 7 s, tras exactamente K = 3 consultas; nunca dos procesos para una réplica |
+
+## Aplican y están pendientes
+
+| Escenario | Qué probaría en el prototipo | Qué se espera |
+|---|---|---|
+| **F2** Caída y reinicio | El controlador cae y se reinicia | Se pierde el objetivo, y Ray termina los actores del driver caído. Es la limitación de durabilidad documentada en el [contrato](CONTRACT.md) (5.2); el experimento la demuestra con evidencia |
+| **F4** Pérdida de paquetes | Respuestas de salud que fallan al azar | Las sospechas sueltas no deben provocar reemplazos innecesarios: solo K fallos consecutivos lo hacen |
+| **F7** Reparación y reconciliación | Un proceso deja de responder durante un tiempo y vuelve | Si vuelve antes de K consultas, sigue sin reemplazo; si vuelve después, ya fue reemplazado y su respuesta tardía se ignora |
+| **F8** Respuesta perdida tras un efecto | El cliente pierde la respuesta de `submit_job`, `set_replicas` o `stop_job` y reintenta | Un solo trabajo y ningún actor duplicado |
+| **F9** Petición duplicada | La misma operación llega dos veces | Sin efectos dobles: las operaciones son idempotentes por contrato |
+| **F16** Sobrecarga | Muchas más réplicas que capacidad | Intentos pendientes acotados y sin crecimiento; se medirá el coste de cada ciclo con muchos pendientes |
+| **F17** Amplificación de reintentos | Una carga que se cae nada más arrancar | **Hoy el controlador la reemplazaría en cada ciclo sin límite.** Hay que añadir una espera creciente entre reemplazos y demostrar que la contiene |
+
+## No aplican en esta fase
+
+| Escenario | Por qué no aplica | ¿Cuándo aplicará? |
+|---|---|---|
+| **F5/F6** Partición de red (minoritaria o simétrica) | Todo corre en una máquina y Ray hace el transporte: no hay una red propia que cortar. La parte de "corte temporal" que sí aplica la cubre F7 | En la versión nativa, con nodos en contenedores y redes separadas |
+| **F10** Descubrimiento obsoleto | No hay un mecanismo de descubrimiento propio: lo resuelve Ray. Se observó de forma indirecta en la [caída de un nodo](F1_NODE.md), donde la información de membresía desactualizada de Ray retrasó la recuperación | En la versión nativa, con registro y arrendamientos propios |
+| **F11** Lectura obsoleta de una réplica | Hay una sola copia del estado | En la versión nativa, al replicar el controlador |
+| **F12** Escrituras concurrentes en conflicto | Las operaciones se procesan en secuencia por contrato | En la versión nativa, con clientes concurrentes |
+| **F13/F14** Fallo del coordinador o participante en 2PC | No hay transacciones distribuidas | Solo si la versión nativa las introduce |
+| **F15** Fallo del líder | No hay líder: un único controlador fijo | En la versión nativa: la tolerancia a dos fallos obliga a replicar el controlador, y lo habitual es que haya un líder |
+| **F18** *Churn* de membresía descentralizada | La membresía no es descentralizada. La entrada y salida de nodos se cubre en la [caída de un nodo](F1_NODE.md) | Solo si la versión nativa descentraliza la membresía |
+| **F19** Actualizaciones CRDT desconectadas | No hay réplicas que se fusionen | No previsto |
+| **F20** Operación no autorizada | Los clientes son de confianza en esta fase | En la versión nativa, con su modelo de seguridad |
+| **F21** Repetición de una mutación autenticada | No hay autenticación en esta fase | En la versión nativa, con su modelo de seguridad |
+
+## Cómo se ejecutan
+
+Los experimentos se ejecutan desde `Ray-Phase1/` con Ray real; las instrucciones están en el [README](../../README.md). Cada uno imprime sus comprobaciones y puede guardar su evidencia en [`evidence/`](evidence/).

@@ -1,0 +1,49 @@
+{"t": "2026-11-25T16:44:41.421Z", "m": 7507.404414, "event": "job_submitted", "job_id": "node-demo", "spec": {"job_id": "node-demo", "workload": {"entrypoint": "ticker", "args": {"interval_ms": 100}}, "replicas": 4, "resources": {"cpu": 1}}}
+{"t": "2026-11-25T16:44:41.421Z", "m": 7507.404476, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/1", "reason": "initial"}
+{"t": "2026-11-25T16:44:41.421Z", "m": 7507.404484, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/2", "reason": "initial"}
+{"t": "2026-11-25T16:44:41.421Z", "m": 7507.404488, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/3", "reason": "initial"}
+{"t": "2026-11-25T16:44:41.421Z", "m": 7507.404492, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/4", "reason": "initial"}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555255, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/1", "from_state": "PENDING", "state": "RUNNING", "pid": 21087, "node_id": "4da50497abc7a254cf02ddef967f61d8f07ca86e48812f8416639800", "progress": 0}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555272, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "from_state": "PENDING", "state": "RUNNING", "pid": 21085, "node_id": "2e0779355c01e5c7b75aec4ff736d32fb208f8c47ae73f7c65a42992", "progress": 0}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555279, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/3", "from_state": "PENDING", "state": "RUNNING", "pid": 21084, "node_id": "4da50497abc7a254cf02ddef967f61d8f07ca86e48812f8416639800", "progress": 0}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555284, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "from_state": "PENDING", "state": "RUNNING", "pid": 21088, "node_id": "2e0779355c01e5c7b75aec4ff736d32fb208f8c47ae73f7c65a42992", "progress": 0}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555425, "event": "annotation", "kind": "fault_injected", "instance_id": "node-demo/1", "node_id": "4da50497abc7a254cf02ddef967f61d8f07ca86e48812f8416639800", "method": "node_lost"}
+{"t": "2026-11-25T16:44:42.572Z", "m": 7508.555429, "event": "annotation", "kind": "fault_injected", "instance_id": "node-demo/3", "node_id": "4da50497abc7a254cf02ddef967f61d8f07ca86e48812f8416639800", "method": "node_lost"}
+{"t": "2026-11-25T16:44:43.085Z", "m": 7509.069012, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/1", "progress": 5}
+{"t": "2026-11-25T16:44:43.085Z", "m": 7509.069025, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 5}
+{"t": "2026-11-25T16:44:43.085Z", "m": 7509.069029, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/3", "progress": 5}
+{"t": "2026-11-25T16:44:43.085Z", "m": 7509.069035, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 5}
+{"t": "2026-11-25T16:45:27.289Z", "m": 7518.22654, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/1", "from_state": "RUNNING", "state": "UNKNOWN", "missed_probes": 1}
+{"t": "2026-11-25T16:45:27.289Z", "m": 7518.226561, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 10}
+{"t": "2026-11-25T16:45:27.289Z", "m": 7518.226574, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/3", "from_state": "RUNNING", "state": "UNKNOWN", "missed_probes": 1}
+{"t": "2026-11-25T16:45:27.289Z", "m": 7518.226584, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 10}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.401601, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/1", "from_state": "UNKNOWN", "state": "FAILED"}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.401616, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 101}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.401622, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/3", "from_state": "UNKNOWN", "state": "FAILED"}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.401627, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 101}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.401644, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/5", "reason": "replacement", "replaces": "node-demo/1"}
+{"t": "2026-11-25T16:44:57.431Z", "m": 7523.40165, "event": "instance_requested", "job_id": "node-demo", "instance_id": "node-demo/6", "reason": "replacement", "replaces": "node-demo/3"}
+{"t": "2026-11-25T16:45:43.589Z", "m": 7534.52731, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 153}
+{"t": "2026-11-25T16:45:43.589Z", "m": 7534.527324, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 153}
+{"t": "2026-11-25T16:45:11.060Z", "m": 7537.029695, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 264}
+{"t": "2026-11-25T16:45:11.060Z", "m": 7537.029704, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 264}
+{"t": "2026-11-25T16:45:13.562Z", "m": 7539.531652, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 289}
+{"t": "2026-11-25T16:45:13.562Z", "m": 7539.531661, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 289}
+{"t": "2026-11-25T16:45:16.057Z", "m": 7542.034446, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 314}
+{"t": "2026-11-25T16:45:16.057Z", "m": 7542.034455, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 314}
+{"t": "2026-11-25T16:45:16.057Z", "m": 7542.034662, "event": "annotation", "kind": "node_joined", "cpus": 2}
+{"t": "2026-11-25T16:45:17.488Z", "m": 7543.465293, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 346}
+{"t": "2026-11-25T16:45:17.488Z", "m": 7543.465309, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 346}
+{"t": "2026-11-25T16:45:17.488Z", "m": 7543.465334, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/5", "from_state": "PENDING", "state": "RUNNING", "pid": 21418, "node_id": "696b325cd383d6d7be90b518fbd770e3ee2edda29e10376cd199d82e", "progress": 0}
+{"t": "2026-11-25T16:45:17.488Z", "m": 7543.465342, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/6", "from_state": "PENDING", "state": "RUNNING", "pid": 21417, "node_id": "696b325cd383d6d7be90b518fbd770e3ee2edda29e10376cd199d82e", "progress": 0}
+{"t": "2026-11-25T16:45:17.488Z", "m": 7543.465529, "event": "replicas_set", "job_id": "node-demo", "from_replicas": 4, "replicas": 0}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.467754, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "progress": 348}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.467763, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "progress": 348}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.467799, "event": "instance_decision", "job_id": "node-demo", "instance_id": "node-demo/6", "reason": "scale_down", "from_state": "RUNNING", "state": "STOPPING"}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.467806, "event": "instance_decision", "job_id": "node-demo", "instance_id": "node-demo/5", "reason": "scale_down", "from_state": "RUNNING", "state": "STOPPING"}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.46781, "event": "instance_decision", "job_id": "node-demo", "instance_id": "node-demo/4", "reason": "scale_down", "from_state": "RUNNING", "state": "STOPPING"}
+{"t": "2026-11-25T16:45:17.490Z", "m": 7543.467813, "event": "instance_decision", "job_id": "node-demo", "instance_id": "node-demo/2", "reason": "scale_down", "from_state": "RUNNING", "state": "STOPPING"}
+{"t": "2026-11-25T16:45:17.994Z", "m": 7543.97116, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/2", "from_state": "STOPPING", "state": "STOPPED"}
+{"t": "2026-11-25T16:45:17.994Z", "m": 7543.971172, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/4", "from_state": "STOPPING", "state": "STOPPED"}
+{"t": "2026-11-25T16:45:17.994Z", "m": 7543.97118, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/5", "from_state": "STOPPING", "state": "STOPPED"}
+{"t": "2026-11-25T16:45:17.994Z", "m": 7543.971184, "event": "instance_observed", "job_id": "node-demo", "instance_id": "node-demo/6", "from_state": "STOPPING", "state": "STOPPED"}

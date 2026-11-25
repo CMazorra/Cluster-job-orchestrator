@@ -1,0 +1,2105 @@
+{
+  "meta": {
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "mode": "simulated cluster: head without CPUs and two worker nodes on one machine",
+    "cpus_per_node": 2,
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_missed_probes": 3
+  },
+  "job_id": "node-demo",
+  "placement_before": {
+    "86783d4542a320bf0269949b78d8559ac7d1fe250f9a7e53478df2e0": [
+      "node-demo/1",
+      "node-demo/2"
+    ],
+    "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f": [
+      "node-demo/3",
+      "node-demo/4"
+    ]
+  },
+  "lost_node": "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f",
+  "lost": [
+    "node-demo/3",
+    "node-demo/4"
+  ],
+  "new_node": "6b85e39519713d91eacd63114d3efc8af08407889d4b38b127cb1d78",
+  "placement_after": {
+    "86783d4542a320bf0269949b78d8559ac7d1fe250f9a7e53478df2e0": [
+      "node-demo/1",
+      "node-demo/2"
+    ],
+    "6b85e39519713d91eacd63114d3efc8af08407889d4b38b127cb1d78": [
+      "node-demo/7",
+      "node-demo/8"
+    ]
+  },
+  "timelines": {
+    "node-demo/3": {
+      "instance_id": "node-demo/3",
+      "replacement_id": "node-demo/5",
+      "failed_by": "instance_decision",
+      "suspicion_s": 2.074,
+      "detection_s": 14.899,
+      "replacement_request_s": 0.0,
+      "recovery_s": null,
+      "total_s": null
+    },
+    "node-demo/4": {
+      "instance_id": "node-demo/4",
+      "replacement_id": "node-demo/6",
+      "failed_by": "instance_decision",
+      "suspicion_s": 2.074,
+      "detection_s": 14.899,
+      "replacement_request_s": 0.0,
+      "recovery_s": null,
+      "total_s": null
+    }
+  },
+  "slowest_probe_round_s": 9.821,
+  "actor_unavailable_answers": 2,
+  "lost_pids": {
+    "node-demo/3": 23919,
+    "node-demo/4": 23921
+  },
+  "lost_alive_when_replaced": [],
+  "lost_alive_when_running": [],
+  "failed_replacements": [
+    "node-demo/5",
+    "node-demo/6"
+  ],
+  "trace": [
+    {
+      "label": "start",
+      "probe_seconds": 0.0,
+      "answers": {},
+      "desired": 4,
+      "counts": {
+        "PENDING": 4,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "PENDING",
+        "node-demo/2": "PENDING",
+        "node-demo/3": "PENDING",
+        "node-demo/4": "PENDING"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "start",
+      "probe_seconds": 0.222,
+      "answers": {
+        "healthy": 4
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "RUNNING",
+        "node-demo/4": "RUNNING"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "node-lost",
+      "probe_seconds": 0.006,
+      "answers": {
+        "healthy": 4
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "RUNNING",
+        "node-demo/4": "RUNNING"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "node-lost",
+      "probe_seconds": 0.004,
+      "answers": {
+        "healthy": 4
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "RUNNING",
+        "node-demo/4": "RUNNING"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "node-lost",
+      "probe_seconds": 1.057,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:ActorUnavailableError": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 2,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "UNKNOWN",
+        "node-demo/4": "UNKNOWN"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "node-lost",
+      "probe_seconds": 9.821,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 2,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "UNKNOWN",
+        "node-demo/4": "UNKNOWN"
+      },
+      "attempts": 4
+    },
+    {
+      "label": "node-lost",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "no-capacity",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "no-capacity",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "no-capacity",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "no-capacity",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 5.944,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 7.034,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.003,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 7.04,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.001,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 9.521,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 2.002,
+      "answers": {
+        "healthy": 2,
+        "unresponsive:no": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "PENDING",
+        "node-demo/6": "PENDING"
+      },
+      "attempts": 6
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 0.004,
+      "answers": {
+        "healthy": 2,
+        "dead": 2
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "FAILED",
+        "node-demo/6": "FAILED",
+        "node-demo/7": "PENDING",
+        "node-demo/8": "PENDING"
+      },
+      "attempts": 8
+    },
+    {
+      "label": "node-joined",
+      "probe_seconds": 0.027,
+      "answers": {
+        "healthy": 4
+      },
+      "desired": 4,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "instances": {
+        "node-demo/1": "RUNNING",
+        "node-demo/2": "RUNNING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "FAILED",
+        "node-demo/6": "FAILED",
+        "node-demo/7": "RUNNING",
+        "node-demo/8": "RUNNING"
+      },
+      "attempts": 8
+    },
+    {
+      "label": "stop",
+      "probe_seconds": 0.003,
+      "answers": {
+        "healthy": 4
+      },
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 4,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "instances": {
+        "node-demo/1": "STOPPING",
+        "node-demo/2": "STOPPING",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "FAILED",
+        "node-demo/6": "FAILED",
+        "node-demo/7": "STOPPING",
+        "node-demo/8": "STOPPING"
+      },
+      "attempts": 8
+    },
+    {
+      "label": "stop",
+      "probe_seconds": 0.003,
+      "answers": {
+        "dead": 4
+      },
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 4,
+        "FAILED": 4
+      },
+      "instances": {
+        "node-demo/1": "STOPPED",
+        "node-demo/2": "STOPPED",
+        "node-demo/3": "FAILED",
+        "node-demo/4": "FAILED",
+        "node-demo/5": "FAILED",
+        "node-demo/6": "FAILED",
+        "node-demo/7": "STOPPED",
+        "node-demo/8": "STOPPED"
+      },
+      "attempts": 8
+    }
+  ],
+  "checks": [
+    {
+      "name": "the replicas start spread over both worker nodes",
+      "ok": true,
+      "detail": "86783d: 2 | ac4da2: 2"
+    },
+    {
+      "name": "the attempts on the lost node end FAILED, not STOPPED",
+      "ok": true,
+      "detail": "{'node-demo/3': 'FAILED', 'node-demo/4': 'FAILED'}"
+    },
+    {
+      "name": "every lost attempt is replaced, and every replacement names a failed attempt",
+      "ok": true,
+      "detail": "replacements for ['node-demo/3', 'node-demo/4', 'node-demo/5', 'node-demo/6']; failed replacements ['node-demo/5', 'node-demo/6']"
+    },
+    {
+      "name": "the attempts on the surviving node kept running",
+      "ok": true,
+      "detail": "state changes 0, survivors ['node-demo/1', 'node-demo/2']"
+    },
+    {
+      "name": "without capacity the replacements wait in PENDING without multiplying",
+      "ok": true,
+      "detail": "pending [2, 2, 2, 2], attempts [6, 6, 6, 6]"
+    },
+    {
+      "name": "no lost process was still alive when its replacement ran",
+      "ok": true,
+      "detail": "alive when requested [], when running []"
+    },
+    {
+      "name": "the goal never changed",
+      "ok": true,
+      "detail": "desired [4]"
+    },
+    {
+      "name": "the replacements run on the node that joined, the survivors where they were",
+      "ok": true,
+      "detail": "on the new node: ['node-demo/7', 'node-demo/8']"
+    },
+    {
+      "name": "detection of every lost attempt was measured",
+      "ok": true,
+      "detail": "node-demo/3: 14.899 s by instance_decision, node-demo/4: 14.899 s by instance_decision"
+    },
+    {
+      "name": "the job stops without leftovers",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-25T16:47:55.855Z",
+      "m": 7701.84879,
+      "event": "job_submitted",
+      "job_id": "node-demo",
+      "spec": {
+        "job_id": "node-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 4,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-25T16:47:55.855Z",
+      "m": 7701.848876,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:47:55.855Z",
+      "m": 7701.848887,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:47:55.855Z",
+      "m": 7701.848895,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:47:55.855Z",
+      "m": 7701.848901,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758363,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 23920,
+      "node_id": "86783d4542a320bf0269949b78d8559ac7d1fe250f9a7e53478df2e0",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758379,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 23918,
+      "node_id": "86783d4542a320bf0269949b78d8559ac7d1fe250f9a7e53478df2e0",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758385,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 23919,
+      "node_id": "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758389,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 23921,
+      "node_id": "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758552,
+      "event": "annotation",
+      "kind": "fault_injected",
+      "instance_id": "node-demo/3",
+      "node_id": "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f",
+      "method": "node_lost"
+    },
+    {
+      "t": "2026-11-25T16:47:56.765Z",
+      "m": 7702.758557,
+      "event": "annotation",
+      "kind": "fault_injected",
+      "instance_id": "node-demo/4",
+      "node_id": "ac4da242115beef191463215085d865b02544e650f941ef59677ae3f",
+      "method": "node_lost"
+    },
+    {
+      "t": "2026-11-25T16:47:57.282Z",
+      "m": 7703.27565,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 5
+    },
+    {
+      "t": "2026-11-25T16:47:57.282Z",
+      "m": 7703.275661,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 5
+    },
+    {
+      "t": "2026-11-25T16:47:57.282Z",
+      "m": 7703.275664,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "progress": 5
+    },
+    {
+      "t": "2026-11-25T16:47:57.282Z",
+      "m": 7703.275669,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "progress": 5
+    },
+    {
+      "t": "2026-11-25T16:47:58.839Z",
+      "m": 7704.832796,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 10
+    },
+    {
+      "t": "2026-11-25T16:47:58.839Z",
+      "m": 7704.832806,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 10
+    },
+    {
+      "t": "2026-11-25T16:47:58.839Z",
+      "m": 7704.832826,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T16:47:58.839Z",
+      "m": 7704.832832,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-25T16:48:44.207Z",
+      "m": 7715.154379,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 25
+    },
+    {
+      "t": "2026-11-25T16:48:44.207Z",
+      "m": 7715.154397,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 25
+    },
+    {
+      "t": "2026-11-25T16:48:44.207Z",
+      "m": 7715.15441,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-25T16:48:44.207Z",
+      "m": 7715.15442,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657614,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657631,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657641,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "missed_probes": 3
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657648,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "missed_probes": 3
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657686,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/3",
+      "reason": "given_up_after_missed_probes",
+      "from_state": "UNKNOWN",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657695,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/4",
+      "reason": "given_up_after_missed_probes",
+      "from_state": "UNKNOWN",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657725,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/5",
+      "reason": "replacement",
+      "replaces": "node-demo/3"
+    },
+    {
+      "t": "2026-11-25T16:48:11.672Z",
+      "m": 7717.657851,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/6",
+      "reason": "replacement",
+      "replaces": "node-demo/4"
+    },
+    {
+      "t": "2026-11-25T16:48:49.217Z",
+      "m": 7720.16508,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 153
+    },
+    {
+      "t": "2026-11-25T16:48:49.217Z",
+      "m": 7720.165091,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 153
+    },
+    {
+      "t": "2026-11-25T16:48:16.681Z",
+      "m": 7722.668342,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 178
+    },
+    {
+      "t": "2026-11-25T16:48:16.681Z",
+      "m": 7722.668358,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 178
+    },
+    {
+      "t": "2026-11-25T16:48:54.224Z",
+      "m": 7725.17149,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 203
+    },
+    {
+      "t": "2026-11-25T16:48:54.224Z",
+      "m": 7725.17151,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 203
+    },
+    {
+      "t": "2026-11-25T16:48:21.693Z",
+      "m": 7727.674412,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 228
+    },
+    {
+      "t": "2026-11-25T16:48:21.693Z",
+      "m": 7727.674425,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 228
+    },
+    {
+      "t": "2026-11-25T16:48:21.693Z",
+      "m": 7727.674708,
+      "event": "annotation",
+      "kind": "node_joined",
+      "cpus": 2
+    },
+    {
+      "t": "2026-11-25T16:48:27.769Z",
+      "m": 7733.753333,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 289
+    },
+    {
+      "t": "2026-11-25T16:48:27.769Z",
+      "m": 7733.75335,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 289
+    },
+    {
+      "t": "2026-11-25T16:49:09.249Z",
+      "m": 7740.197217,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 314
+    },
+    {
+      "t": "2026-11-25T16:49:09.249Z",
+      "m": 7740.19723,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 314
+    },
+    {
+      "t": "2026-11-25T16:48:36.705Z",
+      "m": 7742.699766,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 378
+    },
+    {
+      "t": "2026-11-25T16:48:36.705Z",
+      "m": 7742.699775,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 378
+    },
+    {
+      "t": "2026-11-25T16:49:14.253Z",
+      "m": 7745.20213,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 403
+    },
+    {
+      "t": "2026-11-25T16:49:14.253Z",
+      "m": 7745.202144,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 403
+    },
+    {
+      "t": "2026-11-25T16:48:41.721Z",
+      "m": 7747.704232,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 428
+    },
+    {
+      "t": "2026-11-25T16:48:41.721Z",
+      "m": 7747.704242,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 428
+    },
+    {
+      "t": "2026-11-25T16:48:44.223Z",
+      "m": 7750.206448,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 453
+    },
+    {
+      "t": "2026-11-25T16:48:44.223Z",
+      "m": 7750.206463,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 453
+    },
+    {
+      "t": "2026-11-25T16:48:46.716Z",
+      "m": 7752.708455,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 478
+    },
+    {
+      "t": "2026-11-25T16:48:46.716Z",
+      "m": 7752.708477,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 478
+    },
+    {
+      "t": "2026-11-25T16:48:49.219Z",
+      "m": 7755.210813,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 503
+    },
+    {
+      "t": "2026-11-25T16:48:49.219Z",
+      "m": 7755.210821,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 503
+    },
+    {
+      "t": "2026-11-25T16:48:51.729Z",
+      "m": 7757.712742,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 528
+    },
+    {
+      "t": "2026-11-25T16:48:51.729Z",
+      "m": 7757.712751,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 528
+    },
+    {
+      "t": "2026-11-25T16:49:34.297Z",
+      "m": 7765.24675,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 553
+    },
+    {
+      "t": "2026-11-25T16:49:34.297Z",
+      "m": 7765.246759,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 553
+    },
+    {
+      "t": "2026-11-25T16:49:01.755Z",
+      "m": 7767.750943,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 628
+    },
+    {
+      "t": "2026-11-25T16:49:01.755Z",
+      "m": 7767.750953,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 628
+    },
+    {
+      "t": "2026-11-25T16:49:04.258Z",
+      "m": 7770.253751,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 653
+    },
+    {
+      "t": "2026-11-25T16:49:04.258Z",
+      "m": 7770.25376,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 653
+    },
+    {
+      "t": "2026-11-25T16:49:06.762Z",
+      "m": 7772.755789,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 678
+    },
+    {
+      "t": "2026-11-25T16:49:06.762Z",
+      "m": 7772.7558,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 678
+    },
+    {
+      "t": "2026-11-25T16:49:09.265Z",
+      "m": 7775.258244,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 703
+    },
+    {
+      "t": "2026-11-25T16:49:09.265Z",
+      "m": 7775.258253,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 703
+    },
+    {
+      "t": "2026-11-25T16:49:11.766Z",
+      "m": 7777.760235,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 728
+    },
+    {
+      "t": "2026-11-25T16:49:11.766Z",
+      "m": 7777.760244,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 728
+    },
+    {
+      "t": "2026-11-25T16:49:14.269Z",
+      "m": 7780.262682,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 753
+    },
+    {
+      "t": "2026-11-25T16:49:14.269Z",
+      "m": 7780.262694,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 753
+    },
+    {
+      "t": "2026-11-25T16:49:16.759Z",
+      "m": 7782.76531,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 778
+    },
+    {
+      "t": "2026-11-25T16:49:16.759Z",
+      "m": 7782.765319,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 778
+    },
+    {
+      "t": "2026-11-25T16:49:19.261Z",
+      "m": 7785.267192,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 803
+    },
+    {
+      "t": "2026-11-25T16:49:19.261Z",
+      "m": 7785.267208,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 803
+    },
+    {
+      "t": "2026-11-25T16:49:21.782Z",
+      "m": 7787.769881,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 828
+    },
+    {
+      "t": "2026-11-25T16:49:21.782Z",
+      "m": 7787.769912,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 828
+    },
+    {
+      "t": "2026-11-25T16:50:04.359Z",
+      "m": 7795.310605,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 853
+    },
+    {
+      "t": "2026-11-25T16:50:04.359Z",
+      "m": 7795.31062,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 853
+    },
+    {
+      "t": "2026-11-25T16:49:31.820Z",
+      "m": 7797.813092,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 928
+    },
+    {
+      "t": "2026-11-25T16:49:31.820Z",
+      "m": 7797.813102,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 928
+    },
+    {
+      "t": "2026-11-25T16:49:34.322Z",
+      "m": 7800.314529,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 953
+    },
+    {
+      "t": "2026-11-25T16:49:34.322Z",
+      "m": 7800.314538,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 953
+    },
+    {
+      "t": "2026-11-25T16:50:19.383Z",
+      "m": 7810.335338,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 978
+    },
+    {
+      "t": "2026-11-25T16:50:19.383Z",
+      "m": 7810.335345,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 978
+    },
+    {
+      "t": "2026-11-25T16:49:46.844Z",
+      "m": 7812.837492,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 1078
+    },
+    {
+      "t": "2026-11-25T16:49:46.844Z",
+      "m": 7812.8375,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 1078
+    },
+    {
+      "t": "2026-11-25T16:49:49.346Z",
+      "m": 7815.339427,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 1103
+    },
+    {
+      "t": "2026-11-25T16:49:49.346Z",
+      "m": 7815.339436,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 1103
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.843215,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 1128
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.843225,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 1128
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.843244,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/5",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.843253,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/6",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.843276,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/7",
+      "reason": "replacement",
+      "replaces": "node-demo/5"
+    },
+    {
+      "t": "2026-11-25T16:49:49.842Z",
+      "m": 7815.84328,
+      "event": "instance_requested",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/8",
+      "reason": "replacement",
+      "replaces": "node-demo/6"
+    },
+    {
+      "t": "2026-11-25T16:49:50.371Z",
+      "m": 7816.372269,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 1133
+    },
+    {
+      "t": "2026-11-25T16:49:50.371Z",
+      "m": 7816.372279,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 1133
+    },
+    {
+      "t": "2026-11-25T16:49:50.371Z",
+      "m": 7816.372294,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/7",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 24348,
+      "node_id": "6b85e39519713d91eacd63114d3efc8af08407889d4b38b127cb1d78",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:49:50.371Z",
+      "m": 7816.3723,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/8",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 24347,
+      "node_id": "6b85e39519713d91eacd63114d3efc8af08407889d4b38b127cb1d78",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T16:49:50.371Z",
+      "m": 7816.372502,
+      "event": "replicas_set",
+      "job_id": "node-demo",
+      "from_replicas": 4,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-25T16:49:50.374Z",
+      "m": 7816.375636,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "progress": 1134
+    },
+    {
+      "t": "2026-11-25T16:49:50.375Z",
+      "m": 7816.375646,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "progress": 1134
+    },
+    {
+      "t": "2026-11-25T16:49:50.375Z",
+      "m": 7816.375702,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/8",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T16:49:50.375Z",
+      "m": 7816.375708,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/7",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T16:49:50.375Z",
+      "m": 7816.375712,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T16:49:50.375Z",
+      "m": 7816.375715,
+      "event": "instance_decision",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T16:49:50.878Z",
+      "m": 7816.87936,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/1",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-25T16:49:50.878Z",
+      "m": 7816.87937,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-25T16:49:50.878Z",
+      "m": 7816.879376,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/7",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-25T16:49:50.878Z",
+      "m": 7816.87938,
+      "event": "instance_observed",
+      "job_id": "node-demo",
+      "instance_id": "node-demo/8",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

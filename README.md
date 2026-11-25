@@ -25,7 +25,8 @@ AI_USE.md             declaración de uso de asistentes de IA
 | [Contrato v1.0](Ray-Phase1/docs/CONTRACT.md) | Operaciones, especificación, estados, errores y garantías (congelado) |
 | [Mapa de dependencias](Ray-Phase1/docs/DEPENDENCY_MAP.md) | Qué hace Ray por nosotros y qué tendrá que decidir la versión nativa |
 | [Cierre de la fase Ray](Ray-Phase1/docs/PHASE1_SUMMARY.md) | Entregables, semántica de fallos observada y preguntas abiertas |
-| [F0](Ray-Phase1/docs/F0.md), [F1](Ray-Phase1/docs/F1.md), [F3](Ray-Phase1/docs/F3.md) | Referencia normal, caída de un proceso y proceso que deja de responder, con su [evidencia](Ray-Phase1/docs/evidence/) |
+| [Escenarios](Ray-Phase1/docs/SCENARIOS.md) | Catálogo completo de escenarios de fallo: ejecutados, pendientes y no aplicables, con su justificación |
+| [F0](Ray-Phase1/docs/F0.md), [F1](Ray-Phase1/docs/F1.md), [caída de un nodo](Ray-Phase1/docs/F1_NODE.md), [F3](Ray-Phase1/docs/F3.md) | Referencia normal, caída de un proceso, caída de un nodo y proceso que deja de responder, con su [evidencia](Ray-Phase1/docs/evidence/) |
 
 ## Requisitos
 
@@ -58,6 +59,7 @@ python experiments/scale_sequence.py              # objetivos 1 -> 3 -> 1 -> 0
 python experiments/placement_check.py             # restricción de ubicación
 python experiments/fault_recovery.py --fault crash   # un proceso muere
 python experiments/fault_recovery.py --fault hang    # un proceso deja de responder
+python experiments/node_failure.py                # cae un nodo entero y entra otro
 ```
 
 Cada script imprime sus comprobaciones (`[OK]` o `[FAIL]`) y termina con código 1 si alguna falla. Con `--output` guarda los resultados en JSON y, donde existe, `--events` guarda el historial de eventos en JSONL. Entre ejecuciones conviene hacer `ray stop --force`.

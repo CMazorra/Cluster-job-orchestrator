@@ -131,6 +131,9 @@ Los casos de ejemplo ejecutables están en [`tests/test_contract.py`](../tests/t
 | **El estado vive en memoria:** reiniciar el controlador pierde trabajos, objetivos e IDs | **Durabilidad:** todo cambio aceptado sobrevive a un reinicio del controlador, y tras reiniciar este reconcilia con las instancias que siguieron funcionando |
 | **Un proceso por réplica solo porque Ray puede matar cualquier proceso**, incluso uno colgado | **Un proceso por réplica aunque un worker quede inaccesible:** una instancia abandonada no debe seguir ejecutándose junto a su reemplazo, aunque no se la pueda matar |
 | **La repetición segura de `submit_job` solo dura una sesión** | **Envíos repetibles también tras un reinicio:** reenviar la misma especificación con el mismo ID devuelve el mismo trabajo |
+| **El controlador es un único proceso:** si cae, el cliente pierde el servicio hasta que vuelve | **Tolerancia a dos fallos simultáneos:** el cliente puede seguir usando las cuatro operaciones, y el sistema se recupera, cuando fallan a la vez dos componentes cualesquiera: dos procesos, dos nodos, o un proceso y un nodo. Perder un nodo cuenta como perder todos los procesos que aloja. Exige que el estado del controlador no dependa de un único proceso ni de un único nodo |
+
+Ninguno de estos cambios altera el comportamiento congelado de las secciones 2 a 4. La tolerancia a dos fallos, además, refuerza las garantías mínimas: un fallo, o dos, nunca cambia el objetivo ni produce dos procesos para una réplica.
 
 ### 5.3 Límites que la versión nativa puede mantener, justificándolo
 

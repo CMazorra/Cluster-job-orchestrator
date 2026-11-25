@@ -55,13 +55,13 @@ Crear procesos y colocarlos según recursos y etiquetas, transportar llamadas y 
 **Rediseño nativo.**
 - *Imprescindible:* arrancar y detener procesos en workers, comunicación controlador ↔ worker, detección de fallos con plazos y sospecha, registro de workers con su capacidad y etiquetas.
 - *Se puede omitir:* el object store, la serialización general, las tareas sueltas, el autoescalado y la planificación genérica de Ray; nuestro problema solo necesita colocar procesos según CPU y etiquetas.
-- *Debe ser más fuerte que en Ray* (sección 5.2 del [contrato](CONTRACT.md)): la **durabilidad** de todo cambio aceptado, que cambia el significado de "aceptar"; la **garantía de un proceso por réplica** cuando no se pueda matar un proceso inaccesible; y los **envíos repetibles tras un reinicio**.
+- *Debe ser más fuerte que en Ray* (sección 5.2 del [contrato](CONTRACT.md)): la **durabilidad** de todo cambio aceptado, que cambia el significado de "aceptar"; la **garantía de un proceso por réplica** cuando no se pueda matar un proceso inaccesible; los **envíos repetibles tras un reinicio**; y la **tolerancia a dos fallos simultáneos** de cualquier par de componentes, que obliga a que el estado del controlador no dependa de un único proceso ni de un único nodo.
 
 ## Preguntas abiertas para la versión nativa
 
 Ordenadas por impacto en el diseño:
 
-1. **¿Dónde vive el objetivo y cuándo se confirma una escritura?** Hoy se pierde al reiniciar el controlador. Es lo que la campaña de la fase 3 probará con F2 (caída y reinicio).
+1. **¿Dónde vive el objetivo, en cuántas copias, y cuándo se confirma una escritura?** Hoy se pierde al reiniciar el controlador. La versión nativa debe seguir sirviendo al cliente aunque fallen a la vez dos componentes cualesquiera, incluidos dos nodos, así que el estado del controlador tendrá que replicarse. Hay que elegir cómo (por ejemplo, por mayoría o con un primario y respaldos), cuántas réplicas hacen falta para tolerar dos fallos y qué ocurre durante una partición.
 2. **¿Cómo se detecta que un worker murió sin la confirmación de Ray?** Solo habrá sospecha: plazos, K consultas o *heartbeats*. Hay que elegir valores y justificar el compromiso entre recuperar rápido y no reemplazar procesos lentos.
 3. **¿Cómo se garantiza un proceso por réplica si un worker queda inaccesible?** No se le podrá matar. Opciones a estudiar: que el worker detenga sus instancias si pierde contacto con el controlador, o arrendamientos (*leases*) con caducidad.
 4. **¿Cómo se registran los workers, anuncian su capacidad y sus etiquetas, y cómo se detecta que se fueron?**

@@ -1,4 +1,4 @@
-# Contrato externo — v1.0 (congelado)
+# Contrato externo — v1.1 (congelado)
 
 Comportamiento visible del orquestador, congelado al cerrar la fase Ray. Es la guía de la versión nativa, y distingue dos cosas:
 
@@ -96,7 +96,8 @@ Reglas que se derivan de la tabla:
 - Un silencio aislado no prueba una muerte. Los intentos `PENDING` y `UNKNOWN` cuentan para el objetivo, de modo que no se crean duplicados mientras hay dudas.
 - Al reducir réplicas se detienen primero los `PENDING`, luego los `UNKNOWN` y al final los `RUNNING`; dentro de un mismo estado, los más nuevos.
 - Una respuesta tardía de un intento ya `FAILED` o `STOPPED` no lo reactiva.
-- K y el plazo de consulta son parámetros de configuración; en el prototipo, K = 3 y 2 s.
+- **Espera entre reemplazos:** el primer fallo de una cadena de intentos se reemplaza de inmediato. Si el reemplazo vuelve a fallar sin haber estado `RUNNING` al menos 10 s, el siguiente reemplazo espera 1 s, y cada fallo más duplica la espera hasta un máximo de 30 s. Mientras espera, ese hueco queda vacío, sin bloquear otras réplicas ni un aumento del objetivo.
+- K, el plazo de consulta y los tiempos de espera son parámetros de configuración; en el prototipo, K = 3 y 2 s, y la espera va de 1 s a 30 s, con 10 s para considerar estable un intento.
 
 ## 4. Errores y repeticiones
 
@@ -152,3 +153,10 @@ Pueden cambiar en la versión nativa sin romperlo:
 - Cómo se ejecuta cada instancia (actor de Ray, proceso gestionado por un agente…), cómo se detectan los fallos y dónde se guarda el estado, siempre que se cumplan las garantías de la sección 5.
 
 Cada garantía que la versión nativa añada o refuerce, empezando por las de la sección 5.2, se documenta al comparar versiones como un cambio respecto a esta, con la evidencia que la demuestra.
+
+## 7. Cambios
+
+| Versión | Cambio | Motivo |
+|---|---|---|
+| 1.0 | Contrato congelado al cerrar la fase Ray | — |
+| 1.1 | Espera creciente entre reemplazos de una cadena que sigue fallando (sección 3) | El experimento [F17](F17.md) mostró que una carga que se cae al arrancar se reemplazaba en cada ciclo sin límite. No cambia operaciones, estados ni errores |

@@ -1,0 +1,2521 @@
+{
+  "meta": {
+    "mode": "local cluster (2 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 29773,
+    "driver_node_id": "29c8965c5342b99504277e9d166d020e23e52f579f10125620d694a2",
+    "cluster_resources": {
+      "CPU": 2.0,
+      "object_store_memory": 1737477734.0,
+      "node:172.25.118.49": 1.0,
+      "memory": 4054114714.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "node:__internal_head__": 1.0,
+      "GPU": 1.0
+    },
+    "replicas": 2,
+    "cycle_seconds": 0.5,
+    "loop_seconds": 30.0,
+    "backoff_base_s": 1.0,
+    "backoff_max_s": 30.0
+  },
+  "job_id": "retry-demo",
+  "replacements_during_loop": 5,
+  "request_times_s": [
+    0.01,
+    1.52,
+    4.03,
+    8.59,
+    17.13
+  ],
+  "gaps_s": [
+    1.51,
+    2.51,
+    4.56,
+    8.54
+  ],
+  "heal_seconds": 4.021,
+  "attempts_total": 8,
+  "trace": [
+    {
+      "label": "start",
+      "desired": 2,
+      "counts": {
+        "PENDING": 2,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "attempts": 2,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "PENDING",
+        "retry-demo/2": "PENDING"
+      }
+    },
+    {
+      "label": "start",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      "attempts": 2,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "RUNNING",
+        "retry-demo/2": "RUNNING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      "attempts": 3,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "PENDING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "attempts": 3,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "attempts": 3,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 2
+      },
+      "attempts": 4,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "PENDING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 3
+      },
+      "attempts": 4,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 3
+      },
+      "attempts": 4,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 3
+      },
+      "attempts": 4,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 3
+      },
+      "attempts": 4,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 3
+      },
+      "attempts": 5,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "PENDING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 5,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 4
+      },
+      "attempts": 6,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "PENDING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 6,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 5
+      },
+      "attempts": 7,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "PENDING"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "crash-loop",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 7,
+      "active": 1,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 1,
+        "RUNNING": 1,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 8,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED",
+        "retry-demo/8": "PENDING"
+      }
+    },
+    {
+      "label": "healed",
+      "desired": 2,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 8,
+      "active": 2,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "RUNNING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED",
+        "retry-demo/8": "RUNNING"
+      }
+    },
+    {
+      "label": "stop",
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 2,
+        "STOPPED": 0,
+        "FAILED": 6
+      },
+      "attempts": 8,
+      "active": 0,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "STOPPING",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED",
+        "retry-demo/8": "STOPPING"
+      }
+    },
+    {
+      "label": "stop",
+      "desired": 0,
+      "counts": {
+        "PENDING": 0,
+        "RUNNING": 0,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 2,
+        "FAILED": 6
+      },
+      "attempts": 8,
+      "active": 0,
+      "instances": {
+        "retry-demo/1": "FAILED",
+        "retry-demo/2": "STOPPED",
+        "retry-demo/3": "FAILED",
+        "retry-demo/4": "FAILED",
+        "retry-demo/5": "FAILED",
+        "retry-demo/6": "FAILED",
+        "retry-demo/7": "FAILED",
+        "retry-demo/8": "STOPPED"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "the other replica kept running",
+      "ok": true,
+      "detail": "state changes of retry-demo/2: 0"
+    },
+    {
+      "name": "the goal never changed",
+      "ok": true,
+      "detail": "desired [2]"
+    },
+    {
+      "name": "never more active attempts than the goal",
+      "ok": true,
+      "detail": "max active 2"
+    },
+    {
+      "name": "with backoff, the gaps between replacements grow",
+      "ok": true,
+      "detail": "gaps [1.51, 2.51, 4.56, 8.54]"
+    },
+    {
+      "name": "no replacement was requested before its backoff expired",
+      "ok": true,
+      "detail": "early replacements []"
+    },
+    {
+      "name": "the goal is restored once the fault is removed",
+      "ok": true,
+      "detail": "after 4.021 s"
+    },
+    {
+      "name": "the job stops without leftovers",
+      "ok": true,
+      "detail": "CPUs back after 2.637 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-25T16:59:42.855Z",
+      "m": 8408.868488,
+      "event": "job_submitted",
+      "job_id": "retry-demo",
+      "spec": {
+        "job_id": "retry-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-25T16:59:42.855Z",
+      "m": 8408.86854,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:59:42.855Z",
+      "m": 8408.868549,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-25T16:59:43.444Z",
+      "m": 8409.457393,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 30409,
+      "node_id": "29c8965c5342b99504277e9d166d020e23e52f579f10125620d694a2",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-25T16:59:43.444Z",
+      "m": 8409.457412,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 30410,
+      "node_id": "29c8965c5342b99504277e9d166d020e23e52f579f10125620d694a2",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-25T16:59:43.444Z",
+      "m": 8409.457524,
+      "event": "annotation",
+      "kind": "fault_injected",
+      "instance_id": "retry-demo/1",
+      "method": "crash_loop"
+    },
+    {
+      "t": "2026-11-25T16:59:43.454Z",
+      "m": 8409.467876,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "from_state": "RUNNING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:59:43.454Z",
+      "m": 8409.467908,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "reason": "replacement",
+      "replaces": "retry-demo/1"
+    },
+    {
+      "t": "2026-11-25T16:59:43.957Z",
+      "m": 8409.971077,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 8
+    },
+    {
+      "t": "2026-11-25T16:59:43.957Z",
+      "m": 8409.971106,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:59:43.957Z",
+      "m": 8409.971122,
+      "event": "replacement_backoff",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "failures_in_row": 2,
+      "delay_s": 1.0
+    },
+    {
+      "t": "2026-11-25T16:59:44.459Z",
+      "m": 8410.473156,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 13
+    },
+    {
+      "t": "2026-11-25T16:59:44.961Z",
+      "m": 8410.974987,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 18
+    },
+    {
+      "t": "2026-11-25T16:59:44.961Z",
+      "m": 8410.975015,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "reason": "replacement",
+      "replaces": "retry-demo/3"
+    },
+    {
+      "t": "2026-11-25T17:00:20.500Z",
+      "m": 8411.483419,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 23
+    },
+    {
+      "t": "2026-11-25T17:00:20.500Z",
+      "m": 8411.483435,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T17:00:20.500Z",
+      "m": 8411.483445,
+      "event": "replacement_backoff",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "failures_in_row": 3,
+      "delay_s": 2.0
+    },
+    {
+      "t": "2026-11-25T16:59:45.968Z",
+      "m": 8411.985903,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 29
+    },
+    {
+      "t": "2026-11-25T16:59:46.470Z",
+      "m": 8412.487637,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 34
+    },
+    {
+      "t": "2026-11-25T16:59:46.971Z",
+      "m": 8412.989461,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 39
+    },
+    {
+      "t": "2026-11-25T16:59:47.473Z",
+      "m": 8413.491337,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 44
+    },
+    {
+      "t": "2026-11-25T16:59:47.473Z",
+      "m": 8413.491374,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/5",
+      "reason": "replacement",
+      "replaces": "retry-demo/4"
+    },
+    {
+      "t": "2026-11-25T16:59:48.012Z",
+      "m": 8414.030237,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 49
+    },
+    {
+      "t": "2026-11-25T16:59:48.012Z",
+      "m": 8414.030256,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/5",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T16:59:48.012Z",
+      "m": 8414.030268,
+      "event": "replacement_backoff",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/5",
+      "failures_in_row": 4,
+      "delay_s": 4.0
+    },
+    {
+      "t": "2026-11-25T16:59:48.515Z",
+      "m": 8414.533157,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 54
+    },
+    {
+      "t": "2026-11-25T16:59:49.018Z",
+      "m": 8415.035717,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 59
+    },
+    {
+      "t": "2026-11-25T16:59:49.519Z",
+      "m": 8415.537246,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 64
+    },
+    {
+      "t": "2026-11-25T16:59:50.021Z",
+      "m": 8416.038869,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 69
+    },
+    {
+      "t": "2026-11-25T17:00:25.557Z",
+      "m": 8416.541161,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 74
+    },
+    {
+      "t": "2026-11-25T16:59:51.020Z",
+      "m": 8417.043034,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 79
+    },
+    {
+      "t": "2026-11-25T16:59:51.521Z",
+      "m": 8417.54471,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 84
+    },
+    {
+      "t": "2026-11-25T16:59:52.023Z",
+      "m": 8418.046536,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 89
+    },
+    {
+      "t": "2026-11-25T16:59:52.023Z",
+      "m": 8418.046563,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/6",
+      "reason": "replacement",
+      "replaces": "retry-demo/5"
+    },
+    {
+      "t": "2026-11-25T17:00:27.564Z",
+      "m": 8418.548892,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 94
+    },
+    {
+      "t": "2026-11-25T17:00:27.564Z",
+      "m": 8418.548907,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/6",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T17:00:27.564Z",
+      "m": 8418.548917,
+      "event": "replacement_backoff",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/6",
+      "failures_in_row": 5,
+      "delay_s": 8.0
+    },
+    {
+      "t": "2026-11-25T16:59:53.027Z",
+      "m": 8419.050887,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 99
+    },
+    {
+      "t": "2026-11-25T16:59:53.529Z",
+      "m": 8419.552679,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 104
+    },
+    {
+      "t": "2026-11-25T16:59:54.031Z",
+      "m": 8420.054439,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 109
+    },
+    {
+      "t": "2026-11-25T16:59:54.535Z",
+      "m": 8420.558228,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 114
+    },
+    {
+      "t": "2026-11-25T16:59:55.037Z",
+      "m": 8421.060888,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 119
+    },
+    {
+      "t": "2026-11-25T17:00:30.579Z",
+      "m": 8421.562784,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 124
+    },
+    {
+      "t": "2026-11-25T16:59:56.049Z",
+      "m": 8422.066026,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 129
+    },
+    {
+      "t": "2026-11-25T16:59:56.551Z",
+      "m": 8422.567862,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-25T16:59:57.054Z",
+      "m": 8423.071066,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 139
+    },
+    {
+      "t": "2026-11-25T16:59:57.556Z",
+      "m": 8423.573333,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 144
+    },
+    {
+      "t": "2026-11-25T16:59:58.058Z",
+      "m": 8424.075128,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 149
+    },
+    {
+      "t": "2026-11-25T16:59:58.561Z",
+      "m": 8424.577864,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 154
+    },
+    {
+      "t": "2026-11-25T16:59:59.063Z",
+      "m": 8425.079892,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-25T16:59:59.565Z",
+      "m": 8425.582175,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-25T17:00:00.067Z",
+      "m": 8426.084444,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-25T17:00:35.603Z",
+      "m": 8426.587753,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-25T17:00:35.603Z",
+      "m": 8426.587842,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/7",
+      "reason": "replacement",
+      "replaces": "retry-demo/6"
+    },
+    {
+      "t": "2026-11-25T17:00:01.070Z",
+      "m": 8427.091688,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-25T17:00:01.070Z",
+      "m": 8427.091706,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/7",
+      "from_state": "PENDING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-25T17:00:01.070Z",
+      "m": 8427.091716,
+      "event": "replacement_backoff",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/7",
+      "failures_in_row": 6,
+      "delay_s": 16.0
+    },
+    {
+      "t": "2026-11-25T17:00:01.572Z",
+      "m": 8427.593587,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-25T17:00:02.074Z",
+      "m": 8428.095516,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 189
+    },
+    {
+      "t": "2026-11-25T17:00:02.576Z",
+      "m": 8428.597537,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 194
+    },
+    {
+      "t": "2026-11-25T17:00:03.078Z",
+      "m": 8429.099987,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 199
+    },
+    {
+      "t": "2026-11-25T17:00:03.580Z",
+      "m": 8429.601614,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 204
+    },
+    {
+      "t": "2026-11-25T17:00:04.081Z",
+      "m": 8430.103309,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 209
+    },
+    {
+      "t": "2026-11-25T17:00:04.583Z",
+      "m": 8430.605038,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 214
+    },
+    {
+      "t": "2026-11-25T17:00:05.085Z",
+      "m": 8431.107006,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 219
+    },
+    {
+      "t": "2026-11-25T17:00:40.629Z",
+      "m": 8431.614233,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 224
+    },
+    {
+      "t": "2026-11-25T17:00:06.097Z",
+      "m": 8432.116483,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 230
+    },
+    {
+      "t": "2026-11-25T17:00:06.598Z",
+      "m": 8432.61825,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 235
+    },
+    {
+      "t": "2026-11-25T17:00:07.101Z",
+      "m": 8433.121178,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 240
+    },
+    {
+      "t": "2026-11-25T17:00:07.603Z",
+      "m": 8433.623054,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 245
+    },
+    {
+      "t": "2026-11-25T17:00:08.106Z",
+      "m": 8434.125406,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 250
+    },
+    {
+      "t": "2026-11-25T17:00:08.608Z",
+      "m": 8434.62753,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 255
+    },
+    {
+      "t": "2026-11-25T17:00:09.109Z",
+      "m": 8435.129207,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 260
+    },
+    {
+      "t": "2026-11-25T17:00:09.611Z",
+      "m": 8435.630852,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 265
+    },
+    {
+      "t": "2026-11-25T17:00:10.113Z",
+      "m": 8436.132854,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 270
+    },
+    {
+      "t": "2026-11-25T17:00:45.650Z",
+      "m": 8436.635298,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 275
+    },
+    {
+      "t": "2026-11-25T17:00:11.124Z",
+      "m": 8437.138971,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 280
+    },
+    {
+      "t": "2026-11-25T17:00:11.626Z",
+      "m": 8437.640992,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 285
+    },
+    {
+      "t": "2026-11-25T17:00:12.128Z",
+      "m": 8438.143012,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 290
+    },
+    {
+      "t": "2026-11-25T17:00:12.632Z",
+      "m": 8438.646272,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 295
+    },
+    {
+      "t": "2026-11-25T17:00:13.133Z",
+      "m": 8439.148151,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 300
+    },
+    {
+      "t": "2026-11-25T17:00:13.634Z",
+      "m": 8439.648401,
+      "event": "annotation",
+      "kind": "fault_removed"
+    },
+    {
+      "t": "2026-11-25T17:00:13.635Z",
+      "m": 8439.650092,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 305
+    },
+    {
+      "t": "2026-11-25T17:00:14.137Z",
+      "m": 8440.151689,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 310
+    },
+    {
+      "t": "2026-11-25T17:00:14.639Z",
+      "m": 8440.653306,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 315
+    },
+    {
+      "t": "2026-11-25T17:00:15.141Z",
+      "m": 8441.155527,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 320
+    },
+    {
+      "t": "2026-11-25T17:00:50.672Z",
+      "m": 8441.657398,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 325
+    },
+    {
+      "t": "2026-11-25T17:00:16.140Z",
+      "m": 8442.159289,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 330
+    },
+    {
+      "t": "2026-11-25T17:00:16.642Z",
+      "m": 8442.661442,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 335
+    },
+    {
+      "t": "2026-11-25T17:00:17.144Z",
+      "m": 8443.163563,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 340
+    },
+    {
+      "t": "2026-11-25T17:00:17.144Z",
+      "m": 8443.163583,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/8",
+      "reason": "replacement",
+      "replaces": "retry-demo/7"
+    },
+    {
+      "t": "2026-11-25T17:00:17.649Z",
+      "m": 8443.668859,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 345
+    },
+    {
+      "t": "2026-11-25T17:00:17.649Z",
+      "m": 8443.66888,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/8",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 30775,
+      "node_id": "29c8965c5342b99504277e9d166d020e23e52f579f10125620d694a2",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-25T17:00:17.649Z",
+      "m": 8443.668976,
+      "event": "replicas_set",
+      "job_id": "retry-demo",
+      "from_replicas": 2,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-25T17:00:17.652Z",
+      "m": 8443.671435,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/8",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T17:00:17.652Z",
+      "m": 8443.671446,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-25T17:00:18.154Z",
+      "m": 8444.173943,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-25T17:00:18.154Z",
+      "m": 8444.173954,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/8",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

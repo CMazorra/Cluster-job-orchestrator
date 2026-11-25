@@ -12,7 +12,7 @@ Resumen de lo que entrega el prototipo, las respuestas que pide la metodología 
 | Contrato externo congelado | | [CONTRACT.md](CONTRACT.md) (v1.0) |
 | Experimento inicial | 3 % | [F1](F1.md) (caída de un actor), [F3](F3.md) (proceso que deja de responder) y la referencia [F0](F0.md), con su [evidencia](evidence/) |
 
-Estado verificado al cerrar: 55 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `two_instances` 8/8, `scale_sequence` 8/8, `placement_check` 6/6, `fault_recovery --fault crash` 10/10 y `fault_recovery --fault hang` 12/12.
+Estado verificado: 64 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `two_instances` 8/8, `scale_sequence` 8/8, `placement_check` 6/6, `fault_recovery --fault crash` 10/10, `fault_recovery --fault hang` 12/12, `node_failure` 10/10 y `retry_amplification` 7/7. El recorrido completo del catálogo de escenarios está en [SCENARIOS.md](SCENARIOS.md).
 
 ## Preguntas de salida
 
@@ -72,4 +72,4 @@ Ordenadas por impacto en el diseño:
 
 - Usar el **mismo ciclo de control** (0,5 s), el mismo plazo de consulta (2 s) y la misma K (3), o comparar en número de ciclos.
 - Repetir F0, F1 y F3 con los mismos criterios y comparar contra la [evidencia](evidence/) de esta fase.
-- Las 55 pruebas de `tests/` describen el comportamiento del dominio; la versión nativa debería poder demostrar el mismo comportamiento frente al [contrato](CONTRACT.md).
+- Las 64 pruebas de `tests/` describen el comportamiento del dominio; la versión nativa debería poder demostrar el mismo comportamiento frente al [contrato](CONTRACT.md).

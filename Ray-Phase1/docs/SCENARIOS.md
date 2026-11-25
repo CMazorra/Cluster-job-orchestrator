@@ -6,8 +6,8 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 
 | Estado | Escenarios |
 |---|---|
-| ✅ Ejecutados | F0, F1, caída de un nodo, F3 |
-| 🔜 Aplican y están pendientes | F2, F4, F7, F8, F9, F16, F17 |
+| ✅ Ejecutados | F0, F1, caída de un nodo, F3, F17 |
+| 🔜 Aplican y están pendientes | F2, F4, F7, F8, F9, F16 |
 | ➖ No aplican en esta fase | F5, F6, F10–F15, F18–F21 |
 
 ## Ejecutados
@@ -18,6 +18,7 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 | **F1** Caída de un proceso | [F1.md](F1.md) | 10/10 en tres ejecuciones | Se pierde el estado local; sobreviven el objetivo y las demás instancias; un reemplazo en ~0,5 s |
 | **Caída de un nodo** y entrada de otro (campaña mínima del curso; F1 a nivel de nodo) | [F1_NODE.md](F1_NODE.md) | 10/10 en tres ejecuciones | Detección ~15 s; rondas de consulta de ~10 s pese al plazo de 2 s; con la membresía de Ray desactualizada, los reemplazos se asignan al nodo muerto y la recuperación tarda ~85 s |
 | **F3** Proceso lento o colgado | [F3.md](F3.md) | 12/12 en tres ejecuciones | Sospecha a los 2 s y abandono a los 7 s, tras exactamente K = 3 consultas; nunca dos procesos para una réplica |
+| **F17** Amplificación de reintentos | [F17.md](F17.md) | 7/7 en tres ejecuciones (y 6/6 sin la corrección, como comparación) | Sin control, una carga que se cae al arrancar provocaba 53 reemplazos en 30 s; con la espera creciente añadida al dominio, 5. A cambio, la recuperación tras arreglar el fallo tarda lo que quede de la espera en curso |
 
 ## Aplican y están pendientes
 
@@ -29,7 +30,6 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 | **F8** Respuesta perdida tras un efecto | El cliente pierde la respuesta de `submit_job`, `set_replicas` o `stop_job` y reintenta | Un solo trabajo y ningún actor duplicado |
 | **F9** Petición duplicada | La misma operación llega dos veces | Sin efectos dobles: las operaciones son idempotentes por contrato |
 | **F16** Sobrecarga | Muchas más réplicas que capacidad | Intentos pendientes acotados y sin crecimiento; se medirá el coste de cada ciclo con muchos pendientes |
-| **F17** Amplificación de reintentos | Una carga que se cae nada más arrancar | **Hoy el controlador la reemplazaría en cada ciclo sin límite.** Hay que añadir una espera creciente entre reemplazos y demostrar que la contiene |
 
 ## No aplican en esta fase
 

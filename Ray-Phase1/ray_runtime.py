@@ -34,7 +34,8 @@ DEFAULT_PROBE_TIMEOUT_S = 2.0
 LABEL_UNITS = 1
 
 # Faults an experiment can inject into an actor.
-FAULTS = ("crash", "hang")
+FAULTS = ("crash", "hang", "stall")
+DEFAULT_STALL_S = 4.0
 
 
 @ray.remote(num_cpus=1, max_restarts=0, max_task_retries=0)
@@ -83,6 +84,14 @@ class Ticker:
         this one and is never answered.
         """
         threading.Event().wait()
+
+    def stall(self, seconds: float) -> None:
+        """Blocks this method for ``seconds``, like a long pause, and then returns.
+
+        While it blocks, ``status`` calls queue behind it; afterwards they are
+        answered again. The counter keeps advancing throughout.
+        """
+        time.sleep(seconds)
 
 
 class RayRuntime:
@@ -150,18 +159,23 @@ class RayRuntime:
         ray.kill(actor)
         return Termination(instance_id, KILL_REQUESTED)
 
-    def inject_fault(self, instance_id: str, fault: str) -> None:
+    def inject_fault(self, instance_id: str, fault: str, seconds: float = DEFAULT_STALL_S) -> None:
         """Fault injection for experiments, on the actor of one instance.
 
         * ``crash``: the process exits at once;
-        * ``hang``: the process stays alive but stops answering.
+        * ``hang``: the process stays alive but stops answering;
+        * ``stall``: the process stops answering for ``seconds``, then recovers.
 
         Nothing is awaited and nothing is reported: the controller has to
         discover the fault through its own probes, as with a real one.
         """
         if fault not in FAULTS:
             raise ValueError(f"unknown fault {fault!r}; expected one of {FAULTS}")
-        getattr(self._actors[instance_id], fault).remote()
+        actor = self._actors[instance_id]
+        if fault == "stall":
+            actor.stall.remote(seconds)
+        else:
+            getattr(actor, fault).remote()
 
     def shutdown(self) -> list[Termination]:
         """Requests the end of every actor whose death was not confirmed yet."""

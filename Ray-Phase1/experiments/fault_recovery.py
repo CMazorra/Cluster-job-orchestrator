@@ -52,7 +52,7 @@ RESOURCE_TIMEOUT_S = 30.0
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--fault", choices=FAULTS, default="crash", help="fault to inject")
+    parser.add_argument("--fault", choices=[f for f in FAULTS if f != "stall"], default="crash", help="fault to inject")
     parser.add_argument("--job-id", default=None, help="job id (default: <fault>-demo)")
     parser.add_argument("--replicas", type=int, default=2, help="desired replicas")
     parser.add_argument("--interval-ms", type=int, default=100, help="ticker interval")

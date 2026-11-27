@@ -4,6 +4,8 @@ Caída de un nodo entero, el escenario "one service-node crash" de la campaña m
 
 La predicción se escribió **antes** de las ejecuciones registradas, pero **después** de un prototipo exploratorio, cuyas observaciones se indican.
 
+> **Aviso:** las primeras tres ejecuciones (25 de noviembre) se hicieron, muy probablemente, con el reloj de WSL saltando ±35 s. Al repetirlas con el reloj estable (26 de noviembre), **desaparecieron las rondas de ~10 s y el retraso de ~85 s en la recuperación**. Las conclusiones vigentes están en la sección [Repetición con el reloj estable](#repetición-con-el-reloj-estable).
+
 ## Configuración
 
 | Campo | Valor |
@@ -101,3 +103,45 @@ En la ejecución 1, Ray declaró muerto el nodo antes de que el controlador aban
 - Los nodos son simulados en una sola máquina: cada uno tiene su raylet y sus procesos, pero no hay red real entre ellos. La caída es la terminación de sus procesos, no un corte de red.
 - El tiempo de detección de Ray varió mucho entre el prototipo (~80 s) y las ejecuciones registradas (~15 s). No se investigó qué lo determina.
 - En el prototipo, un proceso de un nodo perdido siguió respondiendo ~50 s. En las ejecuciones registradas no se repitió, así que no se pudo observar cómo lo habría tratado el controlador.
+
+## Repetición con el reloj estable
+
+El 26 de noviembre se comprobó que el reloj de WSL alternaba ±35 s cuando el de Windows estaba desincronizado, y que esos saltos alargaban las rondas de `ray.wait` (ver [F7](F7.md)). Las ejecuciones del 25 de noviembre pudieron verse afectadas. Se repite el experimento con el reloj comprobado antes y después de cada ejecución. Evidencia: `node_stable_run1..3.json` y `.jsonl`.
+
+**Predicción (antes de ejecutar):**
+
+1. **Las rondas seguirán superando el plazo**, aunque menos: aquí, a diferencia de F3 y F7, hay una causa propia, porque Ray intenta contactar con un nodo que ya no existe. Se espera alguna ronda claramente por encima de 2 s.
+2. **El retraso de la recuperación cuando decide el controlador (~85 s) se mantendrá**: depende de cuándo Ray declara muerto el nodo, no del reloj.
+3. Las 10 comprobaciones se cumplirán.
+
+**Incertidumbre:** si todas las rondas se quedan en ~2 s, el punto 1 es falso y las rondas lentas de esta página también venían del reloj.
+
+**Resultado:** tres ejecuciones el 26 de noviembre de 2026, Ray 2.58.0, Python 3.12.3, WSL2, con el reloj comprobado antes y después de cada una (a lo sumo un salto de ~1 s en 10 s). **10/10 en las ejecuciones 1 y 3 y 9/10 en la 2** (explicado abajo).
+
+| Medida | 25 nov. (Ej. 1 / 2 / 3) | 26 nov., reloj estable (Ej. 1 / 2 / 3) |
+|---|---|---|
+| Ronda de consulta más lenta (plazo: 2 s) | 10,6 / 8,5 / 9,8 s | **2,002 / 2,001 / 2,002 s** |
+| Sospecha (`UNKNOWN`) | 9,7 / 9,5 / 2,1 s | 2,3 / 2,3 / 2,4 s |
+| `FAILED` | 14,8 / 18,4 / 14,9 s | **6,3 / 6,3 / 6,4 s**, siempre por decisión del controlador |
+| Respuestas `ActorUnavailableError` | 0 / 0 / 2 | 6 / 6 / 6 |
+| Reemplazos que fallaron y hubo que reemplazar | 0 / 2 / 2 | 0 / 2 / 0 |
+| De la entrada del nodo nuevo a la recuperación | 1,4 / **84,3 / 88,7 s** | **1,5 / 1,7 / 1,4 s** |
+| Procesos perdidos vivos cuando corrían sus reemplazos | ninguno | ninguno |
+
+**La comprobación que falló en la ejecución 2** fue "sin capacidad, los reemplazos esperan en `PENDING` sin multiplicarse": `PENDING` pasó de 2 a 0 en el último ciclo observado. Los reemplazos se habían asignado al nodo perdido, y esta vez Ray declaró muerto ese nodo **a los 14,8 s**, mientras se observaba la espera. Los reemplazos fallaron entonces, antes de que entrara el nodo nuevo. No se multiplicó nada (6 intentos en todos los ciclos) y en cuanto entró el nodo nuevo se reemplazaron y funcionaron en 1,7 s. Es la comprobación la que supone que la espera dura todo el periodo observado; no se ha cambiado a posteriori, para no ajustar el criterio al resultado.
+
+**Comparación con la predicción de la repetición:**
+
+| # | Predicción | Observado | ¿Coincide? |
+|---|---|---|---|
+| 1 | Las rondas seguirán superando el plazo | Ninguna pasó de 2,002 s | **No** |
+| 2 | Se mantendrá el retraso de ~85 s cuando decide el controlador | El controlador decidió primero en las tres, y la recuperación tardó ~1,5 s | **No** |
+| 3 | 10 comprobaciones en todas | 10, 9 y 10 | En parte |
+
+**Qué cambia en las conclusiones de esta página:**
+
+- **Las rondas largas y el retraso de ~85 s no son propios de Ray**: con el reloj estable no aparecen. La explicación más probable es que el detector de fallos de Ray (latidos con plazos) y `ray.wait` se desajustan cuando el reloj salta. No se puede demostrar que el reloj saltara el 25 de noviembre, porque entonces no se comprobaba, pero es el único cambio entre las dos tandas.
+- **Sigue en pie la membresía desactualizada, aunque mucho más breve:** en la ejecución 2 los reemplazos se asignaron al nodo muerto, porque Ray todavía no lo había declarado muerto, y fallaron a los ~8 s de pedirse. Con el reloj estable, Ray declara muerto el nodo en ~15 s y el coste es un reemplazo de más, no 85 s.
+- **Sigue en pie todo lo demás:** el objetivo no cambia, el otro nodo no se entera, nunca hay dos procesos para una réplica y los reemplazos esperan sin multiplicarse.
+- **Ray contesta `ActorUnavailableError` a los actores del nodo perdido** (6 veces en cada ejecución), y el controlador lo trata como incertidumbre, sin reemplazar en el acto. Como esa respuesta llega antes que el plazo, el abandono llega algo antes (6,3 s) que en [F3](F3.md) (7,0 s).
+- **Lo que implica para la versión nativa no cambia:** la detección de fallos de nodo debe ser propia y el planificador debe usar la misma información de membresía que la detección. Además, **sus plazos deben medirse con relojes monotónicos**, porque un reloj que salta engaña a cualquier detector basado en tiempos.

@@ -22,10 +22,10 @@ AI_USE.md             declaración de uso de asistentes de IA
 | Documento | Contenido |
 |---|---|
 | [Arquitectura](Ray-Phase1/docs/ARCHITECTURE.md) | Componentes, componentes de Ray de los que dependen, dueño de cada estado y ciclo de control |
-| [Contrato v1.0](Ray-Phase1/docs/CONTRACT.md) | Operaciones, especificación, estados, errores y garantías (congelado) |
+| [Contrato v1.1](Ray-Phase1/docs/CONTRACT.md) | Operaciones, especificación, estados, errores y garantías (congelado) |
 | [Mapa de dependencias](Ray-Phase1/docs/DEPENDENCY_MAP.md) | Qué hace Ray por nosotros y qué tendrá que decidir la versión nativa |
 | [Cierre de la fase Ray](Ray-Phase1/docs/PHASE1_SUMMARY.md) | Entregables, semántica de fallos observada y preguntas abiertas |
-| [Escenarios](Ray-Phase1/docs/SCENARIOS.md) | Catálogo completo de escenarios de fallo: ejecutados, pendientes y no aplicables, con su justificación |
+| [Escenarios](Ray-Phase1/docs/SCENARIOS.md) | Catálogo completo de escenarios de fallo: ejecutados y no aplicables, con su justificación |
 | [F0](Ray-Phase1/docs/F0.md), [F1](Ray-Phase1/docs/F1.md), [caída de un nodo](Ray-Phase1/docs/F1_NODE.md), [F2](Ray-Phase1/docs/F2.md), [F3](Ray-Phase1/docs/F3.md), [F4](Ray-Phase1/docs/F4.md), [F7](Ray-Phase1/docs/F7.md), [F8](Ray-Phase1/docs/F8.md), [F9](Ray-Phase1/docs/F9.md), [F16](Ray-Phase1/docs/F16.md), [F17](Ray-Phase1/docs/F17.md) | Referencia normal, caída de un proceso, caída de un nodo, caída y reinicio del controlador, proceso que deja de responder, pérdida de respuestas de salud, pausa temporal, respuesta perdida, petición duplicada, sobrecarga y amplificación de reintentos, con su [evidencia](Ray-Phase1/docs/evidence/) |
 
 ## Requisitos
@@ -70,3 +70,5 @@ python experiments/overload.py                    # muchas más réplicas que CP
 ```
 
 Cada script imprime sus comprobaciones (`[OK]` o `[FAIL]`) y termina con código 1 si alguna falla. Con `--output` guarda los resultados en JSON y, donde existe, `--events` guarda el historial de eventos en JSONL. Entre ejecuciones conviene hacer `ray stop --force`.
+
+**Antes de medir tiempos, comprueba el reloj de WSL.** Si el reloj de Windows está desincronizado, el de WSL salta (se observaron saltos de ±35 s) y Ray alarga las esperas mucho más allá de su plazo, lo que falsea los resultados. Sincroniza Windows (*Configuración → Hora e idioma → Sincronizar ahora*) y comprueba durante al menos dos minutos que `time.time()` y `time.monotonic()` avanzan igual.

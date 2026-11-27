@@ -9,8 +9,8 @@ Resumen de lo que entrega el prototipo, las respuestas que pide la metodología 
 | Prototipo funcional con Ray | 7 % | Código en [`Ray-Phase1/`](..); cómo ejecutarlo en el [README](../../README.md) |
 | Diagrama de arquitectura | 5 % (con el mapa) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Mapa de dependencias del middleware | | [DEPENDENCY_MAP.md](DEPENDENCY_MAP.md) |
-| Contrato externo congelado | | [CONTRACT.md](CONTRACT.md) (v1.0) |
-| Experimento inicial | 3 % | [F1](F1.md) (caída de un actor), [F3](F3.md) (proceso que deja de responder) y la referencia [F0](F0.md), con su [evidencia](evidence/) |
+| Contrato externo congelado | | [CONTRACT.md](CONTRACT.md) (v1.1) |
+| Experimento inicial | 3 % | [F1](F1.md) (caída de un actor), [F3](F3.md) (proceso que deja de responder) y la referencia [F0](F0.md), con su [evidencia](evidence/). Los demás escenarios ejecutados están en [SCENARIOS.md](SCENARIOS.md) |
 
 Estado verificado: 64 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `two_instances` 8/8, `scale_sequence` 8/8, `placement_check` 6/6, `fault_recovery --fault crash` 10/10, `fault_recovery --fault hang` 12/12, `node_failure` 10/10, `retry_amplification` 7/7, `controller_restart` 5/5, `message_loss` 6/6, `temporary_stall` 7/7, `lost_response` 7/7, `duplicate_requests` 7/7 y `overload` 7/7. El recorrido completo del catálogo de escenarios está en [SCENARIOS.md](SCENARIOS.md).
 
@@ -20,7 +20,7 @@ Estado verificado: 64 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `t
 Mantener un número deseado de instancias de una carga de larga duración, con recursos y ubicación declarados, a pesar de que los procesos fallen o se cuelguen: compara continuamente el objetivo con lo observado y crea o detiene intentos para acercarlos.
 
 **¿Qué comportamiento debe sobrevivir al rediseño?**
-Lo congelado en el [contrato v1.0](CONTRACT.md): las cuatro operaciones, la especificación, los seis estados y sus transiciones, los cuatro errores, las repeticiones seguras y las garantías mínimas (sección 5.1). Las limitaciones de la sección 5.2 no deben sobrevivir: la versión nativa tiene que superarlas.
+Lo congelado en el [contrato v1.1](CONTRACT.md): las cuatro operaciones, la especificación, los seis estados y sus transiciones, los cuatro errores, las repeticiones seguras y las garantías mínimas (sección 5.1). Las limitaciones de la sección 5.2 no deben sobrevivir: la versión nativa tiene que superarlas.
 
 **¿Qué viene de nuestro código?**
 Validar, guardar el objetivo separado de lo observado, decidir cada transición, no duplicar intentos pendientes, abandonar solo tras K consultas, registrar por qué existe cada intento y medir los tiempos. Detalle en la sección "Lo que no viene de Ray" del [mapa](DEPENDENCY_MAP.md).
@@ -44,7 +44,9 @@ Crear procesos y colocarlos según recursos y etiquetas, transportar llamadas y 
 | Una petición llega duplicada | Sin efecto si llega seguida; una copia tardía de `set_replicas` deshace un cambio posterior | [F9](F9.md) |
 | Más réplicas que capacidad | Pendientes acotados, pero cada ronda espera el plazo completo por ellos: ciclo de ~2,5 s | [F16](F16.md) |
 
-**Supuesto, no observado:** el manejo de `ActorUnavailableError` (Ray nunca lo emitió) y los fallos de red reales; la pérdida de mensajes de F4 es simulada en el lado del controlador.
+**Supuesto, no observado:** los fallos de red reales; la pérdida de mensajes de F4 y las respuestas perdidas o duplicadas de F8 y F9 son simuladas. `ActorUnavailableError` sí se observó: Ray lo emitió para los actores de un nodo perdido ([caída de un nodo](F1_NODE.md), repetición con el reloj estable) y el controlador lo trató como incertidumbre.
+
+**Validez de los tiempos:** las medidas solo valen con el reloj de WSL estable. Con el reloj de Windows desincronizado, el de WSL saltaba ±35 s y Ray alargaba las rondas de consulta hasta ~10 s; las ejecuciones afectadas se repitieron ([F3](F3.md), [caída de un nodo](F1_NODE.md)).
 
 ## Lista de comprobación de la lección
 

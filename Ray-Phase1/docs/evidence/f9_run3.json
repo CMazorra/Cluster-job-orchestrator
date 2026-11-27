@@ -1,0 +1,599 @@
+{
+  "meta": {
+    "mode": "local cluster (4 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 4960,
+    "driver_node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+    "cluster_resources": {
+      "memory": 4303254324.0,
+      "GPU": 1.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "CPU": 4.0,
+      "node:__internal_head__": 1.0,
+      "object_store_memory": 1844251852.0,
+      "node:172.25.118.49": 1.0
+    },
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0
+  },
+  "steps": [
+    {
+      "step": "submit_job twice",
+      "answers": [
+        "dup-demo",
+        "dup-demo"
+      ],
+      "desired_replicas": 2,
+      "running": 2,
+      "alive_in_ray": 2,
+      "settled": true,
+      "attempts_requested_so_far": 2,
+      "attempts_requested_by_step": 2
+    },
+    {
+      "step": "set_replicas(3) twice",
+      "answers": [
+        3,
+        3
+      ],
+      "desired_replicas": 3,
+      "running": 3,
+      "alive_in_ray": 3,
+      "settled": true,
+      "attempts_requested_so_far": 3,
+      "attempts_requested_by_step": 1
+    },
+    {
+      "step": "same ID, different spec",
+      "answers": [
+        "JOB_ALREADY_EXISTS"
+      ],
+      "desired_replicas": 3,
+      "running": 3,
+      "alive_in_ray": 3,
+      "settled": true,
+      "attempts_requested_so_far": 3,
+      "attempts_requested_by_step": 0
+    },
+    {
+      "step": "set_replicas(4) then set_replicas(1)",
+      "answers": [
+        4,
+        1
+      ],
+      "desired_replicas": 1,
+      "running": 1,
+      "alive_in_ray": 1,
+      "settled": true,
+      "attempts_requested_so_far": 3,
+      "attempts_requested_by_step": 0
+    },
+    {
+      "step": "late copy of set_replicas(4) arrives",
+      "answers": [
+        4
+      ],
+      "desired_replicas": 4,
+      "running": 4,
+      "alive_in_ray": 4,
+      "settled": true,
+      "attempts_requested_so_far": 6,
+      "attempts_requested_by_step": 3
+    },
+    {
+      "step": "stop_job twice",
+      "answers": [
+        0,
+        0
+      ],
+      "desired_replicas": 0,
+      "running": 0,
+      "alive_in_ray": 0,
+      "settled": true,
+      "attempts_requested_so_far": 6,
+      "attempts_requested_by_step": 0
+    },
+    {
+      "step": "late copy of the original submit after the stop",
+      "answers": [
+        "dup-demo"
+      ],
+      "desired_replicas": 0,
+      "running": 0,
+      "alive_in_ray": 0,
+      "settled": true,
+      "attempts_requested_so_far": 6,
+      "attempts_requested_by_step": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "a duplicated submit registers one job and starts its replicas once",
+      "ok": true,
+      "detail": "job_submitted 1, attempts 2"
+    },
+    {
+      "name": "a duplicated set_replicas changes the goal once and starts no extra attempt",
+      "ok": true,
+      "detail": "attempts 1"
+    },
+    {
+      "name": "a different spec under the same ID is rejected and changes nothing",
+      "ok": true,
+      "detail": "['JOB_ALREADY_EXISTS']"
+    },
+    {
+      "name": "after every step the goal is met and Ray runs exactly that many actors",
+      "ok": true,
+      "detail": "[(2, 2, 2), (3, 3, 3), (3, 3, 3), (1, 1, 1), (4, 4, 4), (0, 0, 0), (0, 0, 0)]"
+    },
+    {
+      "name": "a late duplicate of set_replicas undoes the newer goal (no request IDs: the last arrival wins)",
+      "ok": true,
+      "detail": "goal 4, attempts started again 3"
+    },
+    {
+      "name": "a late duplicate of the original submit does not restart a stopped job",
+      "ok": true,
+      "detail": "goal 0"
+    },
+    {
+      "name": "the job stops cleanly",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-27T01:10:40.022Z",
+      "m": 550.021074,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "submit_job",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:40.024Z",
+      "m": 550.022902,
+      "event": "job_submitted",
+      "job_id": "dup-demo",
+      "spec": {
+        "job_id": "dup-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-27T01:10:40.024Z",
+      "m": 550.022923,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "submit_job",
+      "copy": 2
+    },
+    {
+      "t": "2026-11-27T01:10:40.024Z",
+      "m": 550.022966,
+      "event": "job_submit_repeated",
+      "job_id": "dup-demo"
+    },
+    {
+      "t": "2026-11-27T01:10:40.024Z",
+      "m": 550.023045,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-27T01:10:40.024Z",
+      "m": 550.023055,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-27T01:10:40.919Z",
+      "m": 550.918066,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5596,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 1
+    },
+    {
+      "t": "2026-11-27T01:10:40.919Z",
+      "m": 550.918093,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5594,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 1
+    },
+    {
+      "t": "2026-11-27T01:10:50.888Z",
+      "m": 559.884677,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "set_replicas",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:50.888Z",
+      "m": 559.884695,
+      "event": "replicas_set",
+      "job_id": "dup-demo",
+      "from_replicas": 2,
+      "replicas": 3
+    },
+    {
+      "t": "2026-11-27T01:10:50.888Z",
+      "m": 559.8847,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "set_replicas",
+      "copy": 2
+    },
+    {
+      "t": "2026-11-27T01:10:50.891Z",
+      "m": 559.887417,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "progress": 90
+    },
+    {
+      "t": "2026-11-27T01:10:50.891Z",
+      "m": 559.887428,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "progress": 91
+    },
+    {
+      "t": "2026-11-27T01:10:50.891Z",
+      "m": 559.88745,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/3",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-27T01:10:51.397Z",
+      "m": 560.393493,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "progress": 95
+    },
+    {
+      "t": "2026-11-27T01:10:51.397Z",
+      "m": 560.393504,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "progress": 96
+    },
+    {
+      "t": "2026-11-27T01:10:51.397Z",
+      "m": 560.393521,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5595,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-27T01:10:51.409Z",
+      "m": 560.406108,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "submit_job",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:51.412Z",
+      "m": 560.408741,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "progress": 96
+    },
+    {
+      "t": "2026-11-27T01:10:51.422Z",
+      "m": 560.418339,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "set_replicas",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:51.422Z",
+      "m": 560.418351,
+      "event": "replicas_set",
+      "job_id": "dup-demo",
+      "from_replicas": 3,
+      "replicas": 4
+    },
+    {
+      "t": "2026-11-27T01:10:51.422Z",
+      "m": 560.418357,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "set_replicas",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:51.422Z",
+      "m": 560.418361,
+      "event": "replicas_set",
+      "job_id": "dup-demo",
+      "from_replicas": 4,
+      "replicas": 1
+    },
+    {
+      "t": "2026-11-27T01:10:51.424Z",
+      "m": 560.420597,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:51.424Z",
+      "m": 560.420609,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:51.927Z",
+      "m": 560.923563,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "progress": 101
+    },
+    {
+      "t": "2026-11-27T01:10:51.927Z",
+      "m": 560.923583,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:51.927Z",
+      "m": 560.923589,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:51.933Z",
+      "m": 560.929614,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "set_replicas",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:51.933Z",
+      "m": 560.929622,
+      "event": "replicas_set",
+      "job_id": "dup-demo",
+      "from_replicas": 1,
+      "replicas": 4
+    },
+    {
+      "t": "2026-11-27T01:10:51.934Z",
+      "m": 560.930994,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/4",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-27T01:10:51.934Z",
+      "m": 560.931002,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/5",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-27T01:10:51.934Z",
+      "m": 560.931006,
+      "event": "instance_requested",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/6",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-27T01:10:52.443Z",
+      "m": 561.440193,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "progress": 106
+    },
+    {
+      "t": "2026-11-27T01:10:52.443Z",
+      "m": 561.44025,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/4",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5597,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-27T01:10:52.444Z",
+      "m": 561.44027,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/5",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5820,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-27T01:10:52.444Z",
+      "m": 561.440278,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/6",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 5821,
+      "node_id": "a0b9b3f66c7c3b9e290b6697925a6d299835a47721c80e5d154d136f",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-27T01:10:52.453Z",
+      "m": 561.449989,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "stop_job",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:52.453Z",
+      "m": 561.45,
+      "event": "replicas_set",
+      "job_id": "dup-demo",
+      "from_replicas": 4,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-27T01:10:52.453Z",
+      "m": 561.450003,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "stop_job",
+      "copy": 2
+    },
+    {
+      "t": "2026-11-27T01:10:52.456Z",
+      "m": 561.453261,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/6",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:52.457Z",
+      "m": 561.453293,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/5",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:52.457Z",
+      "m": 561.453298,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/4",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:52.457Z",
+      "m": 561.453304,
+      "event": "instance_decision",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-27T01:10:52.960Z",
+      "m": 561.956896,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/1",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:52.960Z",
+      "m": 561.956906,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/4",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:52.960Z",
+      "m": 561.956911,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/5",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:52.960Z",
+      "m": 561.956915,
+      "event": "instance_observed",
+      "job_id": "dup-demo",
+      "instance_id": "dup-demo/6",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-27T01:10:52.966Z",
+      "m": 561.96317,
+      "event": "annotation",
+      "kind": "request_delivered",
+      "operation": "submit_job",
+      "copy": 1
+    },
+    {
+      "t": "2026-11-27T01:10:52.966Z",
+      "m": 561.9632,
+      "event": "job_submit_repeated",
+      "job_id": "dup-demo"
+    }
+  ]
+}

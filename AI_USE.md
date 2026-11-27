@@ -17,7 +17,7 @@ ai_use:
   verification:
     - unit tests with python -m unittest (64 cases, no Ray needed)
     - experiments against real Ray 2.58.0 in WSL2, three runs per fault scenario
-    - fault scenarios checked against predictions written before running (F1, F2, F3, F4, F17, node failure)
+    - fault scenarios checked against predictions written before running (F1, F2, F3, F4, F7, F8, F9, F16, F17, node failure)
     - Ray's state API used as an independent source for process identity and liveness
     - manual review against the course documents
   not_verified:

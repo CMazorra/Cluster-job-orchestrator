@@ -6,8 +6,7 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 
 | Estado | Escenarios |
 |---|---|
-| ✅ Ejecutados | F0, F1, caída de un nodo, F2, F3, F4, F17 |
-| 🔜 Aplican y están pendientes | F7, F8, F9, F16 |
+| ✅ Ejecutados | F0, F1, caída de un nodo, F2, F3, F4, F7, F8, F9, F16, F17 |
 | ➖ No aplican en esta fase | F5, F6, F10–F15, F18–F21 |
 
 ## Ejecutados
@@ -20,22 +19,17 @@ Recorrido completo del catálogo de escenarios del curso (F0–F21) frente a lo 
 | **F2** Caída y reinicio del controlador | [F2.md](F2.md) | 5/5 en tres ejecuciones | Ray destruye las instancias ~17 ms después de caer el controlador; el controlador reiniciado responde `JOB_NOT_FOUND`; solo reenviar el trabajo lo restaura (~1,9 s) y los IDs de intento se reutilizan. Es la limitación de durabilidad del [contrato](CONTRACT.md) (5.2), ahora con evidencia |
 | **F3** Proceso lento o colgado | [F3.md](F3.md) | 12/12 en tres ejecuciones | Sospecha a los 2 s y abandono a los 7 s, tras exactamente K = 3 consultas; nunca dos procesos para una réplica |
 | **F4** Pérdida de respuestas de salud | [F4.md](F4.md) | 6/6 en seis ejecuciones (p = 0,1 y p = 0,3) | El 94 % de las sospechas se aclara sin reemplazo; nunca más intentos que réplicas. Aun así, con K = 3 y un 30 % de pérdida hay un abandono falso cada ~25 s por réplica (11 observados frente a ~14 esperados), que mata un proceso sano |
+| **F7** Reparación tras una pausa | [F7.md](F7.md) | 7/7 en tres ejecuciones | Frontera exacta en K·plazo + (K − 1)·ciclo = 7 s: pausas de 4 y 6 s solo producen sospecha y el proceso conserva su contador; una de 12 s se abandona a los 7,0 s, con un reemplazo. Un reloj desincronizado alargaba las rondas de consulta hasta 10 s |
+| **F8** Respuesta perdida tras un efecto | [F8.md](F8.md) | 7/7 en tres ejecuciones | Repetir la misma petición es seguro: un trabajo y ningún actor duplicado. Un cliente que recalcula su petición tras perder la respuesta aplica el cambio dos veces (pidió 4, obtuvo 6) |
+| **F9** Petición duplicada | [F9.md](F9.md) | 7/7 en tres ejecuciones | Los duplicados inmediatos no tienen efecto; una copia tardía de `set_replicas` deshace un cambio posterior y arranca 3 procesos (no hay ID de petición ni versión) |
+| **F16** Sobrecarga | [F16.md](F16.md) | 7/7 en tres ejecuciones | 36 pendientes sin crecimiento y nunca tomados por procesos sin respuesta. Pero cada ronda espera el plazo completo por ellos: el ciclo pasa de 0,5 s a ~2,5 s y se retrasa la detección de fallos |
 | **F17** Amplificación de reintentos | [F17.md](F17.md) | 7/7 en tres ejecuciones (y 6/6 sin la corrección, como comparación) | Sin control, una carga que se cae al arrancar provocaba 53 reemplazos en 30 s; con la espera creciente añadida al dominio, 5. A cambio, la recuperación tras arreglar el fallo tarda lo que quede de la espera en curso |
-
-## Aplican y están pendientes
-
-| Escenario | Qué probaría en el prototipo | Qué se espera |
-|---|---|---|
-| **F7** Reparación y reconciliación | Un proceso deja de responder durante un tiempo y vuelve | Si vuelve antes de K consultas, sigue sin reemplazo; si vuelve después, ya fue reemplazado y su respuesta tardía se ignora |
-| **F8** Respuesta perdida tras un efecto | El cliente pierde la respuesta de `submit_job`, `set_replicas` o `stop_job` y reintenta | Un solo trabajo y ningún actor duplicado |
-| **F9** Petición duplicada | La misma operación llega dos veces | Sin efectos dobles: las operaciones son idempotentes por contrato |
-| **F16** Sobrecarga | Muchas más réplicas que capacidad | Intentos pendientes acotados y sin crecimiento; se medirá el coste de cada ciclo con muchos pendientes |
 
 ## No aplican en esta fase
 
 | Escenario | Por qué no aplica | ¿Cuándo aplicará? |
 |---|---|---|
-| **F5/F6** Partición de red (minoritaria o simétrica) | Todo corre en una máquina y Ray hace el transporte: no hay una red propia que cortar. La parte de "corte temporal" que sí aplica la cubre F7 | En la versión nativa, con nodos en contenedores y redes separadas |
+| **F5/F6** Partición de red (minoritaria o simétrica) | Todo corre en una máquina y Ray hace el transporte: no hay una red propia que cortar. La parte de "corte temporal" que sí aplica la cubre [F7](F7.md) | En la versión nativa, con nodos en contenedores y redes separadas |
 | **F10** Descubrimiento obsoleto | No hay un mecanismo de descubrimiento propio: lo resuelve Ray. Se observó de forma indirecta en la [caída de un nodo](F1_NODE.md), donde la información de membresía desactualizada de Ray retrasó la recuperación | En la versión nativa, con registro y arrendamientos propios |
 | **F11** Lectura obsoleta de una réplica | Hay una sola copia del estado | En la versión nativa, al replicar el controlador |
 | **F12** Escrituras concurrentes en conflicto | Las operaciones se procesan en secuencia por contrato | En la versión nativa, con clientes concurrentes |

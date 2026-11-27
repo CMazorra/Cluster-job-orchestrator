@@ -12,7 +12,7 @@ Resumen de lo que entrega el prototipo, las respuestas que pide la metodología 
 | Contrato externo congelado | | [CONTRACT.md](CONTRACT.md) (v1.0) |
 | Experimento inicial | 3 % | [F1](F1.md) (caída de un actor), [F3](F3.md) (proceso que deja de responder) y la referencia [F0](F0.md), con su [evidencia](evidence/) |
 
-Estado verificado: 64 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `two_instances` 8/8, `scale_sequence` 8/8, `placement_check` 6/6, `fault_recovery --fault crash` 10/10, `fault_recovery --fault hang` 12/12, `node_failure` 10/10, `retry_amplification` 7/7, `controller_restart` 5/5 y `message_loss` 6/6. El recorrido completo del catálogo de escenarios está en [SCENARIOS.md](SCENARIOS.md).
+Estado verificado: 64 pruebas unitarias en OK y, con Ray 2.58.0 real en WSL2, `two_instances` 8/8, `scale_sequence` 8/8, `placement_check` 6/6, `fault_recovery --fault crash` 10/10, `fault_recovery --fault hang` 12/12, `node_failure` 10/10, `retry_amplification` 7/7, `controller_restart` 5/5, `message_loss` 6/6, `temporary_stall` 7/7, `lost_response` 7/7, `duplicate_requests` 7/7 y `overload` 7/7. El recorrido completo del catálogo de escenarios está en [SCENARIOS.md](SCENARIOS.md).
 
 ## Preguntas de salida
 
@@ -39,6 +39,10 @@ Crear procesos y colocarlos según recursos y etiquetas, transportar llamadas y 
 | Estado local de una instancia | Se pierde siempre con su proceso | F1, F3 |
 | Cae el controlador | Ray destruye todas las instancias en ~17 ms; el controlador reiniciado no conoce el trabajo; solo el cliente lo restaura reenviándolo | [F2](F2.md) |
 | Se pierden respuestas de salud | Las sospechas sueltas se aclaran solas; con K = 3 y un 30 % de pérdida, un abandono falso cada ~25 s por réplica, sin superar nunca el objetivo | [F4](F4.md) |
+| Un proceso deja de responder un tiempo y vuelve | Hasta 7 s (K·plazo + (K − 1)·ciclo) solo hay sospecha y conserva su estado; más, se abandona y se reemplaza | [F7](F7.md) |
+| El cliente pierde una respuesta y reintenta | Repetir la misma petición es seguro; recalcularla aplica el cambio dos veces | [F8](F8.md) |
+| Una petición llega duplicada | Sin efecto si llega seguida; una copia tardía de `set_replicas` deshace un cambio posterior | [F9](F9.md) |
+| Más réplicas que capacidad | Pendientes acotados, pero cada ronda espera el plazo completo por ellos: ciclo de ~2,5 s | [F16](F16.md) |
 
 **Supuesto, no observado:** el manejo de `ActorUnavailableError` (Ray nunca lo emitió) y los fallos de red reales; la pérdida de mensajes de F4 es simulada en el lado del controlador.
 

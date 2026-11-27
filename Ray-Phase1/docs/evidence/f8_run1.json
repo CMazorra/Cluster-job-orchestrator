@@ -1,0 +1,990 @@
+{
+  "meta": {
+    "mode": "local cluster (8 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 1974,
+    "driver_node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+    "cluster_resources": {
+      "object_store_memory": 1849588531.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "GPU": 1.0,
+      "node:172.25.118.49": 1.0,
+      "CPU": 8.0,
+      "node:__internal_head__": 1.0,
+      "memory": 4315706573.0
+    },
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_retries": 3
+  },
+  "steps": [
+    {
+      "step": "submit_job, response lost once",
+      "job_id": "retry-demo",
+      "sends": 2,
+      "answer": "retry-demo",
+      "desired_replicas": 2,
+      "running": 2,
+      "alive_in_ray": 2,
+      "settled": true
+    },
+    {
+      "step": "set_replicas(4), retried after the change was applied",
+      "job_id": "retry-demo",
+      "sends": 2,
+      "answer": 4,
+      "desired_replicas": 4,
+      "running": 4,
+      "alive_in_ray": 4,
+      "settled": true
+    },
+    {
+      "step": "set_replicas(3), response lost twice",
+      "job_id": "retry-demo",
+      "sends": 3,
+      "answer": 3,
+      "desired_replicas": 3,
+      "running": 3,
+      "alive_in_ray": 3,
+      "settled": true
+    },
+    {
+      "step": "submit_job repeated after the goal changed",
+      "job_id": "retry-demo",
+      "sends": 2,
+      "answer": "retry-demo",
+      "desired_replicas": 3,
+      "running": 3,
+      "alive_in_ray": 3,
+      "settled": true
+    },
+    {
+      "step": "stop_job, response lost once",
+      "job_id": "retry-demo",
+      "sends": 2,
+      "answer": 0,
+      "desired_replicas": 0,
+      "running": 0,
+      "alive_in_ray": 0,
+      "settled": true
+    },
+    {
+      "step": "recompute client: +2 replicas, response lost once",
+      "job_id": "recompute-demo",
+      "sends": 2,
+      "answer": 6,
+      "desired_replicas": 6,
+      "running": 6,
+      "alive_in_ray": 6,
+      "settled": true
+    }
+  ],
+  "calls": [
+    {
+      "operation": "submit_job",
+      "args": [
+        {
+          "job_id": "retry-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      ],
+      "result": "retry-demo",
+      "response_lost": true
+    },
+    {
+      "operation": "submit_job",
+      "args": [
+        {
+          "job_id": "retry-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      ],
+      "result": "retry-demo",
+      "response_lost": false
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "retry-demo",
+        4
+      ],
+      "result": 4,
+      "response_lost": true
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "retry-demo",
+        4
+      ],
+      "result": 4,
+      "response_lost": false
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "retry-demo",
+        3
+      ],
+      "result": 3,
+      "response_lost": true
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "retry-demo",
+        3
+      ],
+      "result": 3,
+      "response_lost": true
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "retry-demo",
+        3
+      ],
+      "result": 3,
+      "response_lost": false
+    },
+    {
+      "operation": "submit_job",
+      "args": [
+        {
+          "job_id": "retry-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      ],
+      "result": "retry-demo",
+      "response_lost": true
+    },
+    {
+      "operation": "submit_job",
+      "args": [
+        {
+          "job_id": "retry-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      ],
+      "result": "retry-demo",
+      "response_lost": false
+    },
+    {
+      "operation": "stop_job",
+      "args": [
+        "retry-demo"
+      ],
+      "result": 0,
+      "response_lost": true
+    },
+    {
+      "operation": "stop_job",
+      "args": [
+        "retry-demo"
+      ],
+      "result": 0,
+      "response_lost": false
+    },
+    {
+      "operation": "submit_job",
+      "args": [
+        {
+          "job_id": "recompute-demo",
+          "workload": {
+            "entrypoint": "ticker",
+            "args": {
+              "interval_ms": 100
+            }
+          },
+          "replicas": 2,
+          "resources": {
+            "cpu": 1
+          }
+        }
+      ],
+      "result": "recompute-demo",
+      "response_lost": false
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "recompute-demo",
+        4
+      ],
+      "result": 4,
+      "response_lost": true
+    },
+    {
+      "operation": "set_replicas",
+      "args": [
+        "recompute-demo",
+        6
+      ],
+      "result": 6,
+      "response_lost": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "one job per submitted ID, however many times the submit was sent",
+      "ok": true,
+      "detail": "job_submitted ['retry-demo', 'recompute-demo'], repeated submits 3"
+    },
+    {
+      "name": "every retry got the same answer as the lost one",
+      "ok": true,
+      "detail": "14 calls, 7 responses lost"
+    },
+    {
+      "name": "after each absolute retry the goal is the one asked, and Ray runs that many actors",
+      "ok": true,
+      "detail": "[(2, 2, 2), (4, 4, 4), (3, 3, 3), (3, 3, 3), (0, 0, 0)]"
+    },
+    {
+      "name": "a late repeated submit does not reset the goal",
+      "ok": true,
+      "detail": "goal after the late submit 3"
+    },
+    {
+      "name": "no attempt is started twice: only the scale-ups requested attempts, none was a replacement",
+      "ok": true,
+      "detail": "4 attempts requested, 0 replacements"
+    },
+    {
+      "name": "the recompute client applies its change twice (the pattern the contract avoids)",
+      "ok": true,
+      "detail": "wanted 4, got 6"
+    },
+    {
+      "name": "the jobs stop cleanly",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.000926,
+      "event": "job_submitted",
+      "job_id": "retry-demo",
+      "spec": {
+        "job_id": "retry-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.00094,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "submit_job",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.000963,
+      "event": "job_submit_repeated",
+      "job_id": "retry-demo"
+    },
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.000968,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "submit_job",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.001004,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:56:43.410Z",
+      "m": 1169.001011,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:56:43.999Z",
+      "m": 1169.590101,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2607,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:43.999Z",
+      "m": 1169.590115,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2606,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:52.549Z",
+      "m": 1178.140345,
+      "event": "replicas_set",
+      "job_id": "retry-demo",
+      "from_replicas": 2,
+      "replicas": 4
+    },
+    {
+      "t": "2026-11-26T18:56:52.549Z",
+      "m": 1178.140353,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:52.551Z",
+      "m": 1178.141718,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "progress": 89
+    },
+    {
+      "t": "2026-11-26T18:56:52.551Z",
+      "m": 1178.141727,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 89
+    },
+    {
+      "t": "2026-11-26T18:56:52.551Z",
+      "m": 1178.141744,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:52.551Z",
+      "m": 1178.141749,
+      "event": "instance_requested",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:53.060Z",
+      "m": 1178.651498,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "progress": 94
+    },
+    {
+      "t": "2026-11-26T18:56:53.060Z",
+      "m": 1178.651507,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 94
+    },
+    {
+      "t": "2026-11-26T18:56:53.060Z",
+      "m": 1178.651519,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2610,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:53.060Z",
+      "m": 1178.651524,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2608,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:53.060Z",
+      "m": 1178.651573,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:53.070Z",
+      "m": 1178.661184,
+      "event": "replicas_set",
+      "job_id": "retry-demo",
+      "from_replicas": 4,
+      "replicas": 3
+    },
+    {
+      "t": "2026-11-26T18:56:53.070Z",
+      "m": 1178.661192,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:53.070Z",
+      "m": 1178.661198,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:53.070Z",
+      "m": 1178.661201,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:53.073Z",
+      "m": 1178.664201,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:53.575Z",
+      "m": 1179.166659,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "progress": 99
+    },
+    {
+      "t": "2026-11-26T18:56:53.575Z",
+      "m": 1179.166668,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "progress": 99
+    },
+    {
+      "t": "2026-11-26T18:56:53.575Z",
+      "m": 1179.166672,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "progress": 9
+    },
+    {
+      "t": "2026-11-26T18:56:53.575Z",
+      "m": 1179.166684,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/4",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:53.582Z",
+      "m": 1179.173007,
+      "event": "job_submit_repeated",
+      "job_id": "retry-demo"
+    },
+    {
+      "t": "2026-11-26T18:56:53.582Z",
+      "m": 1179.173017,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "submit_job",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:53.582Z",
+      "m": 1179.173033,
+      "event": "job_submit_repeated",
+      "job_id": "retry-demo"
+    },
+    {
+      "t": "2026-11-26T18:56:53.582Z",
+      "m": 1179.173036,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "submit_job",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:53.590Z",
+      "m": 1179.180988,
+      "event": "replicas_set",
+      "job_id": "retry-demo",
+      "from_replicas": 3,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-26T18:56:53.590Z",
+      "m": 1179.180996,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "stop_job",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:53.590Z",
+      "m": 1179.181003,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "stop_job",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:53.592Z",
+      "m": 1179.182829,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:53.592Z",
+      "m": 1179.182836,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:53.592Z",
+      "m": 1179.182839,
+      "event": "instance_decision",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:54.094Z",
+      "m": 1179.684844,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/1",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:54.094Z",
+      "m": 1179.684853,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:54.094Z",
+      "m": 1179.684857,
+      "event": "instance_observed",
+      "job_id": "retry-demo",
+      "instance_id": "retry-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:54.099Z",
+      "m": 1179.690634,
+      "event": "job_submitted",
+      "job_id": "recompute-demo",
+      "spec": {
+        "job_id": "recompute-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-26T18:56:54.099Z",
+      "m": 1179.690642,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "submit_job",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:54.099Z",
+      "m": 1179.690658,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:56:54.099Z",
+      "m": 1179.690662,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.197457,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2611,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.197469,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2609,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.19754,
+      "event": "replicas_set",
+      "job_id": "recompute-demo",
+      "from_replicas": 2,
+      "replicas": 4
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.197546,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": true
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.197557,
+      "event": "replicas_set",
+      "job_id": "recompute-demo",
+      "from_replicas": 4,
+      "replicas": 6
+    },
+    {
+      "t": "2026-11-26T18:56:54.606Z",
+      "m": 1180.197559,
+      "event": "annotation",
+      "kind": "client_call",
+      "operation": "set_replicas",
+      "response_lost": false
+    },
+    {
+      "t": "2026-11-26T18:56:54.608Z",
+      "m": 1180.199106,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/3",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:54.608Z",
+      "m": 1180.199114,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/4",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:54.608Z",
+      "m": 1180.199119,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/5",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:54.608Z",
+      "m": 1180.199123,
+      "event": "instance_requested",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/6",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.706608,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/1",
+      "progress": 9
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.706617,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/2",
+      "progress": 9
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.70663,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2613,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.706636,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/4",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 2612,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.706641,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/5",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3014,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-26T18:56:55.115Z",
+      "m": 1180.706645,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/6",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 3013,
+      "node_id": "c4b0554f3fda5c7578fb1ed8eae01428ba1aeb48682e4e5692f4d413",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-26T18:56:55.122Z",
+      "m": 1180.712922,
+      "event": "replicas_set",
+      "job_id": "recompute-demo",
+      "from_replicas": 6,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715427,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/5",
+      "progress": 1
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715453,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/6",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715457,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/5",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715461,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/4",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715463,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715466,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.124Z",
+      "m": 1180.715469,
+      "event": "instance_decision",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/1",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218812,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/1",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218822,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218826,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218829,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/4",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218832,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/5",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:55.628Z",
+      "m": 1181.218834,
+      "event": "instance_observed",
+      "job_id": "recompute-demo",
+      "instance_id": "recompute-demo/6",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

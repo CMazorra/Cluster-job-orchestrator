@@ -1,0 +1,855 @@
+{
+  "meta": {
+    "mode": "local cluster (4 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 1077,
+    "driver_node_id": "0f233aab9273ee34460ff82165c0f384dc4e523ce115845abe858770",
+    "cluster_resources": {
+      "node:__internal_head__": 1.0,
+      "GPU": 1.0,
+      "memory": 4311041639.0,
+      "CPU": 4.0,
+      "object_store_memory": 1847589273.0,
+      "node:172.25.118.49": 1.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0
+    },
+    "stalls_s": [
+      1.0,
+      4.0,
+      6.0,
+      12.0
+    ],
+    "give_up_bound_s": 7.0,
+    "replicas": 2,
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0,
+    "max_missed_probes": 3
+  },
+  "phases": [
+    {
+      "stall_s": 1.0,
+      "instance_id": "stall-demo/1",
+      "missed_probes": 0,
+      "suspected_after_s": null,
+      "cleared_after_s": null,
+      "given_up_after_s": null,
+      "final_state": "RUNNING",
+      "progress_before": 4,
+      "progress_after": 34,
+      "replacements": [],
+      "stale_reports_ignored": 0,
+      "expected_give_up": false
+    },
+    {
+      "stall_s": 4.0,
+      "instance_id": "stall-demo/1",
+      "missed_probes": 1,
+      "suspected_after_s": 2.001,
+      "cleared_after_s": 4.003,
+      "given_up_after_s": null,
+      "final_state": "RUNNING",
+      "progress_before": 34,
+      "progress_after": 94,
+      "replacements": [],
+      "stale_reports_ignored": 0,
+      "expected_give_up": false
+    },
+    {
+      "stall_s": 6.0,
+      "instance_id": "stall-demo/1",
+      "missed_probes": 2,
+      "suspected_after_s": 2.001,
+      "cleared_after_s": 6.002,
+      "given_up_after_s": null,
+      "final_state": "RUNNING",
+      "progress_before": 94,
+      "progress_after": 174,
+      "replacements": [],
+      "stale_reports_ignored": 0,
+      "expected_give_up": false
+    },
+    {
+      "stall_s": 12.0,
+      "instance_id": "stall-demo/1",
+      "missed_probes": 3,
+      "suspected_after_s": 2.001,
+      "cleared_after_s": null,
+      "given_up_after_s": 7.004,
+      "final_state": "FAILED",
+      "progress_before": 174,
+      "progress_after": 174,
+      "replacements": [
+        "stall-demo/3"
+      ],
+      "stale_reports_ignored": 0,
+      "expected_give_up": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "a stall shorter than the probe deadline goes unnoticed",
+      "ok": true,
+      "detail": "[(1.0, 0)]"
+    },
+    {
+      "name": "a stall that ends before the K-th missed probe is only a suspicion",
+      "ok": true,
+      "detail": "[(1.0, 0, 'RUNNING'), (4.0, 1, 'RUNNING'), (6.0, 2, 'RUNNING')]"
+    },
+    {
+      "name": "the attempt that came back kept its local counter",
+      "ok": true,
+      "detail": "[(1.0, 4, 34), (4.0, 34, 94), (6.0, 94, 174)]"
+    },
+    {
+      "name": "a longer stall is given up after exactly K missed probes and replaced once",
+      "ok": true,
+      "detail": "[(12.0, 3, 'FAILED', ['stall-demo/3'])]"
+    },
+    {
+      "name": "a given-up attempt is never revived",
+      "ok": true,
+      "detail": "stale reports ignored [0]"
+    },
+    {
+      "name": "never more active attempts than the goal",
+      "ok": true,
+      "detail": "max active 2"
+    },
+    {
+      "name": "the job stops cleanly",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-26T18:55:41.432Z",
+      "m": 1107.020573,
+      "event": "job_submitted",
+      "job_id": "stall-demo",
+      "spec": {
+        "job_id": "stall-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-26T18:55:41.434Z",
+      "m": 1107.020634,
+      "event": "instance_requested",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:55:41.434Z",
+      "m": 1107.020643,
+      "event": "instance_requested",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:55:42.089Z",
+      "m": 1107.675809,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 1716,
+      "node_id": "0f233aab9273ee34460ff82165c0f384dc4e523ce115845abe858770",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:55:42.089Z",
+      "m": 1107.675824,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 1717,
+      "node_id": "0f233aab9273ee34460ff82165c0f384dc4e523ce115845abe858770",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:55:42.089Z",
+      "m": 1107.675881,
+      "event": "annotation",
+      "kind": "stall_injected",
+      "instance_id": "stall-demo/1",
+      "seconds": 1.0
+    },
+    {
+      "t": "2026-11-26T18:55:43.091Z",
+      "m": 1108.678133,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 14
+    },
+    {
+      "t": "2026-11-26T18:55:43.593Z",
+      "m": 1109.180429,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 19
+    },
+    {
+      "t": "2026-11-26T18:55:43.593Z",
+      "m": 1109.180438,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 19
+    },
+    {
+      "t": "2026-11-26T18:55:44.095Z",
+      "m": 1109.682519,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 24
+    },
+    {
+      "t": "2026-11-26T18:55:44.095Z",
+      "m": 1109.68253,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 24
+    },
+    {
+      "t": "2026-11-26T18:55:44.597Z",
+      "m": 1110.184535,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 29
+    },
+    {
+      "t": "2026-11-26T18:55:44.598Z",
+      "m": 1110.184545,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 29
+    },
+    {
+      "t": "2026-11-26T18:55:45.099Z",
+      "m": 1110.686548,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 34
+    },
+    {
+      "t": "2026-11-26T18:55:45.100Z",
+      "m": 1110.68656,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 34
+    },
+    {
+      "t": "2026-11-26T18:55:45.100Z",
+      "m": 1110.68662,
+      "event": "annotation",
+      "kind": "stall_phase_done",
+      "instance_id": "stall-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:55:45.100Z",
+      "m": 1110.686705,
+      "event": "annotation",
+      "kind": "stall_injected",
+      "instance_id": "stall-demo/1",
+      "seconds": 4.0
+    },
+    {
+      "t": "2026-11-26T18:55:47.101Z",
+      "m": 1112.688153,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-26T18:55:49.103Z",
+      "m": 1114.68956,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 74
+    },
+    {
+      "t": "2026-11-26T18:55:49.103Z",
+      "m": 1114.689573,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 59
+    },
+    {
+      "t": "2026-11-26T18:55:49.605Z",
+      "m": 1115.191827,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 79
+    },
+    {
+      "t": "2026-11-26T18:55:49.605Z",
+      "m": 1115.191837,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 79
+    },
+    {
+      "t": "2026-11-26T18:55:50.107Z",
+      "m": 1115.694202,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 84
+    },
+    {
+      "t": "2026-11-26T18:55:50.107Z",
+      "m": 1115.694214,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 84
+    },
+    {
+      "t": "2026-11-26T18:55:50.609Z",
+      "m": 1116.19625,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 89
+    },
+    {
+      "t": "2026-11-26T18:55:50.609Z",
+      "m": 1116.19626,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 89
+    },
+    {
+      "t": "2026-11-26T18:55:51.111Z",
+      "m": 1116.698033,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 94
+    },
+    {
+      "t": "2026-11-26T18:55:51.111Z",
+      "m": 1116.698042,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 94
+    },
+    {
+      "t": "2026-11-26T18:55:51.111Z",
+      "m": 1116.698099,
+      "event": "annotation",
+      "kind": "stall_phase_done",
+      "instance_id": "stall-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:55:51.111Z",
+      "m": 1116.698468,
+      "event": "annotation",
+      "kind": "stall_injected",
+      "instance_id": "stall-demo/1",
+      "seconds": 6.0
+    },
+    {
+      "t": "2026-11-26T18:55:53.112Z",
+      "m": 1118.699497,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-26T18:55:55.614Z",
+      "m": 1121.20145,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-26T18:55:55.614Z",
+      "m": 1121.201465,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 119
+    },
+    {
+      "t": "2026-11-26T18:55:57.114Z",
+      "m": 1122.70087,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "UNKNOWN",
+      "state": "RUNNING",
+      "progress": 154
+    },
+    {
+      "t": "2026-11-26T18:55:57.114Z",
+      "m": 1122.700881,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 144
+    },
+    {
+      "t": "2026-11-26T18:55:57.616Z",
+      "m": 1123.202813,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-26T18:55:57.616Z",
+      "m": 1123.202823,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-26T18:55:58.118Z",
+      "m": 1123.704779,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-26T18:55:58.118Z",
+      "m": 1123.704788,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 164
+    },
+    {
+      "t": "2026-11-26T18:55:58.620Z",
+      "m": 1124.206804,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-26T18:55:58.620Z",
+      "m": 1124.206813,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 169
+    },
+    {
+      "t": "2026-11-26T18:55:59.122Z",
+      "m": 1124.708992,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-26T18:55:59.122Z",
+      "m": 1124.709001,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 174
+    },
+    {
+      "t": "2026-11-26T18:55:59.122Z",
+      "m": 1124.709055,
+      "event": "annotation",
+      "kind": "stall_phase_done",
+      "instance_id": "stall-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:55:59.122Z",
+      "m": 1124.709177,
+      "event": "annotation",
+      "kind": "stall_injected",
+      "instance_id": "stall-demo/1",
+      "seconds": 12.0
+    },
+    {
+      "t": "2026-11-26T18:56:01.123Z",
+      "m": 1126.710163,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "from_state": "RUNNING",
+      "state": "UNKNOWN",
+      "missed_probes": 1
+    },
+    {
+      "t": "2026-11-26T18:56:03.625Z",
+      "m": 1129.21175,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "missed_probes": 2
+    },
+    {
+      "t": "2026-11-26T18:56:03.625Z",
+      "m": 1129.211763,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 199
+    },
+    {
+      "t": "2026-11-26T18:56:06.126Z",
+      "m": 1131.712921,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "missed_probes": 3
+    },
+    {
+      "t": "2026-11-26T18:56:06.126Z",
+      "m": 1131.712932,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 224
+    },
+    {
+      "t": "2026-11-26T18:56:06.126Z",
+      "m": 1131.712949,
+      "event": "instance_decision",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/1",
+      "reason": "given_up_after_missed_probes",
+      "from_state": "UNKNOWN",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-26T18:56:06.126Z",
+      "m": 1131.712979,
+      "event": "instance_requested",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "reason": "replacement",
+      "replaces": "stall-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:56:06.632Z",
+      "m": 1132.219072,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 249
+    },
+    {
+      "t": "2026-11-26T18:56:06.632Z",
+      "m": 1132.219091,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 1715,
+      "node_id": "0f233aab9273ee34460ff82165c0f384dc4e523ce115845abe858770",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:56:07.134Z",
+      "m": 1132.721489,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 254
+    },
+    {
+      "t": "2026-11-26T18:56:07.134Z",
+      "m": 1132.7215,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 8
+    },
+    {
+      "t": "2026-11-26T18:56:07.633Z",
+      "m": 1133.223662,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 259
+    },
+    {
+      "t": "2026-11-26T18:56:07.633Z",
+      "m": 1133.223685,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 13
+    },
+    {
+      "t": "2026-11-26T18:56:08.136Z",
+      "m": 1133.726327,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 264
+    },
+    {
+      "t": "2026-11-26T18:56:08.136Z",
+      "m": 1133.726337,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 18
+    },
+    {
+      "t": "2026-11-26T18:56:08.638Z",
+      "m": 1134.228235,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 269
+    },
+    {
+      "t": "2026-11-26T18:56:08.638Z",
+      "m": 1134.228244,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 23
+    },
+    {
+      "t": "2026-11-26T18:56:09.140Z",
+      "m": 1134.730463,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 274
+    },
+    {
+      "t": "2026-11-26T18:56:09.140Z",
+      "m": 1134.730472,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-26T18:56:09.643Z",
+      "m": 1135.233045,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 279
+    },
+    {
+      "t": "2026-11-26T18:56:09.643Z",
+      "m": 1135.233056,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 33
+    },
+    {
+      "t": "2026-11-26T18:56:10.145Z",
+      "m": 1135.735171,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 284
+    },
+    {
+      "t": "2026-11-26T18:56:10.145Z",
+      "m": 1135.73518,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 38
+    },
+    {
+      "t": "2026-11-26T18:56:10.648Z",
+      "m": 1136.238007,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 289
+    },
+    {
+      "t": "2026-11-26T18:56:10.648Z",
+      "m": 1136.238016,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 43
+    },
+    {
+      "t": "2026-11-26T18:56:11.150Z",
+      "m": 1136.739743,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 294
+    },
+    {
+      "t": "2026-11-26T18:56:11.150Z",
+      "m": 1136.739753,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 48
+    },
+    {
+      "t": "2026-11-26T18:56:11.652Z",
+      "m": 1137.242154,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 299
+    },
+    {
+      "t": "2026-11-26T18:56:11.652Z",
+      "m": 1137.242166,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 53
+    },
+    {
+      "t": "2026-11-26T18:56:12.154Z",
+      "m": 1137.743811,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 304
+    },
+    {
+      "t": "2026-11-26T18:56:12.154Z",
+      "m": 1137.743821,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 58
+    },
+    {
+      "t": "2026-11-26T18:56:12.655Z",
+      "m": 1138.245722,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 309
+    },
+    {
+      "t": "2026-11-26T18:56:12.656Z",
+      "m": 1138.245732,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 63
+    },
+    {
+      "t": "2026-11-26T18:56:13.158Z",
+      "m": 1138.748094,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "progress": 314
+    },
+    {
+      "t": "2026-11-26T18:56:13.158Z",
+      "m": 1138.748104,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "progress": 68
+    },
+    {
+      "t": "2026-11-26T18:56:13.158Z",
+      "m": 1138.748157,
+      "event": "annotation",
+      "kind": "stall_phase_done",
+      "instance_id": "stall-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:56:13.158Z",
+      "m": 1138.748238,
+      "event": "replicas_set",
+      "job_id": "stall-demo",
+      "from_replicas": 2,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-26T18:56:13.159Z",
+      "m": 1138.749546,
+      "event": "instance_decision",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:13.159Z",
+      "m": 1138.749555,
+      "event": "instance_decision",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:56:13.662Z",
+      "m": 1139.252465,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:56:13.662Z",
+      "m": 1139.252477,
+      "event": "instance_observed",
+      "job_id": "stall-demo",
+      "instance_id": "stall-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}

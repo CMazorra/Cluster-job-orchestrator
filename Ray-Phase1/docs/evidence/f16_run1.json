@@ -1,0 +1,2752 @@
+{
+  "meta": {
+    "mode": "local cluster (4 logical CPUs, labels [])",
+    "ray_version": "2.58.0",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "driver_pid": 4098,
+    "driver_node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+    "cluster_resources": {
+      "CPU": 4.0,
+      "GPU": 1.0,
+      "node:172.25.118.49": 1.0,
+      "memory": 4342704128.0,
+      "object_store_memory": 1861158912.0,
+      "accelerator_type:GeForce-RTX-3050-Laptop-GPU": 1.0,
+      "node:__internal_head__": 1.0
+    },
+    "replicas": 40,
+    "fits": 2,
+    "overload_seconds": 30.0,
+    "cycle_seconds": 0.5,
+    "probe_timeout_s": 2.0
+  },
+  "times": {
+    "baseline_observe_s": {
+      "n": 10,
+      "median": 0.002,
+      "max": 0.004,
+      "min": 0.001
+    },
+    "overload_observe_s": {
+      "n": 13,
+      "median": 2.004,
+      "max": 2.015,
+      "min": 0.001
+    },
+    "overload_act_s": {
+      "n": 13,
+      "median": 0.0,
+      "max": 0.013,
+      "min": 0.0
+    },
+    "after_observe_s": {
+      "n": 10,
+      "median": 0.002,
+      "max": 0.003,
+      "min": 0.002
+    }
+  },
+  "detection_s": 2.004,
+  "freed_cpu_taken_by": "overload-demo/5",
+  "replacement": "overload-demo/41",
+  "shrink_s": 2.539,
+  "cycles": {
+    "baseline": [
+      {
+        "observe_s": 0.0016773190000094473,
+        "act_s": 1.304199986407184e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.00376522900000964,
+        "act_s": 1.2553000033221906e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0019200970000383677,
+        "act_s": 1.4105999980529305e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0017479480000019976,
+        "act_s": 1.1862999826917076e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0018909289999555767,
+        "act_s": 1.2319000006755232e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0016106329999274749,
+        "act_s": 1.2103000017305021e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0016147900000760274,
+        "act_s": 2.206699991802452e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.001398111000071367,
+        "act_s": 1.263900003323215e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0015287549999811745,
+        "act_s": 1.957099993887823e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 0.0016251519998604635,
+        "act_s": 1.329900010205165e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 2,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      }
+    ],
+    "overload": [
+      {
+        "observe_s": 0.0014398969999547262,
+        "act_s": 0.013274959000000308,
+        "starts": 38,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 38,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0033889239998643,
+        "act_s": 1.731299994389701e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.003288293999958,
+        "act_s": 1.802299993869383e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0034376569999495,
+        "act_s": 2.6780000098369783e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0056104459999915,
+        "act_s": 1.7545999980939087e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0027328589999343,
+        "act_s": 1.691400007075572e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0047281039999234,
+        "act_s": 2.7165000119566685e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.004966728999989,
+        "act_s": 2.19060000290483e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.014974319999965,
+        "act_s": 1.8982000028699986e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0049499110000397,
+        "act_s": 2.9280999797265395e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.003666070999998,
+        "act_s": 2.0260000155758462e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0039094039998417,
+        "act_s": 1.988799999708135e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      },
+      {
+        "observe_s": 2.0051842769998984,
+        "act_s": 1.9450000081633334e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 40,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 0
+      }
+    ],
+    "after_crash": [
+      {
+        "observe_s": 2.004002779000075,
+        "act_s": 0.00042470599987609603,
+        "starts": 1,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 2.007254828999976,
+        "act_s": 1.909200000227429e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 2.005057828999952,
+        "act_s": 1.8419000070935e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 2.0031892540000626,
+        "act_s": 1.9438999970589066e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 2.002025517999982,
+        "act_s": 1.7180999975607847e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 2.0038355560000127,
+        "act_s": 1.7553000134284957e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 36,
+        "RUNNING": 4,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 0,
+        "FAILED": 1
+      }
+    ],
+    "after": [
+      {
+        "observe_s": 0.0015063309999732155,
+        "act_s": 2.076600003420026e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.0021706479999465955,
+        "act_s": 1.9132000034005614e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.0017167169999083853,
+        "act_s": 1.8840000166164828e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.0025134840000191616,
+        "act_s": 1.5030999975351733e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.0015804690001459676,
+        "act_s": 1.767899993865285e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.002281519999996817,
+        "act_s": 1.909200000227429e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.002576365000095393,
+        "act_s": 1.8093999869961408e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.0015033619999940129,
+        "act_s": 1.685699999143253e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.00217661900001076,
+        "act_s": 1.7257000081372098e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      },
+      {
+        "observe_s": 0.002492651000011392,
+        "act_s": 1.4967999959480949e-05,
+        "starts": 0,
+        "kills": 0,
+        "attempts": 41,
+        "PENDING": 0,
+        "RUNNING": 2,
+        "UNKNOWN": 0,
+        "STOPPING": 0,
+        "STOPPED": 38,
+        "FAILED": 1
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "the cluster runs as many replicas as fit, and the rest wait as PENDING",
+      "ok": true,
+      "detail": "running 4, pending 36"
+    },
+    {
+      "name": "the pending attempts do not grow however long the overload lasts",
+      "ok": true,
+      "detail": "attempts [40] over 13 cycles"
+    },
+    {
+      "name": "an attempt waiting for capacity is never taken for an unresponsive one",
+      "ok": true,
+      "detail": "PENDING -> UNKNOWN transitions 0"
+    },
+    {
+      "name": "never more active attempts than the goal",
+      "ok": true,
+      "detail": "max active 40"
+    },
+    {
+      "name": "a crash while overloaded is detected and replaced once",
+      "ok": true,
+      "detail": "failed after 2.004 s, attempts 41"
+    },
+    {
+      "name": "shrinking the goal stops pending attempts first and keeps running ones",
+      "ok": true,
+      "detail": "survivors ['overload-demo/2', 'overload-demo/3'] were running before the shrink"
+    },
+    {
+      "name": "the job stops cleanly",
+      "ok": true,
+      "detail": "CPUs back after 0.001 s, alive tickers []"
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-11-26T18:58:04.300Z",
+      "m": 1249.895505,
+      "event": "job_submitted",
+      "job_id": "overload-demo",
+      "spec": {
+        "job_id": "overload-demo",
+        "workload": {
+          "entrypoint": "ticker",
+          "args": {
+            "interval_ms": 100
+          }
+        },
+        "replicas": 2,
+        "resources": {
+          "cpu": 1
+        }
+      }
+    },
+    {
+      "t": "2026-11-26T18:58:04.300Z",
+      "m": 1249.895558,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:58:04.300Z",
+      "m": 1249.895577,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "reason": "initial"
+    },
+    {
+      "t": "2026-11-26T18:58:04.889Z",
+      "m": 1250.484558,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 4734,
+      "node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:58:04.889Z",
+      "m": 1250.484573,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 4733,
+      "node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:58:05.395Z",
+      "m": 1250.990183,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 8
+    },
+    {
+      "t": "2026-11-26T18:58:05.395Z",
+      "m": 1250.990191,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 9
+    },
+    {
+      "t": "2026-11-26T18:58:05.897Z",
+      "m": 1251.492363,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 14
+    },
+    {
+      "t": "2026-11-26T18:58:05.897Z",
+      "m": 1251.492371,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 14
+    },
+    {
+      "t": "2026-11-26T18:58:06.399Z",
+      "m": 1251.994371,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 19
+    },
+    {
+      "t": "2026-11-26T18:58:06.399Z",
+      "m": 1251.99438,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 19
+    },
+    {
+      "t": "2026-11-26T18:58:06.901Z",
+      "m": 1252.49648,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 24
+    },
+    {
+      "t": "2026-11-26T18:58:06.901Z",
+      "m": 1252.496489,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 24
+    },
+    {
+      "t": "2026-11-26T18:58:07.403Z",
+      "m": 1252.998304,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 29
+    },
+    {
+      "t": "2026-11-26T18:58:07.403Z",
+      "m": 1252.998312,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 29
+    },
+    {
+      "t": "2026-11-26T18:58:07.903Z",
+      "m": 1253.500088,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 34
+    },
+    {
+      "t": "2026-11-26T18:58:07.903Z",
+      "m": 1253.500097,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 34
+    },
+    {
+      "t": "2026-11-26T18:58:08.405Z",
+      "m": 1254.001614,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 39
+    },
+    {
+      "t": "2026-11-26T18:58:08.405Z",
+      "m": 1254.001623,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 39
+    },
+    {
+      "t": "2026-11-26T18:58:08.906Z",
+      "m": 1254.503259,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 44
+    },
+    {
+      "t": "2026-11-26T18:58:08.906Z",
+      "m": 1254.503267,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 44
+    },
+    {
+      "t": "2026-11-26T18:58:09.408Z",
+      "m": 1255.005086,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 49
+    },
+    {
+      "t": "2026-11-26T18:58:09.408Z",
+      "m": 1255.005094,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 49
+    },
+    {
+      "t": "2026-11-26T18:58:09.908Z",
+      "m": 1255.505303,
+      "event": "annotation",
+      "kind": "overload_started",
+      "replicas": 40
+    },
+    {
+      "t": "2026-11-26T18:58:09.908Z",
+      "m": 1255.505315,
+      "event": "replicas_set",
+      "job_id": "overload-demo",
+      "from_replicas": 2,
+      "replicas": 40
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506751,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 54
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506759,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 54
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506777,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506781,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506785,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506789,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/6",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506792,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/7",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506795,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/8",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506799,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/9",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506801,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/10",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506804,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/11",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506807,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/12",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.50681,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/13",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506872,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/14",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506877,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/15",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.50688,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/16",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506885,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/17",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506888,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/18",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506891,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/19",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506894,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/20",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506897,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/21",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.5069,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/22",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506903,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/23",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506906,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/24",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506908,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/25",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506912,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/26",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506916,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/27",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506918,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/28",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506921,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/29",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506924,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/30",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506927,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/31",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.50693,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/32",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506933,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/33",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506938,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/34",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506941,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/35",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506944,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/36",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506946,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/37",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506949,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/38",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506952,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/39",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:09.910Z",
+      "m": 1255.506954,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/40",
+      "reason": "scale_up"
+    },
+    {
+      "t": "2026-11-26T18:58:12.427Z",
+      "m": 1258.02359,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 59
+    },
+    {
+      "t": "2026-11-26T18:58:12.427Z",
+      "m": 1258.023598,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 59
+    },
+    {
+      "t": "2026-11-26T18:58:12.427Z",
+      "m": 1258.023612,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 4731,
+      "node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+      "progress": 3
+    },
+    {
+      "t": "2026-11-26T18:58:12.427Z",
+      "m": 1258.023619,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 4732,
+      "node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+      "progress": 4
+    },
+    {
+      "t": "2026-11-26T18:58:14.930Z",
+      "m": 1260.527211,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 84
+    },
+    {
+      "t": "2026-11-26T18:58:14.930Z",
+      "m": 1260.527221,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 84
+    },
+    {
+      "t": "2026-11-26T18:58:14.930Z",
+      "m": 1260.527225,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-26T18:58:14.930Z",
+      "m": 1260.527232,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 28
+    },
+    {
+      "t": "2026-11-26T18:58:17.434Z",
+      "m": 1263.03083,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 109
+    },
+    {
+      "t": "2026-11-26T18:58:17.434Z",
+      "m": 1263.030837,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 109
+    },
+    {
+      "t": "2026-11-26T18:58:17.434Z",
+      "m": 1263.030841,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 53
+    },
+    {
+      "t": "2026-11-26T18:58:17.434Z",
+      "m": 1263.030844,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 53
+    },
+    {
+      "t": "2026-11-26T18:58:19.940Z",
+      "m": 1265.536659,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-26T18:58:19.940Z",
+      "m": 1265.536669,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 134
+    },
+    {
+      "t": "2026-11-26T18:58:19.940Z",
+      "m": 1265.536672,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 78
+    },
+    {
+      "t": "2026-11-26T18:58:19.940Z",
+      "m": 1265.536676,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 78
+    },
+    {
+      "t": "2026-11-26T18:58:22.443Z",
+      "m": 1268.03965,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-26T18:58:22.443Z",
+      "m": 1268.039658,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 159
+    },
+    {
+      "t": "2026-11-26T18:58:22.443Z",
+      "m": 1268.039662,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 103
+    },
+    {
+      "t": "2026-11-26T18:58:22.443Z",
+      "m": 1268.039666,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 103
+    },
+    {
+      "t": "2026-11-26T18:58:24.948Z",
+      "m": 1270.544526,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-26T18:58:24.948Z",
+      "m": 1270.544534,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 184
+    },
+    {
+      "t": "2026-11-26T18:58:24.948Z",
+      "m": 1270.544538,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-26T18:58:24.948Z",
+      "m": 1270.544542,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 128
+    },
+    {
+      "t": "2026-11-26T18:58:27.453Z",
+      "m": 1273.049763,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 208
+    },
+    {
+      "t": "2026-11-26T18:58:27.453Z",
+      "m": 1273.049773,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 208
+    },
+    {
+      "t": "2026-11-26T18:58:27.453Z",
+      "m": 1273.049777,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 153
+    },
+    {
+      "t": "2026-11-26T18:58:27.453Z",
+      "m": 1273.049781,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 153
+    },
+    {
+      "t": "2026-11-26T18:58:29.968Z",
+      "m": 1275.565235,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 233
+    },
+    {
+      "t": "2026-11-26T18:58:29.968Z",
+      "m": 1275.565243,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 234
+    },
+    {
+      "t": "2026-11-26T18:58:29.968Z",
+      "m": 1275.565247,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-26T18:58:29.968Z",
+      "m": 1275.56525,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 179
+    },
+    {
+      "t": "2026-11-26T18:58:32.473Z",
+      "m": 1278.070294,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 258
+    },
+    {
+      "t": "2026-11-26T18:58:32.473Z",
+      "m": 1278.070304,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 259
+    },
+    {
+      "t": "2026-11-26T18:58:32.473Z",
+      "m": 1278.070309,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 204
+    },
+    {
+      "t": "2026-11-26T18:58:32.473Z",
+      "m": 1278.070314,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 204
+    },
+    {
+      "t": "2026-11-26T18:58:34.977Z",
+      "m": 1280.574328,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 283
+    },
+    {
+      "t": "2026-11-26T18:58:34.977Z",
+      "m": 1280.574339,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 284
+    },
+    {
+      "t": "2026-11-26T18:58:34.977Z",
+      "m": 1280.574344,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 229
+    },
+    {
+      "t": "2026-11-26T18:58:34.977Z",
+      "m": 1280.574349,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 229
+    },
+    {
+      "t": "2026-11-26T18:58:37.481Z",
+      "m": 1283.078455,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 308
+    },
+    {
+      "t": "2026-11-26T18:58:37.482Z",
+      "m": 1283.078465,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 309
+    },
+    {
+      "t": "2026-11-26T18:58:37.482Z",
+      "m": 1283.07847,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 254
+    },
+    {
+      "t": "2026-11-26T18:58:37.482Z",
+      "m": 1283.078473,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 253
+    },
+    {
+      "t": "2026-11-26T18:58:39.981Z",
+      "m": 1285.583844,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "progress": 334
+    },
+    {
+      "t": "2026-11-26T18:58:39.981Z",
+      "m": 1285.583852,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 334
+    },
+    {
+      "t": "2026-11-26T18:58:39.981Z",
+      "m": 1285.583856,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 279
+    },
+    {
+      "t": "2026-11-26T18:58:39.981Z",
+      "m": 1285.58386,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 278
+    },
+    {
+      "t": "2026-11-26T18:58:40.481Z",
+      "m": 1286.084138,
+      "event": "annotation",
+      "kind": "crash_injected",
+      "instance_id": "overload-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088433,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/1",
+      "from_state": "RUNNING",
+      "state": "FAILED"
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088451,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 359
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088456,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 304
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088459,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 304
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088467,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "from_state": "PENDING",
+      "state": "RUNNING",
+      "pid": 4974,
+      "node_id": "d88e57dc402c9bc07fba6b0f32c74a91ab4803e33457924283a79a8d",
+      "progress": 0
+    },
+    {
+      "t": "2026-11-26T18:58:42.486Z",
+      "m": 1288.088498,
+      "event": "instance_requested",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/41",
+      "reason": "replacement",
+      "replaces": "overload-demo/1"
+    },
+    {
+      "t": "2026-11-26T18:58:44.994Z",
+      "m": 1290.596455,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 384
+    },
+    {
+      "t": "2026-11-26T18:58:44.994Z",
+      "m": 1290.596463,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 329
+    },
+    {
+      "t": "2026-11-26T18:58:44.994Z",
+      "m": 1290.596468,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 329
+    },
+    {
+      "t": "2026-11-26T18:58:44.994Z",
+      "m": 1290.596472,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 20
+    },
+    {
+      "t": "2026-11-26T18:58:47.499Z",
+      "m": 1293.10178,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 409
+    },
+    {
+      "t": "2026-11-26T18:58:47.499Z",
+      "m": 1293.101789,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 354
+    },
+    {
+      "t": "2026-11-26T18:58:47.499Z",
+      "m": 1293.101793,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 354
+    },
+    {
+      "t": "2026-11-26T18:58:47.499Z",
+      "m": 1293.101797,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 45
+    },
+    {
+      "t": "2026-11-26T18:58:50.002Z",
+      "m": 1295.605266,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 434
+    },
+    {
+      "t": "2026-11-26T18:58:50.002Z",
+      "m": 1295.605302,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 379
+    },
+    {
+      "t": "2026-11-26T18:58:50.002Z",
+      "m": 1295.605308,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 379
+    },
+    {
+      "t": "2026-11-26T18:58:50.002Z",
+      "m": 1295.605313,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 70
+    },
+    {
+      "t": "2026-11-26T18:58:52.505Z",
+      "m": 1298.107529,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 459
+    },
+    {
+      "t": "2026-11-26T18:58:52.505Z",
+      "m": 1298.107537,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 404
+    },
+    {
+      "t": "2026-11-26T18:58:52.505Z",
+      "m": 1298.107541,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 404
+    },
+    {
+      "t": "2026-11-26T18:58:52.505Z",
+      "m": 1298.107545,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 95
+    },
+    {
+      "t": "2026-11-26T18:58:55.009Z",
+      "m": 1300.611566,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 484
+    },
+    {
+      "t": "2026-11-26T18:58:55.009Z",
+      "m": 1300.611574,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 429
+    },
+    {
+      "t": "2026-11-26T18:58:55.009Z",
+      "m": 1300.611578,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 429
+    },
+    {
+      "t": "2026-11-26T18:58:55.009Z",
+      "m": 1300.611582,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 120
+    },
+    {
+      "t": "2026-11-26T18:58:55.509Z",
+      "m": 1301.111844,
+      "event": "annotation",
+      "kind": "overload_ended",
+      "replicas": 2
+    },
+    {
+      "t": "2026-11-26T18:58:55.509Z",
+      "m": 1301.111856,
+      "event": "replicas_set",
+      "job_id": "overload-demo",
+      "from_replicas": 40,
+      "replicas": 2
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115864,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 509
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115873,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 454
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115876,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "progress": 454
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115881,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "progress": 145
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115933,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/41",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115939,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/40",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115942,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/39",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.11595,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/38",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115956,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/37",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115959,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/36",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115962,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/35",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115966,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/34",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115969,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/33",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115973,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/32",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115976,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/31",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115979,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/30",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115982,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/29",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115985,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/28",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115988,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/27",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115991,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/26",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115994,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/25",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.115997,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/24",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116022,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/23",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116035,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/22",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116048,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/21",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116052,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/20",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116056,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/19",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116059,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/18",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116061,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/17",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116064,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/16",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116067,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/15",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.11607,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/14",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116073,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/13",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116076,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/12",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116078,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/11",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116081,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/10",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116084,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/9",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116087,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/8",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116089,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/7",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116092,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/6",
+      "reason": "scale_down",
+      "from_state": "PENDING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116095,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:57.513Z",
+      "m": 1303.116099,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650543,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 534
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650554,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 479
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650566,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/4",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650571,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/5",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650575,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/6",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650579,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/7",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650582,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/8",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650585,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/9",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650588,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/10",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650592,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/11",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650595,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/12",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650598,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/13",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650601,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/14",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650604,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/15",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650607,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/16",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650611,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/17",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650614,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/18",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650618,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/19",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65062,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/20",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650624,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/21",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650627,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/22",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65063,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/23",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650633,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/24",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650636,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/25",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650639,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/26",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650642,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/27",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650644,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/28",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650647,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/29",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65065,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/30",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650655,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/31",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650658,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/32",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650662,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/33",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650664,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/34",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650667,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/35",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65067,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/36",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650674,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/37",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650677,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/38",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65068,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/39",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.650683,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/40",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.048Z",
+      "m": 1303.65069,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/41",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:58:58.552Z",
+      "m": 1304.154772,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 539
+    },
+    {
+      "t": "2026-11-26T18:58:58.552Z",
+      "m": 1304.15478,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 484
+    },
+    {
+      "t": "2026-11-26T18:58:59.054Z",
+      "m": 1304.65668,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 544
+    },
+    {
+      "t": "2026-11-26T18:58:59.054Z",
+      "m": 1304.656689,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 489
+    },
+    {
+      "t": "2026-11-26T18:58:59.557Z",
+      "m": 1305.159531,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 549
+    },
+    {
+      "t": "2026-11-26T18:58:59.557Z",
+      "m": 1305.159539,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 494
+    },
+    {
+      "t": "2026-11-26T18:59:00.058Z",
+      "m": 1305.661254,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 554
+    },
+    {
+      "t": "2026-11-26T18:59:00.058Z",
+      "m": 1305.661263,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 499
+    },
+    {
+      "t": "2026-11-26T18:59:00.561Z",
+      "m": 1306.163684,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 559
+    },
+    {
+      "t": "2026-11-26T18:59:00.561Z",
+      "m": 1306.163694,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 504
+    },
+    {
+      "t": "2026-11-26T18:59:01.064Z",
+      "m": 1306.666428,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 564
+    },
+    {
+      "t": "2026-11-26T18:59:01.064Z",
+      "m": 1306.666438,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 509
+    },
+    {
+      "t": "2026-11-26T18:59:01.565Z",
+      "m": 1307.168151,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 569
+    },
+    {
+      "t": "2026-11-26T18:59:01.565Z",
+      "m": 1307.168159,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 514
+    },
+    {
+      "t": "2026-11-26T18:59:02.068Z",
+      "m": 1307.670463,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 574
+    },
+    {
+      "t": "2026-11-26T18:59:02.068Z",
+      "m": 1307.670471,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 519
+    },
+    {
+      "t": "2026-11-26T18:59:02.570Z",
+      "m": 1308.173307,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 579
+    },
+    {
+      "t": "2026-11-26T18:59:02.570Z",
+      "m": 1308.173315,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 524
+    },
+    {
+      "t": "2026-11-26T18:59:03.071Z",
+      "m": 1308.673516,
+      "event": "replicas_set",
+      "job_id": "overload-demo",
+      "from_replicas": 2,
+      "replicas": 0
+    },
+    {
+      "t": "2026-11-26T18:59:03.073Z",
+      "m": 1308.675981,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "progress": 584
+    },
+    {
+      "t": "2026-11-26T18:59:03.073Z",
+      "m": 1308.675989,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "progress": 529
+    },
+    {
+      "t": "2026-11-26T18:59:03.073Z",
+      "m": 1308.676027,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:59:03.073Z",
+      "m": 1308.676031,
+      "event": "instance_decision",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "reason": "scale_down",
+      "from_state": "RUNNING",
+      "state": "STOPPING"
+    },
+    {
+      "t": "2026-11-26T18:59:03.575Z",
+      "m": 1309.178104,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/2",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    },
+    {
+      "t": "2026-11-26T18:59:03.575Z",
+      "m": 1309.178113,
+      "event": "instance_observed",
+      "job_id": "overload-demo",
+      "instance_id": "overload-demo/3",
+      "from_state": "STOPPING",
+      "state": "STOPPED"
+    }
+  ]
+}
